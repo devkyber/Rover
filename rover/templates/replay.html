@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rover log replay</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg:#101418; --surface:#171c21; --surface2:#1d242b; --line:#303943;
+  --text:#e8edf2; --muted:#94a0ab; --blue:#59a9ff; --green:#72d38a;
+  --amber:#f4bd62; --red:#f07878; --magenta:#d990e8; --cyan:#63d4cf;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:Inter,Segoe UI,sans-serif; }
+button,select,input { font:inherit; }
+button,select { background:var(--surface2); color:var(--text); border:1px solid var(--line); border-radius:5px; }
+button { min-height:34px; padding:0 12px; cursor:pointer; }
+button:hover { border-color:var(--blue); }
+button:disabled { opacity:.45; cursor:default; }
+select { height:34px; padding:0 28px 0 9px; }
+.shell { min-height:100vh; display:grid; grid-template-rows:auto auto minmax(360px,1fr) auto auto; }
+.topbar { display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line); background:var(--surface); }
+.topbar h1 { margin:0 16px 0 0; font-size:17px; font-weight:600; letter-spacing:0; white-space:nowrap; }
+.topbar label { color:var(--muted); font-size:12px; }
+#log-select { min-width:310px; }
+.message { min-height:20px; padding:4px 14px; color:var(--muted); border-bottom:1px solid var(--line); font-size:12px; }
+.message.error { color:var(--red); }
+.workspace { display:grid; grid-template-columns:minmax(440px,1.45fr) minmax(330px,1fr); min-height:0; }
+.map-section { padding:12px; border-right:1px solid var(--line); min-width:0; display:grid; grid-template-rows:auto minmax(330px,1fr) auto; }
+.section-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:7px; }
+.section-head h2,.signals h2 { margin:0; font-size:13px; font-weight:600; }
+.section-head span { color:var(--muted); font-size:12px; }
+#map { width:100%; height:100%; min-height:330px; display:block; background:var(--surface); border:1px solid var(--line); }
+.truth { padding-top:10px; }
+.truth-head { display:flex; justify-content:space-between; gap:12px; align-items:baseline; margin-bottom:4px; }
+.truth-head h3 { margin:0; font-size:12px; font-weight:600; }
+.truth-head span { color:var(--muted); font-size:11px; }
+.truth table { width:100%; border-collapse:collapse; font-size:11px; }
+.truth tbody tr { cursor:pointer; border-top:1px solid var(--line); }
+.truth tbody tr:hover,.truth tbody tr.active { background:var(--surface2); }
+.truth .empty { color:var(--muted); padding:8px 0 0; font-size:12px; }
+.side { display:grid; grid-template-rows:auto auto minmax(210px,1fr); min-width:0; }
+.summary { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-bottom:1px solid var(--line); }
+.metric { padding:10px; border-right:1px solid var(--line); min-width:0; }
+.metric:last-child { border-right:0; }
+.metric .label { color:var(--muted); font-size:11px; white-space:nowrap; }
+.metric .value { margin-top:3px; font-size:18px; font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.state { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--line); }
+.state table { width:100%; border-collapse:collapse; font-size:12px; }
+.state section { padding:10px 12px; min-width:0; }
+.state section:first-child { border-right:1px solid var(--line); }
+th,td { padding:3px 4px; text-align:right; font-variant-numeric:tabular-nums; }
+th:first-child,td:first-child { text-align:left; color:var(--muted); }
+.signals { min-height:0; display:grid; grid-template-rows:auto repeat(4,minmax(100px,1fr)); padding:10px 12px 12px; gap:7px; }
+.plot { position:relative; min-height:100px; }
+.plot canvas { width:100%; height:100%; display:block; background:var(--surface); border:1px solid var(--line); }
+.plot-label { position:absolute; top:6px; left:9px; font-size:11px; color:var(--muted); pointer-events:none; }
+.transport { border-top:1px solid var(--line); background:var(--surface); padding:9px 14px 11px; }
+.controls { display:flex; align-items:center; gap:7px; }
+.time { min-width:126px; text-align:center; font-variant-numeric:tabular-nums; font-size:13px; }
+#timeline { width:100%; margin:9px 0 2px; accent-color:var(--blue); }
+.legend { display:flex; flex-wrap:wrap; gap:12px; color:var(--muted); font-size:11px; margin-top:4px; }
+.swatch { width:12px; height:3px; display:inline-block; margin-right:4px; vertical-align:middle; }
+.good { color:var(--green); } .warn { color:var(--amber); } .bad { color:var(--red); }
+.muted { color:var(--muted); }
+.zupt { color:var(--amber); font-weight:600; }
+.diagnostics { border-top:1px solid var(--line); background:var(--surface); padding:12px 14px 14px; }
+.diag-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.diag-head h2 { margin:0; font-size:14px; }
+.diag-head span { color:var(--muted); font-size:12px; font-variant-numeric:tabular-nums; }
+.stage-tabs { display:flex; gap:4px; flex-wrap:wrap; margin:10px 0; }
+.stage-tabs button { min-width:76px; height:30px; min-height:30px; padding:0 9px; font-size:12px; }
+.stage-tabs button.active { border-color:var(--blue); background:#20364a; color:#fff; }
+.stage-tabs button.skipped { color:var(--muted); border-style:dashed; }
+.diag-grid { display:grid; grid-template-columns:minmax(280px,.8fr) minmax(380px,1.2fr) minmax(320px,1fr); border:1px solid var(--line); }
+.diag-grid section { padding:9px 11px; min-width:0; border-right:1px solid var(--line); overflow:auto; }
+.diag-grid section:last-child { border-right:0; }
+.diag-grid h3 { margin:0 0 6px; color:var(--muted); font-size:11px; font-weight:600; text-transform:uppercase; }
+.diag-grid table { width:100%; border-collapse:collapse; font-size:11px; }
+.diag-grid td,.diag-grid th { border-top:1px solid #252d35; }
+.diag-status { margin-bottom:7px; font-size:12px; }
+.diag-grid details { margin-top:8px; color:var(--muted); }
+.diag-grid summary { cursor:pointer; font-size:11px; }
+.matrix-wrap { max-height:260px; overflow:auto; margin-top:5px; }
+.matrix-wrap table { min-width:max-content; }
+.attribution { margin-top:10px; overflow:auto; }
+.attribution table { width:100%; max-width:900px; border-collapse:collapse; font-size:11px; }
+.attribution td,.attribution th { border-top:1px solid var(--line); }
+@media (max-width:900px) {
+  .shell { display:block; }
+  .topbar { flex-wrap:wrap; }
+  #log-select { min-width:0; flex:1; }
+  .workspace { grid-template-columns:1fr; }
+  .map-section { border-right:0; border-bottom:1px solid var(--line); min-height:620px; }
+  .side { display:block; }
+  .signals { height:560px; }
+  .diag-grid { grid-template-columns:1fr; }
+  .diag-grid section { border-right:0; border-bottom:1px solid var(--line); }
+  .diag-grid section:last-child { border-bottom:0; }
+}
+@media (max-width:520px) {
+  .topbar h1 { width:100%; }
+  .summary { grid-template-columns:1fr 1fr; }
+  .metric:nth-child(2) { border-right:0; }
+  .metric:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+  .state { grid-template-columns:1fr; }
+  .state section:first-child { border-right:0; border-bottom:1px solid var(--line); }
+  .controls { flex-wrap:wrap; }
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <h1>Rover log replay</h1>
+    <label for="log-select">Recorded run</label>
+    <select id="log-select" aria-label="Recorded log"></select>
+    <button id="load" type="button">Load</button>
+  </header>
+  <div id="message" class="message" aria-live="polite">Select a log to begin.</div>
+
+  <div class="workspace">
+    <section class="map-section">
+      <div class="section-head">
+        <h2>Reported wheel-IMU odometry</h2>
+        <span id="map-scale">x forward, y left</span>
+      </div>
+      <canvas id="map" aria-label="Top view of estimated rover path"></canvas>
+      <div class="truth">
+        <div class="truth-head"><h3>Measured ground-truth checkpoints</h3><span id="truth-status"></span></div>
+        <div id="truth-content" class="empty">No tape-measured checkpoints are registered for this run.</div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="summary">
+        <div class="metric"><div class="label">Duration</div><div id="m-duration" class="value">-</div></div>
+        <div class="metric"><div class="label">Moving path</div><div id="m-path" class="value">-</div></div>
+        <div class="metric"><div id="m-error-label" class="label">Return error</div><div id="m-return" class="value">-</div></div>
+        <div class="metric"><div class="label">Log timing</div><div id="m-rate" class="value">-</div></div>
+      </div>
+
+      <div class="state">
+        <section>
+          <table>
+            <tr><th>State</th><th>x</th><th>y</th><th>z</th></tr>
+            <tr><td>odometry p m</td><td id="px">-</td><td id="py">-</td><td id="pz">-</td></tr>
+            <tr><td>odometry v m/s</td><td id="vx">-</td><td id="vy">-</td><td id="vz">-</td></tr>
+            <tr><td>internal ESKF p</td><td id="fpx">-</td><td id="fpy">-</td><td id="fpz">-</td></tr>
+            <tr><td>RPY deg</td><td id="rr">-</td><td id="rp">-</td><td id="ry">-</td></tr>
+            <tr><td>gyro bias deg/s</td><td id="bx">-</td><td id="by">-</td><td id="bz">-</td></tr>
+          </table>
+        </section>
+        <section>
+          <table id="nis-table">
+            <tr><th>NIS</th><th>mean</th><th>target</th><th>ratio</th></tr>
+            <tr><td colspan="4">-</td></tr>
+          </table>
+        </section>
+      </div>
+
+      <section class="signals">
+        <h2>Synchronized signals</h2>
+        <div class="plot"><canvas id="speed-plot"></canvas><span class="plot-label">wheel speed (m/s)</span></div>
+        <div class="plot"><canvas id="attitude-plot"></canvas><span class="plot-label">roll / pitch / yaw (deg)</span></div>
+        <div class="plot"><canvas id="imu-plot"></canvas><span class="plot-label">gyro x / y / z (deg/s)</span></div>
+        <div class="plot"><canvas id="yaw-source-plot"></canvas><span class="plot-label">cumulative yaw attribution (deg)</span></div>
+      </section>
+    </aside>
+  </div>
+
+  <section class="diagnostics">
+    <div class="diag-head">
+      <h2>Filter cycle</h2>
+      <span id="diag-time">-</span>
+    </div>
+    <div id="stage-tabs" class="stage-tabs"></div>
+    <div class="diag-grid">
+      <section>
+        <h3>State effect</h3>
+        <div id="diag-status" class="diag-status">-</div>
+        <div id="diag-effect"></div>
+      </section>
+      <section>
+        <h3>Calculation</h3>
+        <div id="diag-calculation"></div>
+      </section>
+      <section>
+        <h3>Internal ESKF state and uncertainty after stage</h3>
+        <div id="diag-state"></div>
+      </section>
+    </div>
+    <div class="attribution">
+      <table id="attribution-table"><tr><th>Yaw attribution</th><td>-</td></tr></table>
+      <div id="pose-output" class="diag-status muted">Odometry output: -</div>
+    </div>
+  </section>
+
+  <footer class="transport">
+    <div class="controls">
+      <button id="back" type="button" aria-label="Previous frame">Step -</button>
+      <button id="play" type="button">Play</button>
+      <button id="forward" type="button" aria-label="Next frame">Step +</button>
+      <select id="speed" aria-label="Playback speed">
+        <option value="0.25">0.25x</option><option value="0.5">0.5x</option>
+        <option value="1" selected>1x</option><option value="2">2x</option>
+        <option value="5">5x</option><option value="10">10x</option>
+      </select>
+      <span id="time" class="time">00:00.00 / 00:00.00</span>
+      <span id="motion" class="zupt">-</span>
+    </div>
+    <input id="timeline" type="range" min="0" max="0" step="1" value="0" aria-label="Replay timeline">
+    <div class="legend" id="legend"></div>
+  </footer>
+</main>
+
+<script>
+const NIS_DOF = {{ nis_dof|tojson }};
+const palette = ['#59a9ff','#f4bd62','#72d38a','#d990e8'];
+const state = { data:null, index:0, playing:false, lastClock:0, replayTime:0,
+                stage:'predict', traceCache:new Map(), traceRequest:-1 };
+const $ = id => document.getElementById(id);
+
+function message(text, error=false) {
+  $('message').textContent = text;
+  $('message').className = error ? 'message error' : 'message';
+}
+
+function fmtTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds - m * 60;
+  return String(m).padStart(2,'0') + ':' + s.toFixed(2).padStart(5,'0');
+}
+
+function resizeCanvas(canvas) {
+  const ratio = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  const width = Math.max(1, Math.round(rect.width * ratio));
+  const height = Math.max(1, Math.round(rect.height * ratio));
+  if (canvas.width !== width || canvas.height !== height) {
+    canvas.width = width; canvas.height = height;
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  return [ctx, rect.width, rect.height];
+}
+
+function mapTransform(path, filterPath, truth, width, height) {
+  let xmin=0,xmax=0,ymin=0,ymax=0;
+  const points=path.concat(filterPath||[]);
+  if (truth) for (const event of truth.events) points.push(event.truth,event.estimate);
+  for (const p of points) {
+    xmin=Math.min(xmin,p[0]); xmax=Math.max(xmax,p[0]);
+    ymin=Math.min(ymin,p[1]); ymax=Math.max(ymax,p[1]);
+  }
+  const pad=34;
+  const span=Math.max(xmax-xmin,ymax-ymin,0.25)*1.15;
+  const cx=(xmin+xmax)/2, cy=(ymin+ymax)/2;
+  const scale=Math.min((width-2*pad)/span,(height-2*pad)/span);
+  return { X:x=>width/2+(x-cx)*scale, Y:y=>height/2-(y-cy)*scale,
+           scale, span, cx, cy };
+}
+
+function drawMap() {
+  if (!state.data) return;
+  const [g,w,h]=resizeCanvas($('map'));
+  const path=state.data.path, filterPath=state.data.filter_path||[], truth=state.data.truth;
+  const tr=mapTransform(path,filterPath,truth,w,h);
+  g.clearRect(0,0,w,h);
+
+  const gridStep = tr.span > 4 ? 1 : tr.span > 2 ? 0.5 : tr.span > 0.8 ? 0.2 : 0.1;
+  g.strokeStyle='#29313a'; g.lineWidth=1;
+  for (let x=Math.floor((tr.cx-tr.span)/gridStep)*gridStep; x<tr.cx+tr.span; x+=gridStep) {
+    g.beginPath(); g.moveTo(tr.X(x),0); g.lineTo(tr.X(x),h); g.stroke();
+  }
+  for (let y=Math.floor((tr.cy-tr.span)/gridStep)*gridStep; y<tr.cy+tr.span; y+=gridStep) {
+    g.beginPath(); g.moveTo(0,tr.Y(y)); g.lineTo(w,tr.Y(y)); g.stroke();
+  }
+
+  g.strokeStyle='#48535e'; g.lineWidth=1;
+  g.beginPath(); g.moveTo(tr.X(0),0); g.lineTo(tr.X(0),h); g.stroke();
+  g.beginPath(); g.moveTo(0,tr.Y(0)); g.lineTo(w,tr.Y(0)); g.stroke();
+
+  g.strokeStyle='#59a9ff'; g.lineWidth=2; g.beginPath();
+  for (let i=0; i<=state.index; i++) {
+    const p=path[i];
+    if (i===0) g.moveTo(tr.X(p[0]),tr.Y(p[1])); else g.lineTo(tr.X(p[0]),tr.Y(p[1]));
+  }
+  g.stroke();
+
+  // Internal strapdown position is diagnostic only. It may jump because
+  // velocity/tilt observations correct it through Kalman cross-covariance.
+  if (filterPath.length) {
+    g.setLineDash([4,4]); g.strokeStyle='#d990e8'; g.lineWidth=1; g.beginPath();
+    for (let i=0; i<=state.index; i++) {
+      const p=filterPath[i];
+      if (i===0) g.moveTo(tr.X(p[0]),tr.Y(p[1])); else g.lineTo(tr.X(p[0]),tr.Y(p[1]));
+    }
+    g.stroke(); g.setLineDash([]);
+  }
+
+  // Tape measurements give us true positions only at deliberate stops.
+  // The dashed line is a spatial guide, not invented continuous truth.
+  if (truth) {
+    g.setLineDash([7,5]); g.strokeStyle='#72d38a'; g.lineWidth=1.5; g.beginPath();
+    truth.events.forEach((event,i)=>{
+      const p=event.truth;
+      i?g.lineTo(tr.X(p[0]),tr.Y(p[1])):g.moveTo(tr.X(p[0]),tr.Y(p[1]));
+    });
+    g.stroke(); g.setLineDash([]);
+
+    const labelled=new Set();
+    for (const event of truth.events) {
+      const tx=tr.X(event.truth[0]),ty=tr.Y(event.truth[1]);
+      const key=event.truth.join(',');
+      if (!labelled.has(key)) {
+        labelled.add(key);
+        g.fillStyle='#72d38a';
+        g.beginPath(); g.arc(tx,ty,4,0,Math.PI*2); g.fill();
+        g.fillStyle='#94a0ab'; g.font='11px Segoe UI, sans-serif';
+        g.fillText(event.truth[0].toFixed(2)+' m',tx+6,ty-5);
+      }
+      const passed=event.frame<=state.index;
+      if (passed && event.number>0) {
+        const ex=tr.X(event.estimate[0]),ey=tr.Y(event.estimate[1]);
+        g.strokeStyle=event.error<=truth.tolerance?'#72d38a':'#f07878';
+        g.lineWidth=1; g.beginPath(); g.moveTo(tx,ty); g.lineTo(ex,ey); g.stroke();
+        g.beginPath(); g.moveTo(ex-4,ey-4); g.lineTo(ex+4,ey+4);
+        g.moveTo(ex+4,ey-4); g.lineTo(ex-4,ey+4); g.stroke();
+      }
+    }
+  }
+
+  const start=path[0], f=state.data.frames[state.index];
+  g.fillStyle='#72d38a'; g.beginPath(); g.arc(tr.X(start[0]),tr.Y(start[1]),5,0,Math.PI*2); g.fill();
+  drawRover(g,tr.X(f.pos[0]),tr.Y(f.pos[1]),f.rpy[2]);
+
+  g.fillStyle='#94a0ab'; g.font='12px Segoe UI, sans-serif';
+  g.fillText(gridStep.toFixed(2)+' m grid',10,h-10);
+  $('map-scale').textContent = 'x forward, y left | '+tr.span.toFixed(2)+' m view';
+}
+
+function drawRover(g,x,y,yawDeg) {
+  const yaw=-yawDeg*Math.PI/180;
+  g.save(); g.translate(x,y); g.rotate(yaw);
+  g.fillStyle='#f4bd62'; g.strokeStyle='#101418'; g.lineWidth=2;
+  g.beginPath(); g.rect(-13,-10,26,20); g.fill(); g.stroke();
+  g.fillStyle='#101418'; g.beginPath(); g.moveTo(13,0); g.lineTo(5,-5); g.lineTo(5,5); g.closePath(); g.fill();
+  g.restore();
+}
+
+function drawPlot(id, getter, labels) {
+  if (!state.data) return;
+  const [g,w,h]=resizeCanvas($(id));
+  const frames=state.data.frames;
+  const values=frames.map(getter);
+  let lo=Infinity,hi=-Infinity;
+  for (const row of values) for (const v of row) { lo=Math.min(lo,v); hi=Math.max(hi,v); }
+  if (!isFinite(lo) || hi-lo<1e-6) { lo=-1; hi=1; }
+  const margin=(hi-lo)*0.08; lo-=margin; hi+=margin;
+  const left=42,right=8,top=22,bottom=18;
+  const X=i=>left+i/(frames.length-1||1)*(w-left-right);
+  const Y=v=>top+(hi-v)/(hi-lo)*(h-top-bottom);
+  g.clearRect(0,0,w,h);
+  g.strokeStyle='#303943'; g.lineWidth=1;
+  for (let k=0;k<3;k++) { const y=top+k*(h-top-bottom)/2; g.beginPath(); g.moveTo(left,y); g.lineTo(w-right,y); g.stroke(); }
+  g.fillStyle='#94a0ab'; g.font='11px Segoe UI, sans-serif';
+  g.fillText(hi.toFixed(2),4,top+4); g.fillText(lo.toFixed(2),4,h-bottom);
+  labels.forEach((label,j)=>{
+    g.strokeStyle=palette[j%palette.length]; g.lineWidth=1.25; g.beginPath();
+    values.forEach((row,i)=>{ const x=X(i),y=Y(row[j]); i?g.lineTo(x,y):g.moveTo(x,y); }); g.stroke();
+    g.fillStyle=palette[j%palette.length]; g.fillText(label,175+j*62,14);
+  });
+  const cursor=X(state.index);
+  g.strokeStyle='#e8edf2'; g.lineWidth=1; g.beginPath(); g.moveTo(cursor,top); g.lineTo(cursor,h-bottom); g.stroke();
+}
+
+function nisClass(ratio) { return ratio>3?'bad':ratio<0.33?'warn':'good'; }
+
+function num(v, digits=6) {
+  if (v === undefined || v === null || !isFinite(v)) return '-';
+  const a=Math.abs(v);
+  return a!==0 && (a<1e-4 || a>=1e4) ? v.toExponential(3) : v.toFixed(digits);
+}
+
+function vectorRow(label, values) {
+  return `<tr><td>${label}</td>${values.map(v=>`<td>${num(v)}</td>`).join('')}</tr>`;
+}
+
+function vectorTable(rows, headers=['x','y','z']) {
+  return `<table><tr><th></th>${headers.map(x=>`<th>${x}</th>`).join('')}</tr>${rows.join('')}</table>`;
+}
+
+const errorNames=['dp.x','dp.y','dp.z','dv.x','dv.y','dv.z','dth.x','dth.y','dth.z','dbg.x','dbg.y','dbg.z','dba.x','dba.y','dba.z'];
+
+function matrixTable(matrix, rowNames=[]) {
+  if (!matrix || !matrix.length) return '-';
+  const cols=matrix[0].length;
+  let html='<div class="matrix-wrap"><table><tr><th></th>';
+  for (let c=0;c<cols;c++) html+=`<th>${c}</th>`;
+  html+='</tr>';
+  matrix.forEach((row,r)=>{
+    html+=`<tr><td>${rowNames[r]||r}</td>${row.map(v=>`<td>${num(v,5)}</td>`).join('')}</tr>`;
+  });
+  return html+'</table></div>';
+}
+
+function matrixDetails(label, matrix, rowNames=[]) {
+  return `<details><summary>${label}</summary>${matrixTable(matrix,rowNames)}</details>`;
+}
+
+function renderTrace(trace) {
+  const f=state.data.frames[state.index];
+  if (!trace) return;
+  $('diag-time').textContent=`raw cycle at ${f.t.toFixed(3)} s | dt ${num(trace.input.dt_s,6)} s`;
+
+  const stages=trace.stages;
+  if (!stages.some(x=>x.name===state.stage)) state.stage='predict';
+  $('stage-tabs').innerHTML=stages.map(stage=>
+    `<button type="button" data-stage="${stage.name}" class="${stage.name===state.stage?'active ':''}${stage.applied?'':'skipped'}" title="${stage.applied?'Applied':'Skipped: '+stage.reason}">${stage.name}</button>`
+  ).join('');
+  $('stage-tabs').querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{
+    state.stage=button.dataset.stage; renderTrace(trace);
+  }));
+
+  const stage=stages.find(x=>x.name===state.stage);
+  $('diag-status').textContent=stage.applied?'APPLIED':`SKIPPED: ${stage.reason}`;
+  $('diag-status').className='diag-status '+(stage.applied?'good':'warn');
+  if (!stage.applied) {
+    $('diag-effect').innerHTML='<span class="muted">No state value was changed.</span>';
+    $('diag-calculation').innerHTML='-';
+    $('diag-state').innerHTML='-';
+  } else {
+    const d=stage.state_delta;
+    $('diag-effect').innerHTML=vectorTable([
+      vectorRow('position [m]',d.p_m), vectorRow('velocity [m/s]',d.v_mps),
+      vectorRow('RPY [deg]',d.rpy_deg), vectorRow('gyro bias [deg/s]',d.bg_deg_s),
+      vectorRow('accel bias [m/s2]',d.ba_mps2)
+    ])+vectorTable([vectorRow('quaternion delta',d.q_wxyz)],['w','x','y','z']);
+
+    if (stage.measurement) {
+      const m=stage.measurement;
+      const labels=m.z.map((_,i)=>String(i));
+      $('diag-calculation').innerHTML=vectorTable([
+        vectorRow('z measurement',m.z), vectorRow('h predicted',m.h),
+        vectorRow('y = z - h',m.innovation), vectorRow('sqrt diag(R)',m.R_sigma),
+        vectorRow('sqrt diag(S)',m.S_sigma)
+      ],labels)+`<div class="diag-status">NIS = ${num(m.nis,4)} | correction below is K * y</div>`+
+      vectorTable([
+        vectorRow('delta p [m]',stage.correction.dp_m),
+        vectorRow('delta v [m/s]',stage.correction.dv_mps),
+        vectorRow('delta theta [deg]',stage.correction.dtheta_deg),
+        vectorRow('delta bg [deg/s]',stage.correction.dbg_deg_s),
+        vectorRow('delta ba [m/s2]',stage.correction.dba_mps2)
+      ])+
+      matrixDetails('H measurement Jacobian',m.H)+
+      matrixDetails('R measurement covariance',m.R)+
+      matrixDetails('S innovation covariance',m.S)+
+      matrixDetails('K Kalman gain',m.K,errorNames);
+    } else {
+      const t=stage.terms;
+      $('diag-calculation').innerHTML=vectorTable([
+        vectorRow('gyro raw [deg/s]',trace.input.gyro_raw_deg_s),
+        vectorRow('gyro - bg [deg/s]',t.gyro_corrected_deg_s),
+        vectorRow('accel raw [m/s2]',trace.input.accel_raw_mps2),
+        vectorRow('accel - ba [m/s2]',t.accel_corrected_mps2),
+        vectorRow('world accel [m/s2]',t.accel_world_mps2),
+        vectorRow('rotation increment [deg]',t.rotation_increment_deg)
+      ])+vectorTable([
+        vectorRow('Q dp',t.Q_diagonal.slice(0,3)),
+        vectorRow('Q dv',t.Q_diagonal.slice(3,6)),
+        vectorRow('Q dtheta',t.Q_diagonal.slice(6,9)),
+        vectorRow('Q dbg',t.Q_diagonal.slice(9,12)),
+        vectorRow('Q dba',t.Q_diagonal.slice(12,15))
+      ])+matrixDetails('F state transition',t.F,errorNames)+
+          matrixDetails('Q process covariance',t.Q,errorNames);
+    }
+
+    const a=stage.after, sig=a.sigma;
+    $('diag-state').innerHTML=vectorTable([
+      vectorRow('position [m]',a.p_m), vectorRow('velocity [m/s]',a.v_mps),
+      vectorRow('RPY [deg]',a.rpy_deg), vectorRow('gyro bias [deg/s]',a.bg_deg_s),
+      vectorRow('accel bias [m/s2]',a.ba_mps2),
+      vectorRow('sigma p [m]',sig.p_m), vectorRow('sigma v [m/s]',sig.v_mps),
+      vectorRow('sigma theta [deg]',sig.theta_deg), vectorRow('sigma bg [deg/s]',sig.bg_deg_s),
+      vectorRow('sigma ba [m/s2]',sig.ba_mps2)
+    ])+vectorTable([vectorRow('quaternion',a.q_wxyz)],['w','x','y','z'])+
+       matrixDetails('P before stage',stage.P_before,errorNames)+
+       matrixDetails('P after stage',stage.P_after,errorNames);
+  }
+
+  const names=['predict','wheel','nhc','zupt','zaru','gravity'];
+  const total=names.reduce((sum,name)=>sum+(f.yaw_sources[name]||0),0);
+  $('attribution-table').innerHTML='<tr><th>Cumulative yaw</th>'+names.map(x=>`<th>${x}</th>`).join('')+'<th>sum</th><th>ESKF yaw</th></tr><tr><td>deg</td>'+names.map(x=>`<td>${num(f.yaw_sources[x],3)}</td>`).join('')+`<td>${num(total,3)}</td><td>${num(f.rpy[2],3)}</td></tr>`;
+  const out=trace.odometry_output;
+  if (!out || !out.applied) {
+    $('pose-output').textContent='Odometry output skipped: '+((out&&out.reason)||'unavailable');
+  } else {
+    $('pose-output').innerHTML='<strong>Reported pose step</strong> | '+out.formula+' | '+
+      `v_wheel=${num(out.forward_speed_mps,4)} m/s | `+
+      `v_world=[${out.velocity_world_mps.map(x=>num(x,4)).join(', ')}] m/s | `+
+      `delta p=[${out.delta_position_m.map(x=>num(x,6)).join(', ')}] m | `+
+      `p=[${out.position_after_m.map(x=>num(x,4)).join(', ')}] m`;
+  }
+}
+
+async function requestTrace() {
+  const index=state.index;
+  if (state.traceCache.has(index)) {
+    renderTrace(state.traceCache.get(index));
+    return;
+  }
+  if (state.traceRequest===index) return;
+  state.traceRequest=index;
+  $('diag-time').textContent='Loading cycle...';
+  const file=$('log-select').value;
+  try {
+    const response=await fetch(`/api/trace?file=${encodeURIComponent(file)}&index=${index}`);
+    const trace=await response.json();
+    if (!response.ok) throw new Error(trace.error||'Could not load filter trace.');
+    state.traceCache.set(index,trace);
+    if (state.traceRequest===index && state.index===index) renderTrace(trace);
+  } catch (error) {
+    if (state.index===index) $('diag-time').textContent=error.message;
+  } finally {
+    if (state.traceRequest===index) state.traceRequest=-1;
+  }
+}
+
+function renderState() {
+  if (!state.data) return;
+  const f=state.data.frames[state.index], s=state.data.summary;
+  [['px',f.pos[0]],['py',f.pos[1]],['pz',f.pos[2]],
+   ['vx',f.vel[0]],['vy',f.vel[1]],['vz',f.vel[2]],
+   ['fpx',f.filter_pos[0]],['fpy',f.filter_pos[1]],['fpz',f.filter_pos[2]],
+   ['rr',f.rpy[0]],['rp',f.rpy[1]],['ry',f.rpy[2]],
+   ['bx',f.bg[0]],['by',f.bg[1]],['bz',f.bg[2]]].forEach(([id,v])=>$(id).textContent=v.toFixed(3));
+
+  let html='<tr><th>NIS</th><th>mean</th><th>target</th><th>ratio</th></tr>';
+  for (const name of ['wheel','nhc','zupt','zaru','gravity']) {
+    if (!(name in f.nis)) continue;
+    const target=NIS_DOF[name];
+    const ratio=f.nis[name]/target;
+    html+=`<tr><td>${name}</td><td>${f.nis[name].toFixed(2)}</td><td>${target}</td><td class="${nisClass(ratio)}">${ratio.toFixed(2)}x</td></tr>`;
+  }
+  $('nis-table').innerHTML=html;
+  $('motion').textContent=!f.ready
+      ? `ALIGNING ${Math.round(100*f.alignment_progress)}%`
+      : (f.stopped?'ZUPT active':'moving / settling');
+  $('motion').className=(!f.ready || f.stopped)?'zupt':'good';
+  $('time').textContent=fmtTime(f.t)+' / '+fmtTime(s.duration);
+  $('timeline').value=state.index;
+
+  drawMap();
+  drawPlot('speed-plot',x=>x.wheel,state.data.ids.map(x=>'ID'+x));
+  drawPlot('attitude-plot',x=>x.rpy,['roll','pitch','yaw']);
+  drawPlot('imu-plot',x=>x.gyro,['gx','gy','gz']);
+  drawPlot('yaw-source-plot',x=>[
+    x.yaw_sources.predict,
+    x.yaw_sources.wheel+x.yaw_sources.nhc+x.yaw_sources.zupt+x.yaw_sources.zaru+x.yaw_sources.gravity,
+    x.rpy[2]
+  ],['predict','all updates','ESKF yaw']);
+  requestTrace();
+  updateTruthActive();
+}
+
+function showSummary() {
+  const s=state.data.summary;
+  $('m-duration').textContent=s.duration.toFixed(1)+' s';
+  $('m-path').textContent=s.path_length.toFixed(3)+' m';
+  const truth=state.data.truth;
+  const error=truth && truth.max_error!==null ? truth.max_error : s.return_error;
+  $('m-error-label').textContent=truth?'Max checkpoint error':'Return error';
+  $('m-return').textContent=error.toFixed(3)+' m';
+  $('m-return').className='value '+(error<=0.05?'good':'warn');
+  $('m-rate').textContent=s.rate.toFixed(1)+' Hz';
+  $('m-rate').className='value '+(Math.abs(s.rate-100)<5?'good':'warn');
+  const frameFix=s.legacy_imu_frame_corrected?' Legacy Arduino axes rotated into rover body frame.':'';
+  const timing=`${s.samples} raw samples; p99 gap ${s.p99_gap_ms.toFixed(2)} ms; max ${s.max_gap_ms.toFixed(2)} ms; stale IMU ${s.stale_imu}.${frameFix}`;
+  const note=state.data.note ? ' '+state.data.note : '';
+  message(timing+note);
+  $('legend').innerHTML=state.data.ids.map((id,i)=>`<span><i class="swatch" style="background:${palette[i%palette.length]}"></i>ID${id}</span>`).join('')+
+    '<span><i class="swatch" style="background:#59a9ff"></i>reported wheel-IMU pose</span><span><i class="swatch" style="background:#d990e8"></i>internal ESKF p (diagnostic)</span><span><i class="swatch" style="background:#72d38a"></i>measured checkpoint</span><span><i class="swatch" style="background:#f4bd62"></i>vehicle</span>';
+  showTruth();
+}
+
+function showTruth() {
+  const truth=state.data.truth;
+  if (!truth) {
+    $('truth-status').textContent='ground truth unavailable';
+    $('truth-content').className='empty';
+    $('truth-content').textContent='No tape-measured checkpoints are registered for this run.';
+    return;
+  }
+  $('truth-status').className=truth.status==='matched'?'good':'warn';
+  $('truth-status').textContent=truth.label+' | '+truth.status+' | tolerance +/- '+Math.round(truth.tolerance*100)+' cm';
+  let html='<table><thead><tr><th>#</th><th>time</th><th>true x/y</th><th>odometry x/y</th><th>dx</th><th>dy</th><th>2D error</th><th>result</th></tr></thead><tbody>';
+  for (let i=0;i<truth.events.length;i++) {
+    const event=truth.events[i], next=truth.events[i+1];
+    const good=event.error<=truth.tolerance;
+    const active=event.frame<=state.index && (!next || next.frame>state.index);
+    html+=`<tr data-frame="${event.frame}" class="${active?'active':''}"><td>${event.number}</td><td>${event.t.toFixed(1)} s</td><td>${event.truth[0].toFixed(2)} / ${event.truth[1].toFixed(2)}</td><td>${event.estimate[0].toFixed(3)} / ${event.estimate[1].toFixed(3)}</td><td>${(event.x_error*100).toFixed(1)} cm</td><td>${(event.y_error*100).toFixed(1)} cm</td><td>${(event.error*100).toFixed(1)} cm</td><td class="${good?'good':'bad'}">${good?'OK':'OUT'}</td></tr>`;
+  }
+  html+='</tbody></table>';
+  $('truth-content').className=''; $('truth-content').innerHTML=html;
+  $('truth-content').querySelectorAll('tr[data-frame]').forEach(row=>row.addEventListener('click',()=>{ pause(); seek(Number(row.dataset.frame)); }));
+}
+
+function updateTruthActive() {
+  if (!state.data || !state.data.truth) return;
+  let activeFrame=0;
+  for (const event of state.data.truth.events) {
+    if (event.frame<=state.index) activeFrame=event.frame;
+  }
+  $('truth-content').querySelectorAll('tr[data-frame]').forEach(row=>
+    row.classList.toggle('active',Number(row.dataset.frame)===activeFrame));
+}
+
+async function loadLogs(preferred) {
+  const response=await fetch('/api/logs');
+  const data=await response.json();
+  $('log-select').innerHTML=data.logs.map(x=>`<option value="${x.name}">${x.name}</option>`).join('');
+  if (preferred && data.logs.some(x=>x.name===preferred)) $('log-select').value=preferred;
+}
+
+async function loadReplay() {
+  pause(); message('Running the production ESKF over the complete 100 Hz log...');
+  $('load').disabled=true;
+  try {
+    const name=$('log-select').value;
+    const response=await fetch('/api/replay?file='+encodeURIComponent(name));
+    const data=await response.json();
+    if (!response.ok) throw new Error(data.error||'Could not load log.');
+    state.data=data; state.index=0; state.replayTime=0;
+    state.traceCache=new Map(); state.traceRequest=-1; state.stage='predict';
+    $('timeline').max=Math.max(0,data.frames.length-1);
+    showSummary(); renderState();
+  } catch (error) { message(error.message,true); }
+  finally { $('load').disabled=false; }
+}
+
+function pause() { state.playing=false; $('play').textContent='Play'; }
+function togglePlay() {
+  if (!state.data) return;
+  if (state.playing) { pause(); return; }
+  if (state.index>=state.data.frames.length-1) { state.index=0; state.replayTime=0; }
+  state.playing=true; state.lastClock=performance.now(); state.replayTime=state.data.frames[state.index].t; $('play').textContent='Pause';
+}
+
+function seek(index) {
+  if (!state.data) return;
+  state.index=Math.max(0,Math.min(state.data.frames.length-1,index));
+  state.replayTime=state.data.frames[state.index].t; renderState();
+  if (state.data.truth) showTruth();
+}
+
+function animate(now) {
+  if (state.playing && state.data) {
+    const dt=(now-state.lastClock)/1000*Number($('speed').value);
+    state.lastClock=now; state.replayTime+=dt;
+    const frames=state.data.frames;
+    while (state.index+1<frames.length && frames[state.index+1].t<=state.replayTime) state.index++;
+    if (state.index>=frames.length-1) pause();
+    renderState();
+  }
+  requestAnimationFrame(animate);
+}
+
+$('load').addEventListener('click',loadReplay);
+$('play').addEventListener('click',togglePlay);
+$('back').addEventListener('click',()=>seek(state.index-1));
+$('forward').addEventListener('click',()=>seek(state.index+1));
+$('timeline').addEventListener('input',event=>{ pause(); seek(Number(event.target.value)); });
+window.addEventListener('resize',()=>{ if(state.data) renderState(); });
+window.addEventListener('keydown',event=>{
+  if (event.code==='Space') { event.preventDefault(); togglePlay(); }
+  else if (event.code==='ArrowLeft') { pause(); seek(state.index-1); }
+  else if (event.code==='ArrowRight') { pause(); seek(state.index+1); }
+});
+
+(async()=>{
+  try { await loadLogs({{ preferred|tojson }}); await loadReplay(); }
+  catch(error) { message(error.message,true); }
+})();
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

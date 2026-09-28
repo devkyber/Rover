@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "runs": {
+    "2026-09-06_2329_drive.csv": {
+      "description": "Straight and stop test. No measured distance."
+    },
+    "2026-09-06_2334_drive.csv": {
+      "description": "About 1.20 m out and back, repeated twice.",
+      "ground_truth": {
+        "label": "1.20 m out/back repeated twice",
+        "checkpoints_m": [[0.0, 0.0], [1.2, 0.0], [0.0, 0.0], [1.2, 0.0], [0.0, 0.0]],
+        "tolerance_m": 0.05
+      }
+    },
+    "2026-09-06_2347_drive.csv": {
+      "description": "Stops at 0.00, 0.50, 1.00 and 1.50 m, then return.",
+      "ground_truth": {
+        "label": "0.50 m checkpoints to 1.50 m, then return",
+        "checkpoints_m": [[0.0, 0.0], [0.5, 0.0], [1.0, 0.0], [1.5, 0.0], [1.0, 0.0], [0.5, 0.0], [0.0, 0.0]],
+        "tolerance_m": 0.05
+      }
+    },
+    "2026-09-06_2351_drive.csv": {
+      "description": "Free driving with rotation. No external position truth."
+    }
+  }
+}
