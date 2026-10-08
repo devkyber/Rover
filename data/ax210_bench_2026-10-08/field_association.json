@@ -1,0 +1,19 @@
+{
+  "capturedAtKST": "2026-10-08T01:57:23.435046+09:00",
+  "purpose": "AX210 switch to saved rover-field profile on owner request; no field video test",
+  "command": "iw dev wlP1p1s0 link; ip -4 -br address show wlP1p1s0; iw dev wlP1p1s0 get power_save; systemctl is-active rover-field-return-20261008.timer",
+  "returncode": 3,
+  "stdout": "Connected to b2:38:6c:cf:57:c8 (on wlP1p1s0)\n\tSSID: rover-5G\n\tfreq: 5180\n\tRX: 5673 bytes (42 packets)\n\tTX: 5853 bytes (58 packets)\n\tsignal: -19 dBm\n\trx bitrate: 2401.9 MBit/s 160MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx bitrate: 490.0 MBit/s 160MHz HE-MCS 3 HE-NSS 2 HE-GI 2 HE-DCM 0\n\n\tbss flags:\tshort-preamble short-slot-time\n\tdtim period:\t1\n\tbeacon int:\t100\nwlP1p1s0         UP             192.168.0.200/24 \nPower save: off\ninactive\n",
+  "stderr": "",
+  "earlier_router_ping_observation": {
+    "destination": "192.168.0.1",
+    "transmitted": 3,
+    "received": 3,
+    "rtt_min_avg_max_ms": [
+      0.81,
+      0.842,
+      0.879
+    ]
+  },
+  "laptop_path": "Home Wi-Fi remains active; router LAN adapter not connected. Station reconnection awaiting cable."
+}

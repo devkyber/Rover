@@ -1,9 +1,5 @@
-# Desktop rover tools. This is a dependency list, not a version lock.
-# Tested versions for this cleanup are recorded in docs/10_code_review.md.
-# Jetson camera tools use the OpenCV/GStreamer provided by their JetPack image.
-numpy
+# Jetson runtime; GStreamer Python bindings come from JetPack/system packages.
+# The laptop station uses only the Python standard library.
+numpy<2
 pyserial
-matplotlib
-Flask
-Flask-SocketIO
-pygame
+spidev==3.8; sys_platform == "linux"

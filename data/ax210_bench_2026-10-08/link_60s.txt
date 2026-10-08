@@ -1,0 +1,73 @@
+Testing the link to 192.168.50.57:8000 for 60 s  [AX210 first hardware test; home Wi-Fi both endpoints wireless; ch36 80MHz; distance and antenna assembly unconfirmed; camera-only]
+   s   wifi dBm   telemetry Hz   ping ms   video fps   Mbit/s
+   1        -48             20         4          24      7.7
+   2        -48             20         5          31      9.9
+   3        -48             20         3          31     10.0
+   4        -48             20         3          31      9.6
+   5        -49             20         5          31     10.0
+   6        -49             20         4          31      9.7
+   7        -49             20         4          31     10.0
+   8        -49             20         4          30     10.5
+   9        -49             20         4          31      9.9
+  10        -49             20         4          30      9.6
+  11        -49             20         3          31     10.8
+  12        -49             20         5          30      9.6
+  13        -48             20         5          31     10.4
+  14        -48             20         5          30      9.7
+  15        -48             20         5          31     10.0
+  16        -48             20         4          31     10.5
+  17        -49             20         4          31      9.8
+  18        -49             20         9          31     10.6
+  19        -48             20        34          30     10.0
+  20        -48             20         5          31      9.9
+  21        -48             20         4          30     10.4
+  22        -48             20         5          31      9.6
+  23        -48             20         5          30      9.7
+  24        -47             20        10          31     10.0
+  25        -48             20         5          30     10.6
+  26        -48             20         4          31      9.3
+  27        -48             20         4          31      9.9
+  28        -48             20         5          31      9.7
+  29        -48             19         5          30      9.7
+  30        -48             20        12          30      9.7
+  31        -48             21        37          31     11.2
+  32        -48             20        46          31      9.0
+  33        -48             20        11          31      9.9
+  34        -48             20         8          30      9.7
+  35        -49             20         5          31      9.9
+  36        -48             21        24          31     11.4
+  37        -49             20         4          31      8.8
+  38        -49             20         5          30     11.9
+  39        -48             20         4          31      8.6
+  40        -49             20         4          31     11.9
+  41        -48             20         4          30      8.2
+  42        -48             20         5          31     12.8
+  43        -48             20         5          30      8.0
+  44        -49             20         4          31     12.2
+  45        -48             20         4          30      7.9
+  46        -48             20         4          31     13.1
+  47        -48             20         4          31      7.9
+  48        -47             20         4          31     12.0
+  49        -49             20         5          30      9.2
+  50        -48             20         4          31      9.7
+  51        -48             20         6          31     11.4
+  52        -48             20        14          30      7.9
+  53        -48             20         5          31     11.6
+  54        -48             20         4          30     10.4
+  55        -49             20         6          31      9.9
+  56        -49             20         4          30     10.0
+  57        -49             20         6          31      9.6
+  58        -49             20         3          31     11.1
+  59        -49             20         5          31     10.1
+
+Summary [AX210 first hardware test; home Wi-Fi both endpoints wireless; ch36 80MHz; distance and antenna assembly unconfirmed; camera-only]
+  wifi at the rover  median -48 dBm, weakest -49 dBm
+  telemetry          20.0 per second, gap 99% 69 ms, longest 90 ms
+  ping               median 3.3 ms, 99% 40.6 ms, longest 45.8 ms, 0 of 299 unanswered
+  video              30.4 frames/s, 10.0 Mbit/s, gap 99% 63 ms, longest 73 ms, 61 keyframes
+  camera at rover    30.5 frames/s produced
+  reconnects         0
+
+  Link screen: PASS. This does not verify drive-command timing or video latency.
+
+Row added to C:\Users\tae06\CODE\Rover\data\link_tests.csv

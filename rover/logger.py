@@ -9,6 +9,7 @@ overwritten and the file itself says when it happened. See new_log_path.
 """
 import csv
 import datetime
+import json
 import os
 
 import config
@@ -48,14 +49,15 @@ def new_log_path(tag="run", directory=None):
 N_WHEELS = len(config.MOTOR_IDS)
 
 # 't'     = host loop time (seconds since the run started)
-# 'imu_t' = the IMU's OWN clock. Logged separately on purpose: the gap
-#           between the two is the sensor latency we need to measure for
-#           IMU/encoder time-sync calibration. Averaging them away would
-#           destroy the very thing we want.
+# 'imu_t' = the IMU's own nominal clock, with arbitrary offset/rate. Its
+# difference from host time is NOT directly latency. BMI088 uses the separate
+# host FIFO interval imu_dt for integration, preserving nominal accel time.
 COLUMNS = (['t', 'imu_t', 'imu_frame']
            + [f'w{i+1}_{f}' for i in range(N_WHEELS)
               for f in ('pos', 'vel', 'cur')]
-           + ['ax', 'ay', 'az', 'gx', 'gy', 'gz'])
+           + ['ax', 'ay', 'az', 'gx', 'gy', 'gz']
+           + ['imu_source', 'imu_dt', 'gyro_samples', 'imu_host_t',
+              'accel_host_t', 'imu_temp_c', 'imu_tick', 'accel_raw', 'gyro_raw'])
 
 
 class Logger:
@@ -67,9 +69,17 @@ class Logger:
     # after power loss; fewer samples per second also means longer gaps.
     FLUSH_EVERY = 100          # rows == 1 s at 100 Hz
 
-    def __init__(self, filename):
+    def __init__(self, filename, metadata=None):
         self.filename = filename
-        self.file = open(filename, 'w', newline='')
+        self.file = open(filename, 'x', newline='')
+        if metadata is not None:
+            try:
+                with open(str(filename) + '.meta.json', 'x', encoding='utf-8') as f:
+                    json.dump(metadata, f, indent=2, ensure_ascii=False)
+                    f.write('\n')
+            except BaseException:
+                self.file.close()
+                raise
         self.writer = csv.writer(self.file)
         self.writer.writerow(COLUMNS)
         self.file.flush()      # header on disk before the first row
@@ -93,6 +103,12 @@ class Logger:
         g = imu_data['gyro']
         row.extend([f"{a[0]:.6f}", f"{a[1]:.6f}", f"{a[2]:.6f}"])
         row.extend([f"{g[0]:.6f}", f"{g[1]:.6f}", f"{g[2]:.6f}"])
+        row.extend([imu_data.get('source', ''), imu_data.get('dt', ''),
+                    json.dumps(imu_data['gyro_samples'], separators=(',', ':')) if 'gyro_samples' in imu_data else '',
+                    imu_data.get('timestamp', ''), imu_data.get('accel_timestamp', ''),
+                    imu_data.get('temperature_c', ''), imu_data.get('sensor_tick', ''),
+                    json.dumps(imu_data['accel_raw']) if 'accel_raw' in imu_data else '',
+                    json.dumps(imu_data['gyro_raw']) if 'gyro_raw' in imu_data else ''])
 
         self.writer.writerow(row)
         self.count += 1
@@ -142,6 +158,11 @@ def replay(filename):
             elif imu_frame != 'body':
                 raise ValueError(f"Unsupported IMU frame in log: {imu_frame}")
 
+            extra = {}
+            if row.get('imu_source') == 'bmi088':
+                # No fallback to loop time or one selected gyro frame.
+                extra = {'imu_dt': float(row['imu_dt']),
+                         'gyro_samples': json.loads(row['gyro_samples'])}
             yield {
                 't':      float(row['t']),
                 'imu_t':  float(row.get('imu_t', 0.0)),
@@ -150,6 +171,7 @@ def replay(filename):
                 'gyro':   gyro,
                 'frame':  imu_frame,
                 'source_frame': source_frame,
+                **extra,
             }
 
 

@@ -1,0 +1,5780 @@
+{
+  "started_utc": "2026-10-07T14:33:58.107583+00:00",
+  "hostname": "rover",
+  "kernel": "5.15.148-tegra",
+  "spidev_version": "3.8",
+  "probe_sha256": "54596d6a620d9f04ba5303b0bc0fe5e7fc20c1ed40d7a1c3cea8eea32ad7f905",
+  "wiring": "User confirmed: BMI088 disconnected; physical 19 to 21",
+  "bits_per_word": 8,
+  "bit_order": "MSB first",
+  "cs_active_high": false,
+  "hardware_loopback_flag": false,
+  "clock_note": "Requested SPI speeds; actual clock not measured",
+  "scope": "Data path only; no CS waveform or IMU validation",
+  "cases": [
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.0",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 100000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 1000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 0,
+      "requested_hz": 5000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 100000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 1000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "00",
+      "trials": [
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        },
+        {
+          "rx_hex": "00",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "ff",
+      "trials": [
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        },
+        {
+          "rx_hex": "ff",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "55",
+      "trials": [
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        },
+        {
+          "rx_hex": "55",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "aa",
+      "trials": [
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        },
+        {
+          "rx_hex": "aa",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "8000",
+      "trials": [
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        },
+        {
+          "rx_hex": "8000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "800000",
+      "trials": [
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        },
+        {
+          "rx_hex": "800000",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "12345678",
+      "trials": [
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        },
+        {
+          "rx_hex": "12345678",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "0102030405060708090a0b0c0d0e0f10",
+      "trials": [
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        },
+        {
+          "rx_hex": "0102030405060708090a0b0c0d0e0f10",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "device": "/dev/spidev0.1",
+      "mode": 3,
+      "requested_hz": 5000000,
+      "tx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+      "trials": [
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        },
+        {
+          "rx_hex": "135ca5ee3780c9125ba4ed367fc8115aa3ec357ec71059a2eb347dc60f58a1ea337cc50e57a0e9327bc40d569fe8317ac30c559ee73079c20b549de62f78c10a539ce52e77c009529be42d76bf08519ae32c75be075099e22b74bd064f98e12a73bc054e97e02972bb044d96df2871ba034c95de2770b9024b94dd266fb8014a93dc256eb7004992db246db6ff4891da236cb5fe4790d9226bb4fd468fd8216ab3fc458ed72069b2fb448dd61f68b1fa438cd51e67b0f9428bd41d66aff8418ad31c65aef74089d21b64adf63f88d11a63acf53e87d01962abf43d86cf1861aaf33c85ce1760a9f23b84cd165fa8f13a83cc155ea7f03982cb145da6ef3881ca13",
+          "pass": true
+        }
+      ]
+    }
+  ],
+  "completed": true,
+  "passed": 1200,
+  "total": 1200,
+  "elapsed_s": 1.7600893519999943
+}

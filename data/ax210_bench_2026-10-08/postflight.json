@@ -1,0 +1,42 @@
+{
+  "capturedAtKST": "2026-10-08T01:37:04.807256+09:00",
+  "checks": {
+    "boot_id": {
+      "command": "cat /proc/sys/kernel/random/boot_id",
+      "returncode": 0,
+      "stdout": "8c7f28ca-c1b5-406b-b5cb-1523e0dbf2ff\n",
+      "stderr": ""
+    },
+    "wifi": {
+      "command": "iw dev wlP1p1s0 link",
+      "returncode": 0,
+      "stdout": "Connected to fc:34:97:53:8a:54 (on wlP1p1s0)\n\tSSID: poweron\n\tfreq: 5180\n\tRX: 4525704 bytes (43971 packets)\n\tTX: 657017560 bytes (29078 packets)\n\tsignal: -49 dBm\n\trx bitrate: 1200.9 MBit/s 80MHz HE-MCS 11 HE-NSS 2 HE-GI 0 HE-DCM 0\n\ttx bitrate: 960.7 MBit/s 80MHz HE-MCS 9 HE-NSS 2 HE-GI 0 HE-DCM 0\n\n\tbss flags:\tshort-slot-time\n\tdtim period:\t1\n\tbeacon int:\t100\n",
+      "stderr": ""
+    },
+    "power_save": {
+      "command": "iw dev wlP1p1s0 get power_save",
+      "returncode": 0,
+      "stdout": "Power save: off\n",
+      "stderr": ""
+    },
+    "camera_usb": {
+      "command": "lsusb",
+      "returncode": 0,
+      "stdout": "Bus 002 Device 002: ID 0bda:0489 Realtek Semiconductor Corp. 4-Port USB 3.0 Hub\nBus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub\nBus 001 Device 003: ID 8087:0032 Intel Corp. AX210 Bluetooth\nBus 001 Device 004: ID 0c45:6366 Microdia Webcam Vitade AF\nBus 001 Device 002: ID 0bda:5489 Realtek Semiconductor Corp. 4-Port USB 2.0 Hub\nBus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\n",
+      "stderr": ""
+    },
+    "runtime_log": {
+      "command": "cat /tmp/rover-ax210-bench-1791390544466.log",
+      "returncode": 0,
+      "stdout": "IMU: FakeIMU (synthetic, no hardware)\n============================================================\n  Station ->  python station/station.py --rover 192.168.50.57\n  Port    ->  8000  (/control, /video)\n  Log     ->  NONE (--no-log)\n============================================================\ncamera: streaming 1920x1080 H.264\n",
+      "stderr": ""
+    },
+    "kernel_filtered": {
+      "command": "sudo journalctl -k -b --no-pager",
+      "filter": "iwlwifi|iwlmvm|wlP1p1s0|firmware|NTH SIGN|uvcvideo",
+      "returncode": 0,
+      "stdout": " 2\uc6d4 20 22:24:02 rover kernel: psci: PSCIv1.1 detected in firmware.\n 2\uc6d4 20 22:24:02 rover kernel: Kernel command line: root=PARTUUID=365c9438-2077-4022-a86d-078cd42f5e1b rw rootwait rootfstype=ext4 mminit_loglevel=4 console=ttyTCU0,115200 firmware_class.path=/etc/firmware fbcon=map:0 video=efifb:off console=tty0 bl_prof_dataptr=2031616@0x271E10000 bl_prof_ro_ptr=65536@0x271E00000 \n 2\uc6d4 20 22:24:02 rover kernel: tegra-bpmp bpmp: firmware: e941463f35523d12ee54-da583751bbf\n 2\uc6d4 20 22:24:02 rover kernel: tegra-xusb 3610000.usb: Firmware timestamp: 2023-02-10 03:48:10 UTC\n 2\uc6d4 20 22:24:03 rover kernel: tegra186-cam-rtcpu bc00000.rtcpu: firmware version cpu=rce cmd=6 sha1=e2238c99959d2df9350d393f04e1f44e5bef98cb\n 2\uc6d4 20 22:24:03 rover kernel: iwlwifi: module verification failed: signature and/or required key missing - tainting kernel\n 2\uc6d4 20 22:24:03 rover kernel: iwlwifi 0001:01:00.0: Adding to iommu group 4\n 2\uc6d4 20 22:24:03 rover kernel: iwlwifi 0001:01:00.0: enabling device (0000 -> 0002)\n 2\uc6d4 20 22:24:03 rover kernel: iwlwifi 0001:01:00.0: api flags index 2 larger than supported by driver\n 2\uc6d4 20 22:24:03 rover kernel: iwlwifi 0001:01:00.0: TLV_FW_FSEQ_VERSION: FSEQ Version: 0.63.2.2\n 2\uc6d4 20 22:24:03 rover kernel: iwlwifi 0001:01:00.0: loaded firmware version 66.f1c864e0.0 ty-a0-gf-a0-66.ucode op_mode iwlmvm\n 2\uc6d4 20 22:24:03 rover kernel: Bluetooth: hci0: Minimum firmware build 1 week 10 2014\n 2\uc6d4 20 22:24:03 rover kernel: Bluetooth: hci0: Found device firmware: intel/ibt-0041-0041.sfi\n 1\uc6d4 01 09:00:36 rover kernel: iwlwifi 0001:01:00.0: Detected Intel(R) Wi-Fi 6 AX210 160MHz, REV=0x420\n 1\uc6d4 01 09:00:36 rover kernel: iwlwifi 0001:01:00.0: loaded PNVM version 0xe28bb9d7\n 1\uc6d4 01 09:00:36 rover kernel: iwlwifi 0001:01:00.0: Detected RF GF, rfid=0x10d000\n 1\uc6d4 01 09:00:36 rover kernel: iwlwifi 0001:01:00.0: base HW address: f8:cf:52:cc:04:9d\n10\uc6d4 08 01:18:20 rover kernel: iwlwifi 0001:01:00.0 wlP1p1s0: renamed from wlan0\n10\uc6d4 08 01:18:21 rover kernel: Bluetooth: hci0: Waiting for firmware download to complete\n10\uc6d4 08 01:18:21 rover kernel: Bluetooth: hci0: Firmware loaded in 1221104 usecs\n10\uc6d4 08 01:18:21 rover kernel: Bluetooth: hci0: Firmware timestamp 2022.5 buildtype 1 build 38020\n10\uc6d4 08 01:18:26 rover kernel: wlP1p1s0: authenticate with fc:34:97:53:8a:54\n10\uc6d4 08 01:18:26 rover kernel: wlP1p1s0: send auth to fc:34:97:53:8a:54 (try 1/3)\n10\uc6d4 08 01:18:26 rover kernel: wlP1p1s0: authenticated\n10\uc6d4 08 01:18:26 rover kernel: wlP1p1s0: associate with fc:34:97:53:8a:54 (try 1/3)\n10\uc6d4 08 01:18:26 rover kernel: wlP1p1s0: RX AssocResp from fc:34:97:53:8a:54 (capab=0x1011 status=0 aid=20)\n10\uc6d4 08 01:18:26 rover kernel: wlP1p1s0: associated\n10\uc6d4 08 01:18:26 rover kernel: wlP1p1s0: Limiting TX power to 20 (20 - 0) dBm as advertised by fc:34:97:53:8a:54\n10\uc6d4 08 01:18:26 rover kernel: IPv6: ADDRCONF(NETDEV_CHANGE): wlP1p1s0: link becomes ready\n10\uc6d4 08 01:26:16 rover kernel: usbcore: registered new interface driver uvcvideo\n10\uc6d4 08 01:33:27 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:33:27 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:33:28 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:35:07 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:35:07 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:35:08 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:35:36 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:35:36 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:35:36 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:36:18 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:36:39 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:36:39 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:36:40 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n10\uc6d4 08 01:36:41 rover kernel: configfs-gadget gadget: Wrong NTH SIGN, skblen 1537\n",
+      "stderr": ""
+    }
+  }
+}

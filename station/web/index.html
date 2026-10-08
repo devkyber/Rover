@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rover Station</title>
+<link rel="stylesheet" href="station.css" onerror="setTimeout(() => location.reload(), 1000)">
+</head>
+<body>
+
+<header class="toolbar">
+  <h1>postechME Rover Station</h1>
+  <span class="spacer"></span>
+
+  <label for="rover-address">ROVER</label>
+  <input id="rover-address" type="text" spellcheck="false" autocomplete="off"
+         placeholder="192.168.0.200" aria-label="Rover address">
+  <button id="connect" type="button">CONNECT</button>
+  <span id="link-label" class="status-text">DISCONNECTED</span>
+
+  <span class="divider"></span>
+
+  <label for="run-tag">RUN</label>
+  <input id="run-tag" type="text" value="drive" spellcheck="false" autocomplete="off"
+         aria-label="Name for the next log">
+  <button id="new-run" type="button"
+          title="Rover closes the current log, starts a new one with this name, and re-aligns. Keep the rover still for 5 s.">NEW RUN</button>
+  <button id="stop-log" type="button" title="Rover closes the current log and keeps running.">STOP LOG</button>
+  <span id="log-label" class="status-text">NOT LOGGING</span>
+
+  <span class="divider"></span>
+
+  <button id="reset-view" type="button"
+          title="Clear the plots, path and statistics on this page. The rover and its log are not touched.">RESET</button>
+  <button id="theme" type="button" aria-label="Switch between dark and light">&#9728;</button>
+</header>
+
+<section class="mission" aria-label="Mission status">
+  <div id="clock" class="mission-cell">KST --:--:--</div>
+  <div id="run-time" class="mission-cell muted">T+ --:--.-</div>
+  <div id="state-chip" class="chip idle">OFFLINE</div>
+  <div id="tlm-rate" class="mission-cell muted">TLM -- Hz</div>
+  <div id="rtt" class="mission-cell muted">LINK -- ms</div>
+  <div id="video-rate" class="mission-cell muted">VIDEO -- fps</div>
+  <div id="battery" class="mission-cell muted">BAT -- V</div>
+</section>
+
+<main>
+  <div class="row-top">
+    <section class="panel camera">
+      <div class="panel-head">
+        <h2>CAMERA</h2>
+        <span id="video-info" class="head-note"></span>
+        <button id="fullscreen" type="button" class="small">FULL SCREEN</button>
+      </div>
+      <div class="video-wrap" id="video-wrap">
+        <canvas id="video" width="1920" height="1080"></canvas>
+        <div id="video-banner" class="banner">Not connected to the rover</div>
+        <div class="hud">
+          <span><b id="hud-speed">0.00</b> m/s</span>
+          <span>yaw <b id="hud-yaw">+0.0</b>&deg;</span>
+          <span>roll <b id="hud-roll">+0.0</b>&deg;</span>
+          <span>pitch <b id="hud-pitch">+0.0</b>&deg;</span>
+          <span>stick <b id="hud-cmd">+0.00 / +0.00</b></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="col-mid">
+      <section class="panel attitude">
+        <div class="panel-head"><h2>ATTITUDE</h2><span class="head-note">seen from behind the rover</span></div>
+        <div class="canvas-box"><canvas id="attitude"></canvas></div>
+        <div class="readout">
+          <span>ROLL <b id="att-roll">+0.0&deg;</b></span>
+          <span>PITCH <b id="att-pitch">+0.0&deg;</b></span>
+          <span>YAW <b id="att-yaw">+0.0&deg;</b></span>
+        </div>
+      </section>
+      <section class="panel wheels">
+        <div class="panel-head"><h2>WHEELS</h2><span class="head-note">speed and motor current</span></div>
+        <div id="wheels" class="wheel-grid"><p class="empty">Connect to the rover to see its wheels.</p></div>
+      </section>
+    </div>
+
+    <section class="panel path">
+      <div class="panel-head"><h2>PATH</h2><span id="path-scale" class="head-note"></span></div>
+      <div class="canvas-box"><canvas id="path"></canvas></div>
+      <div class="readout">
+        <span>X <b id="pos-x">+0.000</b> m</span>
+        <span>Y <b id="pos-y">+0.000</b> m</span>
+        <span>FROM START <b id="pos-r">0.000</b> m</span>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel plots">
+    <div class="panel-head">
+      <h2>PLOTS</h2>
+      <div id="plot-toggles" class="toggles"></div>
+      <span class="head-note">last 30 s, up to 4 at once</span>
+    </div>
+    <div id="plot-row" class="plot-row"><p class="empty">Plots start when the rover is connected. Type its address at the top and press CONNECT.</p></div>
+  </section>
+
+  <div class="row-bottom">
+    <section class="panel log">
+      <div class="panel-head"><h2>TELEMETRY / SYSTEM LOG</h2></div>
+      <pre id="log-header" class="log-header"></pre>
+      <div id="log" class="log-body" tabindex="0" aria-label="Telemetry and system log"></div>
+    </section>
+
+    <section class="panel drive">
+      <div class="panel-head"><h2>DRIVE</h2><span id="gamepad-label" class="head-note">keyboard</span></div>
+      <div class="drive-body">
+        <div id="pad" class="pad" aria-label="Drive pad: drag to drive"><div id="pad-dot" class="pad-dot"></div></div>
+        <div class="drive-side">
+          <label for="speed-limit">SPEED LIMIT <b id="speed-limit-value">50%</b></label>
+          <input id="speed-limit" type="range" min="10" max="100" step="5" value="50">
+          <div id="aux" class="aux" aria-label="String lift and camera pan: hold to run">
+            <span>LIFT</span>
+            <button type="button" data-lift="1" aria-label="Lift up" title="Hold to wind the string in. Key R, gamepad D-pad up.">&#9650;</button>
+            <button type="button" data-lift="-1" aria-label="Lift down" title="Hold to let the string out. Key F, gamepad D-pad down.">&#9660;</button>
+            <span>PAN</span>
+            <button type="button" data-pan="-1" aria-label="Pan camera left" title="Hold to turn the camera left. Key Q, gamepad D-pad left.">&#9664;</button>
+            <button type="button" data-pan="1" aria-label="Pan camera right" title="Hold to turn the camera right. Key E, gamepad D-pad right.">&#9654;</button>
+          </div>
+          <button id="estop" type="button" class="estop">E-STOP</button>
+          <p class="hint">W A S D or arrows drive. R F lift, Q E pan. Space stops.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel stats">
+      <div class="panel-head">
+        <h2>DRIVE STATS</h2>
+        <button id="zero-battery" type="button" class="small"
+                title="Set the rover's count of battery charge used back to zero, e.g. after fitting a fresh battery.">ZERO mAh</button>
+      </div>
+      <dl class="kv">
+        <div class="hero"><dt>DISTANCE</dt><dd id="st-distance">0.00 m</dd></div>
+        <div><dt>MOVING TIME</dt><dd id="st-moving">0.0 s</dd></div>
+        <div><dt>MAX SPEED</dt><dd id="st-speed">0.00 m/s</dd></div>
+        <div><dt>MAX CURRENT</dt><dd id="st-current">0.00 A</dd></div>
+        <div><dt>MAX TILT</dt><dd id="st-tilt">0.0&deg;</dd></div>
+        <div><dt>BATTERY DRAW</dt><dd id="st-battery">--</dd></div>
+        <div><dt>BATTERY USED</dt><dd id="st-mah">--</dd></div>
+      </dl>
+    </section>
+
+    <section class="panel health">
+      <div class="panel-head"><h2>HEALTH</h2><span id="h-temp" class="head-note"></span></div>
+      <dl class="kv chips">
+        <div><dt>LINK</dt><dd><span id="h-link" class="chip idle">OFF</span></dd></div>
+        <div><dt>CONTROL</dt><dd><span id="h-control" class="chip idle">--</span></dd></div>
+        <div><dt>MOTORS</dt><dd><span id="h-motors" class="chip idle">--</span></dd></div>
+        <div><dt>IMU</dt><dd><span id="h-imu" class="chip idle">--</span></dd></div>
+        <div><dt>CAMERA</dt><dd><span id="h-camera" class="chip idle">--</span></dd></div>
+        <div><dt>LOOP</dt><dd><span id="h-loop" class="chip idle">--</span></dd></div>
+        <div><dt>SERVOS</dt><dd><span id="h-servos" class="chip idle">--</span></dd></div>
+        <div><dt>BATTERY</dt><dd><span id="h-battery" class="chip idle">--</span></dd></div>
+      </dl>
+    </section>
+
+    <section class="panel filter">
+      <div class="panel-head"><h2>FILTER CHECK</h2><span class="head-note">NIS, last 3 s</span></div>
+      <table class="nis">
+        <thead><tr><th>update</th><th>mean</th><th>target</th><th>ratio</th><th></th></tr></thead>
+        <tbody id="nis"><tr><td colspan="5" class="muted">waiting for the rover</td></tr></tbody>
+      </table>
+      <p class="hint">ratio = mean / target. Outside 0.33 to 3, check the model, timing and noise settings. It does not measure accuracy.</p>
+    </section>
+  </div>
+</main>
+
+<!-- If any script file fails to download, load the page again. It happens:
+     the browser cancels downloads -- even from localhost -- when Windows
+     reports a network change, e.g. the Jetson's USB-C network adapter
+     reconnecting. A mistake in the code does not trigger this, only a
+     failed download, so it cannot loop on a bug. -->
+<script type="module" src="main.js" onerror="setTimeout(() => location.reload(), 1000)"></script>
+</body>
+</html>

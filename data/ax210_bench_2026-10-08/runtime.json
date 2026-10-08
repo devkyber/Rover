@@ -1,0 +1,17 @@
+{
+  "pid": 2584,
+  "log": "/tmp/rover-ax210-bench-1791390544466.log",
+  "command": [
+    "/home/taeholee/rover-venv/bin/python",
+    "-u",
+    "rover_main.py",
+    "--no-motors",
+    "--imu",
+    "fake",
+    "--pico",
+    "off",
+    "--no-log"
+  ],
+  "cwd": "/home/taeholee/Rover/rover",
+  "early_exit": null
+}

@@ -1,0 +1,5 @@
+# Files that run on the Jetson must keep LF endings even when checked out
+# on Windows (core.autocrlf=true) -- bash fails on a CRLF script with
+# "$'\r': command not found".
+*.sh    text eol=lf
+*.rules text eol=lf

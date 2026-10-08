@@ -1,0 +1,5 @@
+time,label,rover,seconds,wifi_dbm_median,wifi_dbm_min,telemetry_hz,telemetry_gap_p99_ms,telemetry_gap_max_ms,ping_median_ms,ping_p99_ms,ping_max_ms,pings_lost,video_fps,video_mbps,video_gap_p99_ms,video_gap_max_ms,rover_camera_fps,reconnects
+2026-10-05 00:16:07,"baseline: home router ch 36 80 MHz, stock RTL8822CE",192.168.50.243,30.0,-48.0,-49,20.0,54.7,57.5,3.6,10.3,13.3,0,29.9,10.0,42.9,53.0,30.5,0
+2026-10-05 02:02:54,AX3000Q; stock RTL8822CE; AP ch36 160MHz; client 80MHz; close together on desk; distance unmeasured; camera-only,192.168.0.200,30.0,-26.0,-28,20.0,53.4,66.2,1.6,6.4,13.4,0,29.8,10.0,38.2,44.1,30.5,0
+2026-10-05 02:41:46,AX3000Q; stock RTL8822CE; desk; after native Intel modules installed and loaded; AP ch36 160MHz client80MHz; camera-only,192.168.0.200,30.0,-23,-24,20.0,53.0,71.0,1.7,4.4,7.9,0,30.0,9.9,38.1,42.5,30.5,0
+2026-10-08 01:30:51,AX210 first hardware test; home Wi-Fi both endpoints wireless; ch36 80MHz; distance and antenna assembly unconfirmed; camera-only,192.168.50.57,60.0,-48.0,-49,20.0,69.3,90.5,3.3,40.6,45.8,0,30.4,10.0,63.1,72.7,30.5,0

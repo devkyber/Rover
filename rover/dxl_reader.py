@@ -31,7 +31,7 @@ def open_port(port=config.PORT, baudrate=config.BAUDRATE):
         if "access is denied" in text or "permission" in text:
             hint = ("Something else is holding the port."
                     "\n  - Close DYNAMIXEL Wizard 2.0"
-                    "\n  - Stop any teleop.py / record.py still running")
+                    "\n  - Stop any rover_main.py / record.py still running")
         elif "cannot find" in text or "no such" in text:
             hint = (f"{port} does not exist right now."
                     "\n  - Is the U2D2 plugged in?"

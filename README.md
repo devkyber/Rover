@@ -1,129 +1,137 @@
-# Rover — KSRC 2026 달 탐사 로버
+# Rover — 현장 사용법
 
-엔코더 + IMU를 융합해 **위성항법 없이 자기 위치를 추정하는** 오도메트리
-시스템. 4륜 스키드스티어 모함, DYNAMIXEL XH430-V350-R 구동, 15상태
-Error-State Kalman Filter.
+Jetson과 공유기의 전원이 켜져 있고, 기존 장치 설정이 완료된 상태에서 사용한다.
 
-**Learning in English:** Start with the [learning guide and complete source map](docs/08_learning_guide.md),
-then run the [turn-angle lesson](docs/09_turn_angle_lesson.md).
-The [code review](docs/10_code_review.md) separates this cleanup from unresolved behavior issues.
+## 1. 연결
 
----
+```text
+노트북 ── USB Ethernet ── 공유기의 LAN 포트 (WAN 아님)
+Jetson / AX210 ── Wi-Fi: rover-5G ── 같은 공유기
+카메라 · U2D2 · Pico(사용 시) ── Jetson USB
+```
 
-## 처음 왔다면 여기서부터
-
-| 목적 | 문서 |
+| 대상 | 주소 |
 |---|---|
-| **원리를 처음부터 알고 싶다** | [docs/01 — 오도메트리와 ESKF 이론](docs/01_이론_오도메트리와_ESKF.md) |
-| **코드가 어디서 무엇을 하나** | [docs/02 — 코드 해설](docs/02_구현_코드해설.md) |
-| **필터를 맞추고 싶다 / NIS가 뭔가** | [docs/03 — 튜닝과 NIS](docs/03_튜닝과_NIS.md) |
-| **당장 돌려보고 싶다** | [docs/04 — 실행 가이드](docs/04_실행_가이드.md) |
+| 공유기 설정 | http://192.168.0.1 |
+| Jetson | `192.168.0.200` |
+| 조종 화면 | http://localhost:8766/?rover=192.168.0.200 |
 
-전체 목록은 [`docs/README.md`](docs/README.md).
+공유기 LAN은 `192.168.0.1/24`, DHCP 범위는 `.100–.199`로 둔다.
+Jetson의 고정 주소 `.200`은 DHCP 범위 밖이다. 인터넷 연결은 필요 없다.
+노트북의 집 Wi-Fi는 인터넷용으로 함께 연결해도 된다.
 
----
+## 2. Jetson 프로그램 시작
 
-## 30초 요약
+노트북 PowerShell에서 접속한다.
+
+```powershell
+ssh taeholee@192.168.0.200
+```
+
+Jetson 터미널에서 실행한다. `pgrep`에 기존 프로그램이 나오면 중복 실행하지 않는다.
 
 ```bash
-cd rover
+pgrep -af '[r]over_main.py'
+source ~/rover-venv/bin/activate
+cd ~/Rover/rover
 ```
 
-| 명령 | 하는 일 | 모터 |
-|---|---|---|
-| `python test_filter.py` | 야코비안 5 + 시나리오 10 (하드웨어 불필요) | — |
-| `python dxl_tool.py check` | 모터 레지스터 점검 | 안 움직임 |
-| `python dxl_tool.py scan` | 포트·보드레이트·ID 탐색 | 안 움직임 |
-| `python test_pipeline.py --seconds 5` | 센서→로깅→재생 자동 감사 | 안 움직임 |
-| `python record.py --seconds 20` | 정지 로그 녹화 | 안 움직임 |
-| `python teleop.py --tag drive` | **폰으로 조종** + 로깅 | **움직임** |
-| `python replay_gui.py` | **차량 재생 + 실측점 + 필터 단계별 원인 분석** | — |
-| `python replay.py ../logs/<파일>.csv --plot ../data/<파일>.png` | 로그 → 필터 → NIS 판정 | — |
+**카메라·통신만 확인** — 모터와 Pico를 사용하지 않는다. 표시되는 IMU는 가상 값이다.
 
-조종은 폰(`http://<IP>:5000`), 실시간 상태는 브라우저 패널(`/panel`).
+```bash
+python rover_main.py --no-motors --imu fake --pico off --no-log
+```
 
-**로그 이름은 자동이다** — `logs/2026-09-06_1432_drive.csv`처럼 날짜·시각·태그로
-붙는다. 고정 이름은 다음 실험이 이전 실험을 조용히 덮어쓴다.
-`--tag`로 이름 조각을, `--log`로 경로 전체를 지정할 수 있고 `--no-log`면 안 남긴다.
+**주행** — U2D2와 BMI088 연결을 확인한 뒤 실행한다. 모터 제어가 활성화된다.
 
----
+```bash
+python rover_main.py --imu bmi088 --pico off --tag field
+```
 
-## 지금 상태
+Pico 서보·배터리 기능까지 사용하려면 `--pico off`를 `--pico usb`로 바꾼다.
+시작 후 약 5초간 정지해 IMU 정렬을 기다린다. IMU 오류가 나면 주행하지 않는다.
+AX210의 근거리 연결은 확인했지만, 10 m·가림 조건의 신뢰성과 BMI088를 포함한
+전체 주행은 별도로 검증해야 한다.
 
-| 항목 | 결과 |
+## 3. 노트북 조종 화면
+
+새 PowerShell 창에서 실행한다. Python이 설치되어 있으면 추가 패키지는 필요 없다.
+
+```powershell
+cd C:\Users\tae06\CODE\Rover
+python station/station.py --rover 192.168.0.200 --port 8766
+```
+
+Chrome 또는 Edge에서 위 조종 화면 주소를 연다. `ROVER`가 `192.168.0.200`인지
+확인하고 `CONNECT`를 누른다. 조종 탭은 하나만 사용한다.
+
+| 조작 | 기능 |
 |---|---|
-| 파이프라인 감사 | **10/10** fake audit 통과; 실기 기록은 기존 100.0 Hz, 지터 0.28 ms, 드롭 0 |
-| 필터 시나리오 | **10/10** (10시드 몬테카를로, 최악값 판정) |
-| 수학·구조 검사 | **11/11** (야코비안 5개 + trace + yaw/좌표계/출력모델 검사) |
-| 정지 20 s 실측 드리프트 | **5.3 mm**, ZUPT 95.8 % |
-| Sync Read 왕복 (4륜) | 1.14–1.48 ms (≈700–875 Hz 한계) |
-| `23:47` 재생 | yaw **+0.06°**, 복귀 **1.2 cm**, 최대 횡이탈 **4 mm** |
+| `DRIVE` 원형 패드 드래그 | 화면 조이스틱. 놓으면 정지 |
+| `W / S`, `A / D` 또는 방향키 | 전진·후진, 좌·우 회전. 키를 놓으면 정지 |
+| `SPEED LIMIT` 슬라이더 | 속도 제한. 낮게 시작 |
+| `Space` / `E-STOP` | 소프트웨어 비상 정지. 재개는 `RELEASE` |
+| `R / F`, `Q / E` | Pico 사용 시 리프트, 카메라 팬 |
+| `RUN` 이름 → `NEW RUN` | 새 기록 시작·IMU 재정렬. 약 5초 정지 |
+| `STOP LOG` | 기록만 종료. 주행 정지는 아님 |
 
-### 알아야 할 두 가지
+영상·연결이 끊기면 조작을 멈추고 아래 연결 확인부터 한다.
+소프트웨어 `E-STOP`은 물리적 전원 차단을 대신하지 않는다.
 
-> **1. Relative heading can still drift.**
-> Stationary startup alignment estimates the initial gyro bias; later stationary
-> ZARU updates can refine it. Residual bias and sensor noise still accumulate,
-> and neither update supplies an absolute heading reference. Periodic stops can
-> help bias estimation, but real turn accuracy still needs independent measurement.
+## 4. 연결이 안 될 때
 
-> **2. 직진 거리용 휠 `R`은 바닥 주행으로 맞췄지만 동적 `R`과 회전 정확도는 아직 모른다.**
-> 0.50 m 체크포인트 주행에서 종방향 오차는 4 cm 이내였지만, 회전이 많은
-> 로그에는 외부 위치 정답이 없다. 다음 검증은 크기를 잰 정사각형 코스다.
-> `python replay_gui.py`에서 추정 궤적과 등록된 줄자 체크포인트를 함께 본다.
+노트북에서 LAN 케이블과 주소를 확인한다.
 
-> 실행 직후에는 **5초간 로버를 건드리지 않는다.** 이 동안 모터 명령은 강제로
-> 0이고 패널에 `ALIGNING`이 표시된다. 완료 시 시작 방향이 yaw 0°가 된다.
-
-> 임시 Arduino IMU는 로버 축과 90° 돌아가 장착되어 있다.
-> `+X_body=-Y_sensor`, `+Y_body=+X_sensor`, `+Z_body=+Z_sensor` 변환을
-> 드라이버가 적용한다. 2026-09-06 구형 로그는 replay가 같은 변환을 한 번 적용한다.
-
-> 화면에 보이는 위치는 `p += R(q_ESKF)[v_wheel,0,0]dt`로 계산한다.
-> 엔코더가 이동량, ESKF 자세가 진행방향을 담당한다. 내부 strapdown `p`는
-> 위치 관측이 없어 교차공분산 보정으로 점프할 수 있으므로 진단선으로만 표시한다.
-
-> 물리 치수(`WHEEL_RADIUS_M` 62.5 mm, `WHEELBASE_M` 485 mm)는 **실측 완료.**
-> 공식 31 rpm과 기본 command limit의 환산은 약 **0.203 m/s**지만 24 V 무부하
-> 기준이다. 적재된 실차의 지속 최고속도는 아직 별도로 측정하지 않았다.
-
-한계와 다음 할 일은 전부 → **[docs/05 한계와 로드맵](docs/05_한계와_로드맵.md)**
-
----
-
-## 하드웨어
-
-| 항목 | 사양 |
-|---|---|
-| 구동 | DYNAMIXEL XH430-V350-R ×4 (모델 1040, FW v50) |
-| 통신 | U2D2 (FTDI FT232H), COM22, **4.5 Mbps**, Protocol 2.0 |
-| IMU (임시) | Arduino Nano 33 IoT — LSM6DS3, COM25, 104 Hz |
-| IMU (목표) | BMI088 |
-| 배치 | ID1 좌전 · ID2 우전 · ID3 좌후 · ID4 우후 |
-
-> 4.5 Mbps는 상용 SDK가 거부한다. 로컬 패치가 있다 —
-> [`rover/vendor/PATCHES.md`](rover/vendor/PATCHES.md). SDK를 올릴 때
-> 반드시 다시 적용할 것.
-
----
-
-## 폴더
-
-```
-rover/      코드. vendor/ 는 DYNAMIXEL SDK 사본 + 로컬 패치
-arduino/    IMU 스트리밍 스케치 (Nano 33 IoT)
-jetson/     카메라 서브시스템 (별개) -- docs/99
-logs/       기록한 CSV. 입력이고, 다시 만들 수 없다
-data/       로그에서 만들어낸 것 (그래프 등). 지워도 다시 생성된다
-docs/       문서
+```powershell
+ipconfig
+ping 192.168.0.1
+ping 192.168.0.200
 ```
 
-`logs/`와 `data/`를 나눈 이유: **로그는 실험을 다시 해야만 얻을 수 있고,
-`data/`는 언제든 `replay.py`로 다시 만들 수 있다.** 지워도 되는 것과 절대
-지우면 안 되는 것이 한눈에 갈린다.
+공유기는 응답하지만 Jetson이 응답하지 않으면 Jetson 로컬 터미널이나
+다른 연결의 SSH에서 Wi-Fi를 확인한다.
 
-## 설정
+```bash
+nmcli connection show --active
+sudo nmcli connection up rover-field
+```
 
-바꿀 값은 전부 [`rover/config.py`](rover/config.py) 한 곳에 있다.
-포트, 보드레이트, 바퀴 배치, 물리 치수, Q, R, 임계값.
-그 외 파일에 상수를 새로 만들지 말 것.
+`rover-field`는 부팅·재연결 때 자동 연결된다. 이미 집 Wi-Fi에 연결된 경우에는
+위 명령으로 전환한다. 전환하면 기존 Wi-Fi SSH가 끊기므로 `.200`으로 다시 접속한다.
+프로필이 없을 때만 아래 명령으로 만들고, 위 명령으로 활성화한다.
+
+```bash
+bash ~/Rover/jetson/wifi_field.sh "rover-5G"
+```
+
+`.200`은 응답하는데 화면이 끊겨 있으면 Jetson의 `rover_main.py` 실행 여부와
+화면의 `ROVER` 주소를 확인한다. `Address already in use`는 기존 프로그램이나
+서버가 실행 중이라는 뜻이다. 기존 창을 사용하거나 그 창에서 `Ctrl+C`로 종료한다.
+
+## 5. 종료·기록
+
+정지 → `STOP LOG` → Jetson 실행 창에서 `Ctrl+C` 순서로 종료한다.
+기록은 Jetson의 `~/Rover/logs/`에 저장된다. CSV와 같은 이름의 `.meta.json`을 함께 보관한다.
+필요하면 노트북 PowerShell에서 복사한다.
+
+```powershell
+scp -r taeholee@192.168.0.200:~/Rover/logs ./field-logs
+```
+
+Jetson 전원을 끄려면 Jetson 터미널에서 `sudo shutdown -h now`를 실행한다.
+노트북 스테이션 서버는 실행 창에서 `Ctrl+C`로 종료한다.
+
+## 설치 파일
+
+- [rover/rover_main.py](rover/rover_main.py): Jetson 실행. 설정은 [rover/config.py](rover/config.py).
+- [station/station.py](station/station.py): 노트북 조종 화면 서버.
+- [jetson/setup_jetson.sh](jetson/setup_jetson.sh): 새 Jetson의 기본 패키지·USB 장치 이름 설정.
+  `bash ~/Rover/jetson/setup_jetson.sh`로 실행한다. AX210 드라이버와 BMI088 SPI 설정은 포함하지 않는다.
+- [firmware/pico/main.py](firmware/pico/main.py): MicroPython이 설치된 Pico용 펌웨어.
+  Jetson의 저장소 루트에서 `mpremote connect /dev/pico cp firmware/pico/main.py :main.py + reset`으로 복사한다.
+
+참고 설정·문제는 [docs](docs/README.md), 원본은 [logs](logs/README.md), 실측·보관 분석은 [data](data/README.md)에 있다.
+오래된 자료는 저장소 안 ZIP으로 보관하고 필수 내용만 문서에 남겼다.
+코드를 배우려면 [학습 순서](docs/08_learning_guide.md)와 [회전각 예제](docs/09_turn_angle_lesson.md)부터 읽는다.
+현재 AX210 드라이버는 Jetson에 설치되어 있다. 커널 업데이트 시 재빌드가 필요할 수 있다.
+암호는 Git에 기록하지 않고 개인 `*.local.md` 또는 자격 증명 저장소에서 관리한다.

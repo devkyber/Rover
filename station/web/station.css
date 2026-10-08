@@ -1,0 +1,486 @@
+/* Rover station. Look and layout follow the PSI ground station:
+   black field, near-black panels, gold panel titles, coloured status chips.
+   Every colour is a variable so the light theme is one block. */
+
+:root {
+  --bg: #000000;
+  --panel: #0a0a0a;
+  --border: #2a2a2a;
+  --border-soft: #1f1f1f;
+  --fg: #e6e6e6;
+  --muted: #8a8a8a;
+  --accent: #f5c451;
+  --btn: #111111;
+  --btn-hover: #1c1c1c;
+
+  /* Status. Always shown with a word, never colour alone. */
+  --good: #16a34a;
+  --warn: #d97706;
+  --bad: #dc2626;
+  --info: #3b6fd9;
+  --idle: #5c5c5c;
+
+  /* Plot series, in fixed order: FL, FR, RL, RR (or x, y, z).
+     Checked with the dataviz palette validator against this panel colour. */
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --s4: #c98500;
+  --grid: #1c1c1c;
+  --axis: #333333;
+
+  --sans: "Pretendard", "Pretendard Variable", "Segoe UI Variable Text", "Segoe UI", "Malgun Gothic", system-ui, sans-serif;
+  --mono: Consolas, "Cascadia Mono", ui-monospace, monospace;
+}
+
+:root[data-theme="light"] {
+  --bg: #eeeeee;
+  --panel: #ffffff;
+  --border: #c4c4c4;
+  --border-soft: #dcdcdc;
+  --fg: #1a1a1a;
+  --muted: #6a6a6a;
+  --accent: #8a5a00;
+  --btn: #ffffff;
+  --btn-hover: #e4e4e4;
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --s4: #eda100;
+  --grid: #ececec;
+  --axis: #c4c4c4;
+}
+
+* { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+
+html, body { height: 100%; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }   /* phones: keep the sizes set here */
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.35 var(--sans);
+  overflow: hidden;
+}
+
+b { font-weight: 700; }
+.muted { color: var(--muted); }
+.spacer { flex: 1; }
+
+/* ── toolbar ─────────────────────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+
+.toolbar h1 {
+  margin: 0 8px 0 0;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.toolbar label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+
+.divider { width: 1px; align-self: stretch; background: var(--border); margin: 0 4px; }
+
+input[type="text"] {
+  background: var(--btn);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  font: 14px var(--mono);
+}
+#rover-address { width: 168px; }
+#run-tag { width: 104px; }
+
+button {
+  background: var(--btn);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 12px;
+  font: 700 13px var(--sans);
+  letter-spacing: 1px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+button:hover { background: var(--btn-hover); }
+button:disabled { color: var(--muted); cursor: default; background: var(--btn); }
+button.small { padding: 2px 8px; font-size: 11px; }
+button.on { border-color: var(--accent); color: var(--accent); }
+
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.status-text {
+  font: 700 13px var(--mono);
+  color: var(--muted);
+  white-space: nowrap;
+  min-width: 132px;
+}
+.status-text.good { color: var(--good); }
+.status-text.warn { color: var(--warn); }
+.status-text.bad { color: var(--bad); }
+
+/* ── mission bar ─────────────────────────────────────────────────── */
+
+.mission {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.3fr 0.9fr 1.4fr 1.7fr 1.2fr;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+
+/* Fixed-width digits so the bar does not jitter as the numbers change. */
+.mission-cell {
+  text-align: center;
+  font: 700 20px var(--sans);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.mission-cell.live { color: var(--accent); }
+.mission-cell.warn { color: var(--warn); }
+.mission-cell.bad { color: var(--bad); }
+
+.chip {
+  display: inline-block;
+  min-width: 96px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  text-align: center;
+  font: 700 14px var(--sans);
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  background: var(--idle);
+  white-space: nowrap;
+}
+.chip.good { background: var(--good); }
+.chip.warn { background: var(--warn); }
+.chip.bad  { background: var(--bad); }
+.chip.info { background: var(--info); }
+.chip.idle { background: var(--idle); }
+
+.mission .chip { font-size: 20px; padding: 2px 12px; justify-self: center; min-width: 210px; }
+
+/* ── layout ──────────────────────────────────────────────────────── */
+
+main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 5.7fr) minmax(0, 2.4fr) minmax(0, 2.9fr);
+  gap: 6px;
+  padding: 6px;
+}
+
+.row-top { display: flex; gap: 6px; min-height: 0; }
+.col-mid { flex: 1 1 0; min-width: 0; display: grid; grid-template-rows: minmax(0, 1.25fr) minmax(0, 1fr); gap: 6px; }
+.row-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.25fr) minmax(0, 0.95fr) minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 6px;
+  min-height: 0;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panel-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 5px 10px 4px;
+  border-bottom: 1px solid var(--border-soft);
+  flex: none;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.head-note { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.panel-head .small { margin-left: auto; align-self: center; }
+
+.canvas-box { position: relative; flex: 1; min-height: 0; }
+.canvas-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.readout {
+  display: flex;
+  justify-content: space-around;
+  gap: 8px;
+  padding: 4px 8px;
+  border-top: 1px solid var(--border-soft);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  flex: none;
+  white-space: nowrap;
+}
+.readout b { color: var(--fg); font: 700 14px var(--mono); letter-spacing: 0; }
+
+/* ── camera ──────────────────────────────────────────────────────── */
+
+/* The camera sets its own width from the row height, so the picture fills
+   the panel at 16:9 and the other panels share what is left. */
+.camera { flex: none; height: 100%; aspect-ratio: 16 / 9.55; max-width: 60%; }
+.path { flex: 1 1 0; }
+
+.video-wrap { position: relative; flex: 1; min-height: 0; background: #000; }
+.video-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.banner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  font-size: 17px;
+  color: #c9c9c9;
+  background: rgba(0, 0, 0, 0.72);
+}
+.banner[hidden] { display: none; }
+.banner.alert { color: #ffffff; background: rgba(220, 38, 38, 0.38); font-size: 34px; font-weight: 700; letter-spacing: 3px; }
+
+.hud {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  padding: 5px 10px;
+  font-size: 13px;
+  color: #c9c9c9;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0));
+  white-space: nowrap;
+  pointer-events: none;
+}
+.hud b { color: #ffffff; font: 700 16px var(--mono); }
+
+/* ── wheels ──────────────────────────────────────────────────────── */
+
+.wheel-grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 1px;
+  background: var(--border-soft);
+}
+
+.wheel { background: var(--panel); padding: 5px 10px; display: flex; flex-direction: column; justify-content: center; gap: 3px; min-height: 0; }
+.wheel-name { display: flex; align-items: center; gap: 6px; font-size: 12px; letter-spacing: 1px; color: var(--muted); }
+.wheel-name i { width: 14px; height: 3px; border-radius: 2px; }
+.wheel-values { display: flex; justify-content: space-between; font: 700 14px var(--mono); }
+.wheel-values span:last-child { color: var(--muted); }
+
+/* Speed: grows left or right from the centre line. Current: from the left. */
+.bar { position: relative; height: 6px; background: var(--border-soft); border-radius: 3px; overflow: hidden; }
+.bar i { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
+.bar.speed::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--muted); }
+.bar.current i { left: 0; background: var(--muted); }
+
+/* ── plots ───────────────────────────────────────────────────────── */
+
+.toggles { display: flex; gap: 14px; font-size: 12px; letter-spacing: 1px; }
+.toggles label { display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; }
+.toggles input { accent-color: var(--accent); margin: 0; }
+.toggles input:disabled + span { color: var(--muted); }
+
+.plot-row { flex: 1; min-height: 0; display: flex; gap: 1px; background: var(--border-soft); }
+.plot { flex: 1 1 0; min-width: 0; background: var(--panel); display: flex; flex-direction: column; position: relative; }
+/* The legend drops to its own line when title and legend do not fit side by side. */
+.plot-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 10px; padding: 4px 10px 0; flex: none; white-space: nowrap; }
+.plot-title { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; }
+.plot-unit { font-size: 12px; color: var(--muted); }
+.legend { display: flex; gap: 12px; margin-left: auto; font-size: 12px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 4px; }
+.legend i { width: 12px; height: 2px; border-radius: 1px; }
+.legend b { color: var(--fg); font: 700 12px var(--mono); min-width: 44px; text-align: right; }
+
+.tooltip {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--btn);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.tooltip[hidden] { display: none; }
+.tooltip .when { color: var(--muted); margin-bottom: 2px; }
+.tooltip .line { display: flex; align-items: center; gap: 6px; }
+.tooltip .line i { width: 10px; height: 2px; }
+.tooltip .line b { font: 700 13px var(--mono); min-width: 52px; text-align: right; }
+.tooltip .line span { color: var(--muted); }
+
+/* ── log ─────────────────────────────────────────────────────────── */
+
+.log-header, .log-body { font: 700 12px/1.45 var(--mono); white-space: pre; margin: 0; }
+.log-header { padding: 4px 10px; color: var(--muted); border-bottom: 1px solid var(--border-soft); flex: none; overflow: hidden; }
+.log-body { flex: 1; min-height: 0; overflow: auto; padding: 4px 10px; font-weight: 400; }
+.log-body .event { color: var(--accent); font-weight: 700; }
+.log-body .event.bad { color: var(--bad); }
+
+/* ── drive ───────────────────────────────────────────────────────── */
+
+.drive-body { flex: 1; min-height: 0; display: flex; gap: 10px; padding: 8px 10px; }
+
+.pad {
+  position: relative;
+  flex: none;
+  height: 100%;
+  aspect-ratio: 1;
+  max-width: 48%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background:
+    linear-gradient(var(--border-soft), var(--border-soft)) center / 1px 100% no-repeat,
+    linear-gradient(var(--border-soft), var(--border-soft)) center / 100% 1px no-repeat,
+    var(--btn);
+  touch-action: none;
+  cursor: crosshair;
+}
+.pad-dot {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 18px; height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--btn);
+}
+
+.drive-side { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.drive-side label { font-size: 12px; letter-spacing: 1px; color: var(--muted); display: flex; justify-content: space-between; }
+.drive-side label b { color: var(--fg); font-family: var(--mono); }
+input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; }
+
+/* Lift and pan: a name and two hold-to-run buttons per row. The buttons
+   share the width that is left, so the rows fit a narrow column. */
+.aux { display: grid; grid-template-columns: auto 1fr 1fr; align-items: center; gap: 4px; flex: none; }
+.aux span { font-size: 12px; letter-spacing: 1px; color: var(--muted); padding-right: 4px; }
+.aux button { padding: 1px 0; font-size: 12px; line-height: 1.4; touch-action: none; user-select: none; }
+
+.estop {
+  flex: 1;
+  min-height: 40px;
+  border: 2px solid var(--bad);
+  background: var(--bad);
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 3px;
+  border-radius: 6px;
+}
+.estop:hover { background: #b91c1c; }
+.estop.engaged { background: var(--btn); color: var(--bad); }
+.estop.engaged:hover { background: var(--btn-hover); }
+
+.hint { margin: 0; font-size: 11.5px; line-height: 1.4; color: var(--muted); }
+
+/* Shown in a panel until the rover has said what it is. */
+.empty { grid-column: 1 / -1; flex: 1; margin: 0; padding: 12px; display: flex; align-items: center; justify-content: center;
+         text-align: center; color: var(--muted); background: var(--panel); }
+
+/* ── stats, health, filter ───────────────────────────────────────── */
+
+.kv { margin: 0; padding: 4px 10px; flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: space-evenly; }
+.kv > div { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.kv dt { font-size: 12px; letter-spacing: 1px; color: var(--muted); white-space: nowrap; }
+.kv dd { margin: 0; font: 700 16px var(--mono); white-space: nowrap; }
+.kv .hero dd { font: 700 27px var(--sans); color: var(--accent); }
+.kv.chips dd.plain { font-size: 14px; }
+.kv.chips .chip { min-width: 104px; font-size: 12px; padding: 1px 8px; }   /* nine rows must fit */
+
+.nis { width: calc(100% - 20px); margin: 4px 10px 0; border-collapse: collapse; font-size: 13px; }
+.nis th { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--muted); text-align: right; padding: 2px 4px; }
+.nis td { text-align: right; padding: 2px 4px; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.nis th:first-child, .nis td:first-child { text-align: left; font-family: var(--sans); }
+.nis td:last-child { text-align: left; font: 700 12px var(--sans); letter-spacing: 0.5px; }
+.nis .good { color: var(--good); }
+.nis .warn { color: var(--warn); }
+.nis .bad { color: var(--bad); }
+.filter .hint { padding: 6px 10px; margin-top: auto; }
+
+/* ── short screens (a laptop, not the big monitor): keep every row visible ── */
+
+@media (min-width: 1181px) and (max-height: 900px) {
+  .drive .hint { display: none; }          /* the keys are in each button's tooltip and the README */
+  .drive-side { gap: 4px; }
+  .kv { padding-top: 2px; padding-bottom: 2px; }
+  .kv .hero dd { font-size: 22px; }
+  .kv.chips dd { font-size: 12px; line-height: 1.2; }
+  .kv.chips .chip { line-height: 1.2; }
+}
+
+/* ── smaller screens: stack, and let the page scroll ─────────────── */
+
+@media (max-width: 1180px) {
+  body { overflow: auto; height: auto; }
+  .toolbar { flex-wrap: wrap; }
+  .mission { grid-template-columns: repeat(3, 1fr); }
+  .mission-cell, .mission .chip { font-size: 16px; }
+  .mission .chip { min-width: 0; justify-self: stretch; }
+  main { display: flex; flex-direction: column; }
+  .row-top { flex-direction: column; }
+  .camera { height: auto; width: 100%; max-width: none; aspect-ratio: 16 / 9.7; }
+  .hud { flex-wrap: wrap; gap: 2px 14px; }
+  .col-mid { grid-template-rows: 260px 200px; flex: none; }
+  .path { flex: none; height: 320px; }
+  .plots { height: 240px; flex: none; }
+  .plot-row { flex-wrap: nowrap; overflow-x: auto; }
+  .plot { min-width: 280px; }
+  .toggles { flex-wrap: wrap; gap: 6px 12px; }
+  .panel-head { flex-wrap: wrap; }
+  .row-bottom { grid-template-columns: 1fr 1fr; }
+  .row-bottom .panel { min-height: 230px; }
+  .log { grid-column: 1 / -1; height: 240px; }
+  .log-body { overflow: auto; }
+}
+
+@media (max-width: 640px) {
+  .row-bottom { grid-template-columns: 1fr; }
+  .mission { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bar i { transition: width 60ms linear, left 60ms linear; }
+}

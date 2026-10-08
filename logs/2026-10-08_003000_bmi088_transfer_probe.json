@@ -1,0 +1,1248 @@
+{
+  "started_utc": "2026-10-07T15:30:00.435466+00:00",
+  "host": "rover",
+  "kernel": "5.15.148-tegra",
+  "purpose": "Read-only BMI088 ID comparison: normal short transfer, packed 8-byte read, single ioctl and two transfers per ioctl with CS held and 10 us gap",
+  "requested_hz": 1000000,
+  "clock_note": "default parent, requested speed only; physical CS not measured",
+  "owner_reported_voltage": "P1-1/P1-2/P2-6 relative to P1-3 all expected values: 3.3 V/3.3 V/0 V",
+  "cases": [
+    {
+      "cs": 0,
+      "mode": 3,
+      "profile": "short_xfer2",
+      "tx_parts": [
+        [
+          128,
+          0,
+          0
+        ]
+      ],
+      "id_index": 2,
+      "expected_id": 30,
+      "rx": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 0,
+      "mode": 3,
+      "profile": "packed_xfer2",
+      "tx_parts": [
+        [
+          128,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "id_index": 2,
+      "expected_id": 30,
+      "rx": [
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 0,
+      "mode": 3,
+      "profile": "single_ioctl",
+      "tx_parts": [
+        [
+          128,
+          0,
+          0
+        ]
+      ],
+      "id_index": 2,
+      "expected_id": 30,
+      "rx": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 0,
+      "mode": 3,
+      "profile": "split_ioctl",
+      "tx_parts": [
+        [
+          128
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "id_index": 2,
+      "expected_id": 30,
+      "rx": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 1,
+      "mode": 3,
+      "profile": "short_xfer2",
+      "tx_parts": [
+        [
+          128,
+          0
+        ]
+      ],
+      "id_index": 1,
+      "expected_id": 15,
+      "rx": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 1,
+      "mode": 3,
+      "profile": "packed_xfer2",
+      "tx_parts": [
+        [
+          128,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "id_index": 1,
+      "expected_id": 15,
+      "rx": [
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 1,
+      "mode": 3,
+      "profile": "single_ioctl",
+      "tx_parts": [
+        [
+          128,
+          0
+        ]
+      ],
+      "id_index": 1,
+      "expected_id": 15,
+      "rx": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 1,
+      "mode": 3,
+      "profile": "split_ioctl",
+      "tx_parts": [
+        [
+          128
+        ],
+        [
+          0
+        ]
+      ],
+      "id_index": 1,
+      "expected_id": 15,
+      "rx": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 0,
+      "mode": 0,
+      "profile": "short_xfer2",
+      "tx_parts": [
+        [
+          128,
+          0,
+          0
+        ]
+      ],
+      "id_index": 2,
+      "expected_id": 30,
+      "rx": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 0,
+      "mode": 0,
+      "profile": "packed_xfer2",
+      "tx_parts": [
+        [
+          128,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "id_index": 2,
+      "expected_id": 30,
+      "rx": [
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 0,
+      "mode": 0,
+      "profile": "single_ioctl",
+      "tx_parts": [
+        [
+          128,
+          0,
+          0
+        ]
+      ],
+      "id_index": 2,
+      "expected_id": 30,
+      "rx": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 0,
+      "mode": 0,
+      "profile": "split_ioctl",
+      "tx_parts": [
+        [
+          128
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "id_index": 2,
+      "expected_id": 30,
+      "rx": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 1,
+      "mode": 0,
+      "profile": "short_xfer2",
+      "tx_parts": [
+        [
+          128,
+          0
+        ]
+      ],
+      "id_index": 1,
+      "expected_id": 15,
+      "rx": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 1,
+      "mode": 0,
+      "profile": "packed_xfer2",
+      "tx_parts": [
+        [
+          128,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "id_index": 1,
+      "expected_id": 15,
+      "rx": [
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 1,
+      "mode": 0,
+      "profile": "single_ioctl",
+      "tx_parts": [
+        [
+          128,
+          0
+        ]
+      ],
+      "id_index": 1,
+      "expected_id": 15,
+      "rx": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    },
+    {
+      "cs": 1,
+      "mode": 0,
+      "profile": "split_ioctl",
+      "tx_parts": [
+        [
+          128
+        ],
+        [
+          0
+        ]
+      ],
+      "id_index": 1,
+      "expected_id": 15,
+      "rx": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "valid_ids": 0
+    }
+  ],
+  "finished_utc": "2026-10-07T15:30:01.353780+00:00",
+  "executed_source": "import ctypes, datetime, fcntl, json, platform, struct, time\nimport spidev\nassert struct.calcsize('=QQIIHBBBBBB')==32\ndef message(spi, parts):\n    buffers=[]; descriptors=[]\n    for index,part in enumerate(parts):\n        tx=(ctypes.c_ubyte*len(part))(*part); rx=(ctypes.c_ubyte*len(part))()\n        buffers.append((tx,rx))\n        descriptors.append(struct.pack('=QQIIHBBBBBB',ctypes.addressof(tx),ctypes.addressof(rx),len(part),1000000,10 if index<len(parts)-1 else 0,8,0,0,0,0,0))\n    fcntl.ioctl(spi.fileno(),0x40006b00 | (32*len(parts)<<16),b''.join(descriptors))\n    return [int(v) for tx,rx in buffers for v in rx]\nr={'started_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'host':platform.node(),'kernel':platform.release(),'purpose':'Read-only BMI088 ID comparison: normal short transfer, packed 8-byte read, single ioctl and two transfers per ioctl with CS held and 10 us gap','requested_hz':1000000,'clock_note':'default parent, requested speed only; physical CS not measured','owner_reported_voltage':'P1-1/P1-2/P2-6 relative to P1-3 all expected values: 3.3 V/3.3 V/0 V','cases':[]}\nfor mode in (3,0):\n    for cs,expected,id_index in ((0,0x1e,2),(1,0x0f,1)):\n        spi=spidev.SpiDev(); spi.open(0,cs)\n        try:\n            spi.mode=mode; spi.bits_per_word=8; spi.max_speed_hz=1000000; spi.cshigh=False; spi.lsbfirst=False; spi.no_cs=False\n            spi.xfer2([0x80,0,0]); time.sleep(.01)\n            profiles=(('short_xfer2',[[0x80]+[0]*id_index]),('packed_xfer2',[[0x80]+[0]*7]),('single_ioctl',[[0x80]+[0]*id_index]),('split_ioctl',[[0x80],[0]*id_index]))\n            for label,parts in profiles:\n                rx=[]\n                for _ in range(10):\n                    values=spi.xfer2(list(parts[0])) if label.endswith('xfer2') else message(spi,parts)\n                    rx.append(list(values)); time.sleep(.005)\n                r['cases'].append({'cs':cs,'mode':mode,'profile':label,'tx_parts':parts,'id_index':id_index,'expected_id':expected,'rx':rx,'valid_ids':sum(v[id_index]==expected for v in rx)})\n        finally: spi.close()\nr['finished_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat()\nprint(json.dumps(r))\n",
+  "source_sha256": "d5866af4882797cbd538a2349376f85d1c0757aeffd9c2108b5bf5d290747d13"
+}

@@ -1,0 +1,190 @@
+{
+  "input": "logs/2026-10-08_011054_bmi088_stationary.json",
+  "input_sha256": "0115a43e144ce4602e191cadb5211a39b467823fe8c50cd65abaacdb3e9bc317",
+  "capture_source_sha256": "7f37f1d2756f3912232ae7fb85d71c3e767bf5cc8c0eeece6bd860a4c1e3f44f",
+  "analysis_sha256": "fabca73b5a98fc61a649b33e9095eadea594e3185a35bb751b2963101be0ba00",
+  "analysis_versions": {
+    "python": "3.13.14",
+    "numpy": "2.4.3",
+    "matplotlib": "3.10.8"
+  },
+  "samples": 6001,
+  "duration_s": 60.000053487,
+  "config": {
+    "accel_range_g": 6,
+    "gyro_range_dps": 500,
+    "accel_odr_hz": 400,
+    "gyro_odr_hz": 400,
+    "host_poll_hz": 100,
+    "accel_sensor_time_tick_s": 3.90625e-05
+  },
+  "frame": "sensor",
+  "runtime_calibration_applied": false,
+  "full_record_mean_gyro_dps": [
+    0.15926249840521373,
+    0.05321632999317822,
+    0.03149143518397975
+  ],
+  "full_record_mean_gyro_rads": [
+    0.002779654972123198,
+    0.0009288001742087715,
+    0.000549629230138833
+  ],
+  "gyro_std_dps": [
+    0.08970476551368865,
+    0.13762491308290434,
+    0.09677375623609048
+  ],
+  "ten_second_blocks": [
+    {
+      "start_s_nominal": 0,
+      "count": 1000,
+      "mean_dps": [
+        0.16180419921875,
+        0.053253173828125,
+        0.034515380859375
+      ],
+      "std_dps": [
+        0.08832345983067769,
+        0.13053169431033143,
+        0.09497950397890231
+      ]
+    },
+    {
+      "start_s_nominal": 10,
+      "count": 1000,
+      "mean_dps": [
+        0.1584930419921875,
+        0.049652099609375,
+        0.029754638671875
+      ],
+      "std_dps": [
+        0.09059562242912868,
+        0.13519965987888383,
+        0.10062879279049447
+      ]
+    },
+    {
+      "start_s_nominal": 20,
+      "count": 1000,
+      "mean_dps": [
+        0.1561737060546875,
+        0.0551605224609375,
+        0.030517578125
+      ],
+      "std_dps": [
+        0.08926557881689455,
+        0.14177769772314228,
+        0.09739124581383761
+      ]
+    },
+    {
+      "start_s_nominal": 30,
+      "count": 1000,
+      "mean_dps": [
+        0.1622467041015625,
+        0.053619384765625,
+        0.029022216796875
+      ],
+      "std_dps": [
+        0.09131376358940943,
+        0.14065243863927793,
+        0.09730801003540489
+      ]
+    },
+    {
+      "start_s_nominal": 40,
+      "count": 1000,
+      "mean_dps": [
+        0.15716552734375,
+        0.0507354736328125,
+        0.0330047607421875
+      ],
+      "std_dps": [
+        0.0895757201567459,
+        0.13493409804263828,
+        0.09649351164573534
+      ]
+    },
+    {
+      "start_s_nominal": 50,
+      "count": 1000,
+      "mean_dps": [
+        0.1594696044921875,
+        0.0570220947265625,
+        0.031982421875
+      ],
+      "std_dps": [
+        0.08872116453001459,
+        0.14211154309962956,
+        0.09350635737592786
+      ]
+    }
+  ],
+  "temperature_minmax_c": [
+    22.875,
+    23.25
+  ],
+  "temperature_start_end_c": [
+    22.875,
+    22.875
+  ],
+  "mean_accel_mss": [
+    0.8151350000061968,
+    -0.2793822084314736,
+    -9.59671460097991
+  ],
+  "accel_norm_mean_mss": 9.635391362696566,
+  "accel_norm_std_mss": 0.024998166687657634,
+  "accel_norm_difference_from_standard_g_percent": -1.7463520907081698,
+  "gyro_poll_interval_ms_min_p50_p95_p99_max": [
+    8.19072799999887,
+    9.99970149999907,
+    10.414148999999284,
+    10.69327688000015,
+    11.771282999998078
+  ],
+  "gyro_poll_intervals_over_15ms": 0,
+  "sensor_tick_step_minmax": [
+    223,
+    294
+  ],
+  "sensor_time_span_s": 60.633007812500004,
+  "accel_clock_fit": {
+    "nominal_sensor_seconds_per_host_second": 1.0105465422291078,
+    "relative_rate_difference_percent": 1.054654222910778,
+    "intercept_s": -0.0009235289733034053,
+    "residual_std_us": 384.8539896427323,
+    "scope": "Relative clock estimate for this capture, not a permanent correction"
+  },
+  "withheld_second_half": {
+    "training_samples": 3000,
+    "test_samples": 3001,
+    "training_bias_dps": [
+      0.15882364908854166,
+      0.0526885986328125,
+      0.031595865885416664
+    ],
+    "duration_s": 30.000070211000004,
+    "residual_integral_sensor_deg": [
+      0.026219434075998027,
+      0.03358442871729876,
+      -0.00753580367397412
+    ],
+    "up_direction_estimated_from_training_accel": [
+      0.08430984906087616,
+      -0.028869211959890378,
+      -0.9960212939250581
+    ],
+    "vertical_projection_final_deg": 0.00874682146433437,
+    "vertical_projection_max_abs_deg": 0.06290498491864689,
+    "scope": "Same stationary capture, later time segment; not independent turn/yaw validation"
+  },
+  "limitations": [
+    "One stationary orientation and narrow temperature range",
+    "Sample standard deviations are not noise densities or Allan-deviation fits",
+    "Sensor output rates are 400 Hz; host polls at 100 Hz without hardware sync",
+    "No sensor-to-body mounting transform or gyro scale calibration established",
+    "No accelerometer offset/scale fitted from a single gravity orientation"
+  ]
+}

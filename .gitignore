@@ -1,9 +1,9 @@
-# Local Python environments and generated interpreter caches.
 .venv/
 venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
-
-# Raw experiment logs, metadata, and calibration data are intentionally kept.
-# Decide how to version large recordings before adding exclusions for them.
+*.local.md
+# Raw logs, metadata, results and verified archives are intentionally NOT ignored.
+# Temporary laptop downloads are imported into logs/ with their metadata after review.
+field-logs/

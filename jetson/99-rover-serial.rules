@@ -1,0 +1,22 @@
+# Fixed device names + low latency for the rover's USB-serial adapters.
+# Installed by setup_jetson.sh to /etc/udev/rules.d/.
+#
+# Without this, /dev/ttyUSB0 vs /dev/ttyUSB1 depends on plug order, and
+# config.py would open the wrong adapter after a re-plug.
+
+# U2D2 (FTDI FT232H) -> /dev/u2d2
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", SYMLINK+="u2d2", GROUP="dialout", MODE="0660"
+
+# The FTDI driver buffers received bytes for up to 16 ms by default before
+# handing them over. Every Sync Read reply would wait for that timer, turning
+# the measured 1.1-1.5 ms round trip into ~16 ms and breaking the 100 Hz loop.
+# (Windows has the same setting in Device Manager; Linux needs it here.)
+ACTION=="add", SUBSYSTEM=="usb-serial", DRIVER=="ftdi_sio", ATTR{latency_timer}="1"
+
+# Raspberry Pi Pico 2 running MicroPython (servos + battery monitor) -> /dev/pico
+# ID_MM_PORT_IGNORE: ModemManager is running on the Jetson and probes new
+# serial ports with modem commands. This tells it to leave this one alone.
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0005", SYMLINK+="pico", GROUP="dialout", MODE="0660", ENV{ID_MM_PORT_IGNORE}="1"
+
+# Arduino Nano 33 IoT IMU stand-in -> /dev/rover_imu
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="8057", SYMLINK+="rover_imu", GROUP="dialout", MODE="0660"

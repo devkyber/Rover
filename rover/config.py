@@ -3,11 +3,17 @@ Hardware settings and shared odometry tuning parameters.
 Change ports, geometry, noise settings, and motion thresholds here.
 """
 import math
+import os
+
+# Windows laptop (bench) vs Jetson (rover). On Linux the names come from
+# jetson/99-rover-serial.rules, which pins each adapter to a fixed
+# /dev/<name> by VID:PID -- /dev/ttyUSB0 vs ttyUSB1 depends on plug order.
+ON_WINDOWS = os.name == "nt"
 
 # ── DYNAMIXEL motor setup ──────────────────────────────────────────
 # XH430-V350-R, Protocol 2.0, connected via U2D2
 
-PORT       = "COM22"              # U2D2 (FTDI FT232H, VID:PID 0403:6014)
+PORT       = "COM22" if ON_WINDOWS else "/dev/u2d2"  # U2D2 (FTDI FT232H, VID:PID 0403:6014)
 BAUDRATE   = 4_500_000            # Baud Rate(8) value 7 = 4.5 Mbps
 PROTOCOL   = 2.0
 
@@ -52,8 +58,11 @@ CURRENT_TO_AMP   = 1.34e-3                  # 1.34 mA per unit → A
 # loaded-rover maximum. The command limit below only prevents simulation
 # from requesting more than the default Velocity Limit(44)=135 allows.
 
-WHEEL_RADIUS_M  = 0.0625     # wheel radius, m
-WHEELBASE_M     = 0.485      # left-right track width, m
+# Current chassis, used for the 2026-10-02 recordings onward. The chassis
+# of the 2026-09-06 recordings was 0.0625 m / 0.485 m. A log does not store
+# these, so put the old values back to replay a September log.
+WHEEL_RADIUS_M  = 0.055      # wheel radius, m
+WHEELBASE_M     = 0.1585     # left-right track width, m
 MOTOR_SPEC_NO_LOAD_RPM = 31.0       # official spec at 24 V, no load
 GOAL_VELOCITY_LIMIT_RAW = 135       # XH430 default Velocity Limit(44)
 COMMAND_WHEEL_SPEED_LIMIT_MPS = (
@@ -152,6 +161,32 @@ NIS_DOF = {'wheel': 1, 'nhc': 2, 'zupt': 3, 'zaru': 3, 'gravity': 3}
 EKF_RATE_HZ = 100    # target filter rate
 IMU_RATE_HZ = 400    # BMI088 output rate
 
+# BMI088 SPI on Jetson physical header pins 24 (accel) / 26 (gyro).
+# Requested SPI speed; the Tegra clock divider may produce a different rate.
+BMI088_SPI_BUS = 0
+BMI088_ACCEL_CS = 0
+BMI088_GYRO_CS = 1
+BMI088_SPI_HZ = 1_000_000
+BMI088_SPI_MODE = 3
+BMI088_ACCEL_RANGE_G = 6
+BMI088_GYRO_RANGE_DPS = 500
+# 400 Hz accel, OSR4 / 40 Hz bandwidth; gyro 400 Hz / 47 Hz bandwidth.
+# All gyro FIFO frames are retained; accel is the latest filtered reading.
+BMI088_ACCEL_CONF = 0x8A
+BMI088_GYRO_BANDWIDTH = 0x03
+BMI088_READ_TIMEOUT_S = 0.020
+BMI088_MAX_GAP_S = 0.050
+# Owner mounting description 2026-10-08: sensor +Y forward, +X right.
+# body = matrix @ sensor; therefore +Z sensor must point up. Confirm gravity
+# and positive CCW yaw on the installed rover before driving. The earlier
+# loose-board stationary recording had -Z up and is not mounting evidence.
+# None blocks body-frame operation; --sensor-frame is a bench diagnostic.
+BMI088_IMU_TO_BODY = (
+    (0.0, 1.0, 0.0),
+    (-1.0, 0.0, 0.0),
+    (0.0, 0.0, 1.0),
+)
+
 # The rover must remain stationary for this long when live odometry starts.
 # We average the gyro to initialize its bias and use mean acceleration to
 # initialize roll/pitch. The direction the rover faces then defines yaw=0.
@@ -178,7 +213,7 @@ STARTUP_ALIGNMENT_SECONDS = 5.0
 # Drive Mode(10) Reverse bit; the two cancel out. Software wins because
 # then a swapped motor is one edit here, not an EEPROM write.
 #
-# HOW TO CHECK: run teleop.py, push the left stick forward. Every wheel
+# HOW TO CHECK: run rover_main.py, drive forward from the station. Every wheel
 # must turn the way the rover would drive forward. If one is backwards,
 # flip that row's side letter.
 
@@ -189,6 +224,16 @@ WHEELS = [
     (3,          "rear-left",   "L"),   # left  bottom
     (4,          "rear-right",  "R"),   # right bottom
 ]
+
+# BENCH TESTING ONLY. ROVER_MOTOR_IDS=5,6,7,8 swaps the motor IDs above, in
+# order, for four other motors on the same bus -- names and sides stay, so the
+# whole program runs unchanged against spare motors. Unset = the real rover.
+# Set per command, never exported, or the real wheels stop answering.
+_bench_ids = os.environ.get("ROVER_MOTOR_IDS")
+if _bench_ids:
+    _bench_ids = [int(x) for x in _bench_ids.split(",")]
+    assert len(_bench_ids) == len(WHEELS), "ROVER_MOTOR_IDS needs one ID per wheel"
+    WHEELS = [(i, w[1], w[2]) for i, w in zip(_bench_ids, WHEELS)]
 
 # ── Everything below is derived. Do not edit. ──────────────────────
 MOTOR_IDS   = [w[0] for w in WHEELS]
@@ -233,10 +278,10 @@ GRAVITY_GATE_MAX_DEV = 0.5    # m/s^2
 GRAVITY_GATE_MAX_YAW_RATE = 0.1   # rad/s
 
 # ── IMU over USB (Arduino Nano 33 IoT, LSM6DS3) ────────────────────
-# Stand-in for the BMI088 until it arrives.
-# Flash arduino/imu_stream/imu_stream.ino onto the board first.
+# Alternate reader and legacy recordings.
+# Flash firmware/imu_stream/imu_stream.ino onto the board first.
 
-IMU_PORT = "COM25"        # Arduino Nano 33 IoT (VID:PID 2341:8057)
+IMU_PORT = "COM25" if ON_WINDOWS else "/dev/rover_imu"  # Arduino Nano 33 IoT (VID:PID 2341:8057)
 IMU_BAUD = 500_000        # must match SERIAL_BAUD in the sketch
 
 # Arduino board axes -> rover body axes.
@@ -267,3 +312,90 @@ GYRO_DPS_TO_RADS = math.pi / 180.0  # LSM6DS3 gyro is in deg/s
 # That is ABOVE our 100 Hz target with little margin -- fine for a
 # pipeline test, but the real BMI088 (400 Hz) is what P0 assumes.
 IMU_EXPECTED_HZ = 104
+
+# ── Station link (rover_main.py <-> station/ page on the laptop) ───
+# One TCP port carries both WebSocket channels, /control and /video.
+STATION_PORT = 8000
+
+# Deadman. No drive message from the station for this long -> wheels are
+# commanded to zero. The station sends 20 a second, so this is ten missed
+# in a row. At the 0.2 m/s command limit the rover covers 10 cm in that
+# time. (The proposal says 100 ms; tighten only after measuring how long
+# the field Wi-Fi really stalls, or every hiccup becomes a stop.)
+COMMAND_TIMEOUT_S = 0.5
+
+TELEMETRY_HZ = 20         # telemetry messages to the station per second
+
+# ── Pico 2 I/O board: servos + battery monitor (firmware/pico/main.py) ──────
+# On Linux the name comes from jetson/99-rover-serial.rules. None = find
+# the board by its USB ID, whatever COM number Windows gave it.
+PICO_PORT = None if ON_WINDOWS else "/dev/pico"
+PICO_USB_ID = (0x2E8A, 0x0005)      # MicroPython on a Raspberry Pi board
+
+# Servo commands to the Pico per second. Its failsafe stops the servos
+# after 300 ms without one, so five in a row can go missing.
+PICO_COMMAND_HZ = 20
+
+# The three hobby servos (FS90MGR, continuous rotation), in the order of
+# the Pico's outputs. A continuous-rotation servo takes a SPEED, not an
+# angle: the stop pulse holds it still and the distance from the stop
+# pulse sets how fast it turns, one way or the other.
+#
+# WARNING: NOT MEASURED. 1500 is FEETECH's nominal stop pulse; each servo's
+# real one differs by some microseconds, and until it is trimmed here the
+# servo creeps when it should stand still. The offsets are cautious
+# guesses inside the 900-2100 us range of docs/electronics/PDB_Design_Handover.md.
+#
+# HOW TO SET: `python pico_link.py --pulse 1500 1500 1500`, then change one
+# number a few microseconds at a time until that servo stops. Direction:
+# +1 lift must wind the string IN on both lift servos, +1 pan must turn the
+# camera to the RIGHT. If one goes the wrong way, flip its sign here.
+SERVOS = [
+    # (name,     stop pulse us,  offset at full command us,  direction)
+    ("lift-a",   1500,           300,                        +1),
+    ("lift-b",   1500,           300,                        +1),
+    ("pan",      1500,           100,                        +1),
+]
+
+# ── Battery monitor (INA226, read by the Pico) ─────────────────────
+# The Pico sends the INA226's raw shunt voltage; current = voltage / this.
+# 0.002 is RS1 on the PDB. The loose bench modules carry 0.010 (marked
+# R010): change it here when testing with one of those, or every current
+# reads five times too high.
+BATTERY_SHUNT_OHM = 0.002
+BATTERY_CELLS = 6                   # 6S pack; only used to show volts per cell
+
+# When the station says LOW and EMPTY, in volts per cell. 3.3 V/cell
+# (19.8 V) is the "empty pack" point docs/electronics/PDB_Design_Handover.md plans
+# with; LOW comes 0.2 V/cell earlier. NOT taken from this pack's
+# datasheet -- check them against it. These only colour the station's
+# display: nothing switches off by itself at either level.
+BATTERY_LOW_V_PER_CELL = 3.5
+BATTERY_EMPTY_V_PER_CELL = 3.3
+
+# ── Driving camera (Arducam B0201, USB) ────────────────────────────
+# The camera's own H.264 node. The by-id name follows the camera;
+# /dev/video2 would change if USB devices come up in another order.
+# Full resolution costs nothing extra: the camera's bitrate is fixed
+# near 10 Mbit/s at every resolution. docs/11 section 4.2.
+CAMERA_DEVICE = ("/dev/v4l/by-id/usb-Sonix_Technology_Co.__Ltd."
+                 "_USB_2.0_Camera_SN0001-video-index2")
+CAMERA_WIDTH  = 1920
+CAMERA_HEIGHT = 1080
+CAMERA_FPS    = 30
+
+# Mains frequency of the lights where the rover drives: 50 or 60. Korea is 60.
+# Indoor lights flicker at twice the mains frequency, and the camera reads its
+# picture out row by row, so with the wrong value light and dark bands drift
+# across the video. The camera's own default is 50 and it forgets the setting
+# when it loses power, so camera.py sets it at every start.
+# Measured 2026-10-05 under room lights: at 50, four bands per frame at 2.8% of
+# brightness, moving 22 rows per frame; at 60, 0.02% (gone). Sunlight does not
+# flicker, so outdoors the value does not matter.
+CAMERA_MAINS_HZ = 60
+
+# Jetson CPU temperature, in thousandths of a degree C. Absent on Windows.
+CPU_TEMP_FILE = "/sys/devices/virtual/thermal/thermal_zone0/temp"
+
+# Wi-Fi signal strength as Linux reports it. Absent on Windows.
+WIFI_STATUS_FILE = "/proc/net/wireless"

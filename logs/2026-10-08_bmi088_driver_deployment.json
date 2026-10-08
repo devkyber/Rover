@@ -1,0 +1,72 @@
+{
+  "target": "/home/taeholee/Rover/rover",
+  "backup": "/home/taeholee/bmi088-driver-20261008-013419/target-before.zip",
+  "platform": "Linux-5.15.148-tegra-aarch64-with-glibc2.35",
+  "files": {
+    "imu_reader.py": {
+      "before": "904d13dff3024feec17d81feaa2b920896762a29bd48babcbaf64c355f304100",
+      "after": "e8db48204a0390a892f5a117915c454763232484dd06d1051eae7e916432dbfd"
+    },
+    "config.py": {
+      "before": "04dced6de70641c28e86937b98e1536196340b278c716136ac31f1128e2415cf",
+      "after": "a9100f6395728c1d1f8c5010f704661903364d6d44ed9be2f65f8581eb041ab4"
+    },
+    "odometry.py": {
+      "before": "d4a27a81ba09fbc077caec5dc6e2f303b2f0298cdc9ef472f5ffa4f52a1c8cb4",
+      "after": "4db1f448434280a90e462e85cac628b977644bd3e5814cf6e6c12c33202214bd"
+    },
+    "logger.py": {
+      "before": "6a854106805ee26f9240f4ffdddb907df95d4516f37012c973effd38759a6c4b",
+      "after": "6c9e00538104afc038b7d24e85cd91ade627d60216e54e3b2fe3195239d74748"
+    },
+    "record.py": {
+      "before": "e0a7c7919178ffec1f716b3e18c57431024de5d01d468b567773b963d4738816",
+      "after": "f89ff73e140f088c789846f4cd92e967eaa32dea94de6ce7f34199ffc2a697d2"
+    },
+    "rover_main.py": {
+      "before": "1cbc29e3826346256fcb1e4c3e86e1fb1b2e1ed692f4e71aaf7f2b42e284c297",
+      "after": "f5d8877c4f24e729b9cd2df3fae604d8dd1f9ceb5863b2e68cbbbd1db8dd324c"
+    },
+    "replay.py": {
+      "before": "f2e9a97724d86f016615b8176a6c164ae29aa11c708129287969f08f328a9e29",
+      "after": "3066e60770c7d03d6cf41dec7c0b32bc83bc9944b32e4c6fd878ab30d9e907ac"
+    },
+    "replay_gui.py": {
+      "before": "57f1ea00ddcf366be8e48607b27b7c72d250c0524538d11b4c4db1f2847270fc",
+      "after": "800ee71e20ed74761dec93e6d12e282bb872b3394a2f0deea8b7bee866944807"
+    },
+    "analyze_drive.py": {
+      "before": "dda81cb25cbe8f999884555961efdbb62b152e605eba4ea6392b597d458c323a",
+      "after": "03771707393f563387d4fd23322dac667294cfeab6423a5111d2ec51304b2eda"
+    },
+    "test_imu_reader.py": {
+      "before": null,
+      "after": "7253316f3ef1ce5f899ae008390dcd9c518ba11ae2490f2eb67f7b2efe144da5"
+    }
+  },
+  "unit_tests": {
+    "args": [
+      "/home/taeholee/rover-venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/home/taeholee/Rover/rover",
+      "-p",
+      "test_imu_reader.py",
+      "-v"
+    ],
+    "returncode": 0,
+    "stdout": "Logged 30 rows -> /tmp/tmp6z_t7z6j/imu.csv\n",
+    "stderr": "test_delayed_first_read_discards_startup_only (test_imu_reader.BMI088Tests) ... ok\ntest_init_failures_close_both_handles (test_imu_reader.BMI088Tests) ... ok\ntest_proper_rotation_required_before_hardware_open (test_imu_reader.BMI088Tests) ... ok\ntest_reset_and_range_drift_latch_fault (test_imu_reader.BMI088Tests) ... ok\ntest_sensor_frame_diagnostic_is_explicit (test_imu_reader.BMI088Tests) ... ok\ntest_stale_overflow_gap_and_clipping_rejected (test_imu_reader.BMI088Tests) ... ok\ntest_tick_wrap_accepted_reset_and_frozen_rejected (test_imu_reader.BMI088Tests) ... ok\ntest_transport_failure_latches_and_closed_reader_cannot_read (test_imu_reader.BMI088Tests) ... ok\ntest_units_axes_fifo_and_mutating_transport (test_imu_reader.BMI088Tests) ... ok\ntest_all_ordered_rates_reach_prediction (test_imu_reader.IntegrationTests) ... ok\ntest_csv_replays_fifo_motion_and_preserves_raw_provenance (test_imu_reader.IntegrationTests) ... ok\ntest_invalid_batch_rejected_before_filter_mutation (test_imu_reader.IntegrationTests) ... ok\ntest_startup_bias_then_fifo_turn (test_imu_reader.IntegrationTests) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.412s\n\nOK\n"
+  },
+  "bench_outputs": {
+    "main-bench-2-output.txt": "IMU: BMI088 SPI, 400 Hz gyro FIFO, configured rover body axes\n============================================================\n  Station ->  python station/station.py --rover 192.168.50.57\n  Port    ->  18766  (/control, /video)\n  Log     ->  /home/taeholee/bmi088-driver-20261008-013419/logs/2026-10-08_0139_bmi088_main.csv\n============================================================\n\nStopping.\nLogged 1380 rows -> /home/taeholee/bmi088-driver-20261008-013419/logs/2026-10-08_0139_bmi088_main.csv\nIMU stats: {'parsed': 1381, 'gyro_frames': 5753, 'bad': 0, 'dropped': 0, 'stale': 0, 'startup_fifo_discarded': 25, 'max_gap_s': 0.016062357000009797, 'fault': None}\n1380 cycles in 14.4 s -> 95.9 Hz\n",
+    "main-bench-3-result.json": "{\"returncode\": 0, \"seconds_before_sigterm\": 15}",
+    "main-bench-result.json": "{\"returncode\": 1, \"seconds_before_sigterm\": 13}",
+    "main-bench-output.txt": "Traceback (most recent call last):\n  File \"/home/taeholee/bmi088-driver-20261008-013419/rover/rover_main.py\", line 370, in <module>\n    main(ap.parse_args())\n  File \"/home/taeholee/bmi088-driver-20261008-013419/rover/rover_main.py\", line 211, in main\n    imu = imu_reader.create_imu(args.imu)\n  File \"/home/taeholee/bmi088-driver-20261008-013419/rover/imu_reader.py\", line 485, in create_imu\n    imu = RealIMU()\n  File \"/home/taeholee/bmi088-driver-20261008-013419/rover/imu_reader.py\", line 277, in __init__\n    self._initialize()\n  File \"/home/taeholee/bmi088-driver-20261008-013419/rover/imu_reader.py\", line 316, in _initialize\n    self._ids()\n  File \"/home/taeholee/bmi088-driver-20261008-013419/rover/imu_reader.py\", line 311, in _ids\n    raise IMUError(f\"BMI088 chip IDs {ids}, expected (30, 15); check wiring/power\")\nimu_reader.IMUError: BMI088 chip IDs (0, 255), expected (30, 15); check wiring/power\n",
+    "main-bench-2-result.json": "{\"returncode\": 0, \"seconds_before_sigterm\": 15}",
+    "main-bench-3-output.txt": "IMU: BMI088 SPI, 400 Hz gyro FIFO, configured rover body axes\n============================================================\n  Station ->  python station/station.py --rover 192.168.50.57\n  Port    ->  18766  (/control, /video)\n  Log     ->  /home/taeholee/bmi088-driver-20261008-013419/logs/2026-10-08_0142_bmi088_main.csv\n============================================================\n\nStopping.\nLogged 1432 rows -> /home/taeholee/bmi088-driver-20261008-013419/logs/2026-10-08_0142_bmi088_main.csv\nIMU stats: {'parsed': 1432, 'gyro_frames': 5745, 'bad': 0, 'dropped': 0, 'stale': 0, 'startup_fifo_discarded': 0, 'max_gap_s': 0.048344775999794365, 'fault': None}\n1432 cycles in 14.3 s -> 99.9 Hz\n"
+  },
+  "deployment_completed": true
+}

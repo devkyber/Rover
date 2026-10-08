@@ -172,7 +172,7 @@ Two quantities answer different questions:
 
 An orientation alone does not encode how many revolutions occurred. The lesson's
 scalar accumulator retains them. The production Euler display wraps around
-±180 degrees. Replay also accumulates stage-wise yaw changes for diagnostics;
+±180 degrees. The archived replay tool also accumulates stage-wise yaw changes for diagnostics;
 those changes include any estimator corrections, not only physical rotation.
 
 To accumulate from a sampled heading, the usual planar calculation is:
@@ -222,3 +222,106 @@ that requirement or replace this physical validation.
 **Self-check:** without looking at the source, explain why a +0.5 degrees/s bias
 produces +1.5 degrees in 3 seconds, why +g appears in the generated accelerometer
 reading, and why a full turn can end with yaw zero.
+
+## 8. BMI088 yaw — implementation and validation path
+
+BMI088 is the owner's selected sensor for the next driving tests (2026-10-07).
+This section defines the approach; implementation status remains in
+[IMU-01](05_한계와_로드맵.md#imu-01), [ODOM-02](05_한계와_로드맵.md#odom-02) and
+[ODOM-03](05_한계와_로드맵.md#odom-03). The SPI/FIFO implementation and its
+timing limitations are documented in [Jetson driver notes](11_jetson_bringup.md#드라이버와-검증-범위).
+
+### Acquisition before filter tuning
+
+Use the SPI interface only after confirming the installed wiring and
+both chip selects. Check device identity and read back range, rate and bandwidth.
+Scale signed raw counts once at the input boundary, then apply a measured
+sensor-to-body rotation. The accelerometer SPI read includes a dummy byte;
+the gyro transaction differs. Use [Bosch's Sensor API](https://github.com/boschsensortec/BMI08x_SensorAPI)
+and [datasheet §6.1.2](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmi088-ds001.pdf)
+as implementation references alongside the current `RealIMU` source.
+
+Record actual sample timing, age, gaps, saturation and temperature. Do not reuse
+the Arduino mounting matrix, its thresholds or its old **1.14688** gyro correction.
+Reject invalid/stale samples explicitly instead of giving an old rate a new timestamp.
+Propagate quaternion attitude with measured gyro intervals. If acquisition runs
+at 400 Hz while the wheel/control loop stays at 100 Hz, preserve the
+intermediate gyro motion through queued prediction or validated preintegration;
+do not silently treat a single selected sample as all four samples. Raw capture
+must preserve enough timing and configuration to reproduce the integration.
+
+The accelerometer and gyro are separate sensing elements. Reading both in one
+loop does not establish synchronization. Bosch's [data-synchronization guide](https://github.com/boschsensortec/BMI08x_SensorAPI/blob/master/DataSync.md)
+describes an interrupt connection and configuration mechanism. Either implement
+that supported mode or measure/document the independent delays; choose the mode
+with the required bandwidth and wiring, not from equal nominal ODR alone.
+
+### Separate the yaw error mechanisms
+
+| Pattern in measured trials | Investigation and correction |
+|---|---|
+| Turn error grows in proportion to angle in both directions | Verify range/count conversion and gyro scale against independent angle truth; calibrate only after units are correct |
+| Error grows mainly with time or temperature | Record warm-up behavior; estimate stationary bias, then characterize bias versus temperature and choose measured noise parameters |
+| Error appears after gaps or changes in loop load | Compare acquisition time, host time and integrated intervals; fix sample freshness/drop handling before tuning R |
+| Bias changes during wheel/NHC/gravity updates and later yaw drifts | Compare stage/bias traces with independent heading; evaluate the existing bias-protection experiment without adopting it by default |
+| A carried rover or smooth slow turn is labelled stationary | Tighten the combined stationary evidence and test false-stop cases; low gyro variance alone does not prove zero rotation |
+| Short turns work, but long routes drift | Add an independently observed heading/pose correction if the measured mission error budget requires it |
+
+Keep the five-second stationary startup alignment, but verify it against the
+actual warm-up behavior instead of assuming that five seconds makes bias stable.
+Use ZARU only during supported stops. Retain 3D quaternion attitude for slopes;
+body `gz` alone is not Euler yaw rate under general tilted motion.
+
+The [archived replay study](../data/archive/README.md) is useful
+for choosing the next experiment: the legacy Arduino unit correction dominated
+the tested improvements. Vertical gyro-bias protection changed the six reserved
+nominal-corner discrepancies only slightly; that is insufficient evidence to
+make it the BMI088 default. Its fitted effective wheel track was also a
+dataset-specific estimate, not a replacement for physical track width.
+
+### Measure the result before choosing the next correction
+
+Use the independently measured orientations in §7. A useful initial protocol is
+five repeats of each CW/CCW 90°, 180° and 360° turn, at two turning speeds, with
+settled stops. Record raw IMU/wheel data, temperature, sample gaps, bias and
+continuous turn angle. Report error both when motion ends and after stationary
+updates settle, plus a stationary ten-minute drift run after warm-up. Repeat on
+the intended surface and payload; keep calibration and validation runs separate.
+
+Compare the same samples using raw gyro integration, startup-bias-corrected gyro,
+the current ESKF, and only then a separately calibrated wheel-rate aid. All
+comparators must use correct BMI088 units, the same timestamps and the same
+independent truth. This exposes whether a proposed filter change actually adds
+information instead of hiding an input error.
+
+For wheel aiding, identify `B_eff` separately from physical `WHEELBASE_M`, then
+test `(v_R - v_L) / B_eff` as an uncertain turn-rate observation. Validate slip,
+reversal and surface changes; reject or downweight inconsistent wheel information.
+Equal encoder speeds do not guarantee zero body yaw on a slipping skid-steer rover.
+Motor current can support a slip warning but cannot supply the missing angle.
+Implementation and comparison belong to [EST-01](05_한계와_로드맵.md#est-01).
+
+### Set a yaw budget and supply a reference when needed
+
+For a straight segment of length `L` with a constant heading error `delta`,
+lateral error is approximately `L * sin(delta)`. As an **illustrative allocation**,
+allowing heading alone to consume 5 cm gives:
+
+| Straight segment | Approximate maximum constant heading error |
+|---|---|
+| 1 m | 2.87° |
+| 3 m | 0.95° |
+| 5 m | 0.57° |
+
+This is not an adopted mission tolerance: wheel scale, slip and contact-point
+offset also consume position error, and time-varying yaw error needs trajectory
+evaluation. Agree the mission budget before selecting a more complex estimator.
+
+BMI088 measures acceleration and angular rate, not an external heading reference.
+Bias calibration and wheel aiding can reduce drift; they cannot guarantee bounded
+heading on arbitrary long routes. For that requirement, use surveyed visual
+landmarks/AprilTags or validated visual odometry, as scoped in
+[MAP-01](05_한계와_로드맵.md#map-01). Fix the onboard camera during a first dataset,
+or measure its pan angle and transform; an unmeasured moving pan mount invalidates
+the assumed camera-to-body geometry. An overhead camera used as independent
+ground truth must remain separate from whichever observations feed the estimator.

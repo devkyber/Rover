@@ -1,0 +1,1374 @@
+{
+  "started_at_utc": "2026-10-07T15:26:57.942511+00:00",
+  "host": "rover",
+  "kernel": "5.15.148-tegra",
+  "test": "BMI088 retry after owner says IMU ready; fresh command per read; temporary clk_m parent",
+  "wiring": "Owner says IMU ready; wiring changes and board-side voltages not independently inspected",
+  "clock_note": "BPMP reported clock; no oscilloscope measurement",
+  "before": {
+    "parent": "pllp_out0",
+    "rate": "4975610",
+    "possible_parents": "pllp_out0 clk_32k clk_m"
+  },
+  "cases": [
+    {
+      "mode": 0,
+      "requested_hz": 100000,
+      "accel_spi_selection_rx": [
+        255,
+        255,
+        255
+      ],
+      "chips": [
+        {
+          "cs": 0,
+          "tx": [
+            128,
+            0,
+            0
+          ],
+          "expected_id": 30,
+          "rx": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "150000",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        },
+        {
+          "cs": 1,
+          "tx": [
+            128,
+            0
+          ],
+          "expected_id": 15,
+          "rx": [
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "150000",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "requested_hz": 500000,
+      "accel_spi_selection_rx": [
+        255,
+        255,
+        255
+      ],
+      "chips": [
+        {
+          "cs": 0,
+          "tx": [
+            128,
+            0,
+            0
+          ],
+          "expected_id": 30,
+          "rx": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "492308",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        },
+        {
+          "cs": 1,
+          "tx": [
+            128,
+            0
+          ],
+          "expected_id": 15,
+          "rx": [
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "492308",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        }
+      ]
+    },
+    {
+      "mode": 0,
+      "requested_hz": 1000000,
+      "accel_spi_selection_rx": [
+        255,
+        255,
+        255
+      ],
+      "chips": [
+        {
+          "cs": 0,
+          "tx": [
+            128,
+            0,
+            0
+          ],
+          "expected_id": 30,
+          "rx": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "960000",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        },
+        {
+          "cs": 1,
+          "tx": [
+            128,
+            0
+          ],
+          "expected_id": 15,
+          "rx": [
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "960000",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        }
+      ]
+    },
+    {
+      "mode": 3,
+      "requested_hz": 100000,
+      "accel_spi_selection_rx": [
+        255,
+        255,
+        255
+      ],
+      "chips": [
+        {
+          "cs": 0,
+          "tx": [
+            128,
+            0,
+            0
+          ],
+          "expected_id": 30,
+          "rx": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "150000",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        },
+        {
+          "cs": 1,
+          "tx": [
+            128,
+            0
+          ],
+          "expected_id": 15,
+          "rx": [
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "150000",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        }
+      ]
+    },
+    {
+      "mode": 3,
+      "requested_hz": 500000,
+      "accel_spi_selection_rx": [
+        255,
+        255,
+        255
+      ],
+      "chips": [
+        {
+          "cs": 0,
+          "tx": [
+            128,
+            0,
+            0
+          ],
+          "expected_id": 30,
+          "rx": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "492308",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        },
+        {
+          "cs": 1,
+          "tx": [
+            128,
+            0
+          ],
+          "expected_id": 15,
+          "rx": [
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "492308",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        }
+      ]
+    },
+    {
+      "mode": 3,
+      "requested_hz": 1000000,
+      "accel_spi_selection_rx": [
+        255,
+        255,
+        255
+      ],
+      "chips": [
+        {
+          "cs": 0,
+          "tx": [
+            128,
+            0,
+            0
+          ],
+          "expected_id": 30,
+          "rx": [
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ],
+            [
+              255,
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "960000",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        },
+        {
+          "cs": 1,
+          "tx": [
+            128,
+            0
+          ],
+          "expected_id": 15,
+          "rx": [
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ],
+            [
+              255,
+              255
+            ]
+          ],
+          "matches": 0,
+          "clock": {
+            "parent": "clk_m",
+            "rate": "960000",
+            "possible_parents": "pllp_out0 clk_32k clk_m"
+          }
+        }
+      ]
+    }
+  ],
+  "after_parent_change": {
+    "parent": "clk_m",
+    "rate": "234147",
+    "possible_parents": "pllp_out0 clk_32k clk_m"
+  },
+  "restoration_errors": [],
+  "restored": {
+    "parent": "pllp_out0",
+    "rate": "4975610",
+    "possible_parents": "pllp_out0 clk_32k clk_m"
+  },
+  "restoration_verified": true,
+  "finished_at_utc": "2026-10-07T15:26:59.415541+00:00",
+  "executed_source": "import collections, datetime, json, pathlib, platform, time\nimport spidev\nclock = pathlib.Path('/sys/kernel/debug/bpmp/debug/clk/spi1')\ndef state():\n    return {name:(clock/name).read_text().strip() for name in ('parent','rate','possible_parents')}\noriginal = state()\nresult = {'started_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(), 'host':platform.node(), 'kernel':platform.release(), 'test':'BMI088 retry after owner says IMU ready; fresh command per read; temporary clk_m parent', 'wiring':'Owner says IMU ready; wiring changes and board-side voltages not independently inspected', 'clock_note':'BPMP reported clock; no oscilloscope measurement', 'before':original, 'cases':[]}\nhandles=[]\ntry:\n    assert 'clk_m' in original['possible_parents'].split(), original\n    (clock/'parent').write_text('clk_m\\n')\n    result['after_parent_change']=state()\n    for mode in (0,3):\n        for requested in (100000,500000,1000000):\n            handles=[]\n            for cs in (0,1):\n                spi=spidev.SpiDev(); spi.open(0,cs); handles.append(spi)\n                spi.mode=mode; spi.max_speed_hz=requested\n            dummy=handles[0].xfer2([0x80,0,0]); time.sleep(.01)\n            case={'mode':mode,'requested_hz':requested,'accel_spi_selection_rx':dummy,'chips':[]}\n            for cs,tx,expected in ((0,(0x80,0,0),0x1e),(1,(0x80,0),0x0f)):\n                rows=[]\n                for i in range(20):\n                    rows.append(list(handles[cs].xfer2(list(tx)))); time.sleep(.005)\n                case['chips'].append({'cs':cs,'tx':list(tx),'expected_id':expected,'rx':rows,'matches':sum(r[-1]==expected for r in rows),'clock':state()})\n            result['cases'].append(case)\n            for spi in handles: spi.close()\n            handles=[]\nexcept Exception as exc:\n    result['error']=repr(exc)\nfinally:\n    for spi in handles:\n        try: spi.close()\n        except Exception: pass\n    errors=[]\n    for name in ('parent','rate'):\n        try: (clock/name).write_text(original[name]+'\\n')\n        except Exception as exc: errors.append(name+': '+repr(exc))\n    result['restoration_errors']=errors\n    result['restored']=state()\n    result['restoration_verified']=all(result['restored'][name]==original[name] for name in ('parent','rate'))\n    result['finished_at_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat()\nprint(json.dumps(result))\n",
+  "source_sha256": "d3d243c510b707ef24351208e875c43afe7bcbee68770dbcb150457644c20279"
+}

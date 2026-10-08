@@ -1,0 +1,8 @@
+{
+  "time": "2026-10-08T01:46:39.390301+09:00",
+  "source": "import sys,json,time\nsys.path.insert(0,'/home/taeholee/Rover/rover')\nfrom imu_reader import RealIMU\nfirst=RealIMU()\ntry:\n try:\n  second=RealIMU()\n except BlockingIOError: print('PASS: concurrent driver rejected by SPI advisory lock')\n else:\n  second.close();raise RuntimeError('second reader acquired SPI')\n sample=first.read();print('PASS: first owner still reads',len(sample['gyro_samples']),'frames')\nfinally:first.close()\nthird=RealIMU()\ntry:print('PASS: lock released after close; fresh reader',third.read()['frame'])\nfinally:third.close()\n",
+  "source_sha256": "f3b0888a693379b0e0d27ccc112ec6774dc8b0714acf4a2ddfa4a4442fc08be7",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"<string>\", line 4, in <module>\n  File \"/home/taeholee/Rover/rover/imu_reader.py\", line 277, in __init__\n    self._initialize()\n  File \"/home/taeholee/Rover/rover/imu_reader.py\", line 316, in _initialize\n    self._ids()\n  File \"/home/taeholee/Rover/rover/imu_reader.py\", line 311, in _ids\n    raise IMUError(f\"BMI088 chip IDs {ids}, expected (30, 15); check wiring/power\")\nimu_reader.IMUError: BMI088 chip IDs (0, 255), expected (30, 15); check wiring/power\n"
+}

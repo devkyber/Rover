@@ -1,0 +1,133 @@
+{
+  "started_utc": "2026-10-07T15:52:28.825231+00:00",
+  "hostname": "rover",
+  "kernel": "5.15.148-tegra",
+  "spidev_version": "3.8",
+  "test": "BMI088 initialization and 10-second live bench capture after stable chip IDs",
+  "mode": 3,
+  "requested_spi_hz": 1000000,
+  "clock_note": "requested speed only; wire clock not measured",
+  "axes": "raw sensor axes; no body transform or calibration",
+  "stationarity": "owner asked to keep board still; not independently confirmed",
+  "config": {
+    "accel_range_g": 6,
+    "gyro_range_dps": 500,
+    "accel_odr_hz": 400,
+    "gyro_odr_hz": 400,
+    "host_poll_hz": 100,
+    "accel_sensor_time_tick_s": 3.90625e-05
+  },
+  "writes": [
+    {
+      "cs": 0,
+      "address": 126,
+      "value": 182
+    },
+    {
+      "cs": 1,
+      "address": 20,
+      "value": 182
+    },
+    {
+      "cs": 0,
+      "address": 124,
+      "value": 0
+    },
+    {
+      "cs": 0,
+      "address": 125,
+      "value": 4
+    },
+    {
+      "cs": 0,
+      "address": 64,
+      "value": 170
+    },
+    {
+      "cs": 0,
+      "address": 65,
+      "value": 1
+    },
+    {
+      "cs": 1,
+      "address": 17,
+      "value": 0
+    },
+    {
+      "cs": 1,
+      "address": 15,
+      "value": 2
+    },
+    {
+      "cs": 1,
+      "address": 16,
+      "value": 3
+    }
+  ],
+  "readback": [
+    {
+      "cs": 0,
+      "address": 124,
+      "expected": 0,
+      "actual": 0,
+      "mask": 255
+    },
+    {
+      "cs": 0,
+      "address": 125,
+      "expected": 4,
+      "actual": 4,
+      "mask": 255
+    },
+    {
+      "cs": 0,
+      "address": 64,
+      "expected": 170,
+      "actual": 170,
+      "mask": 255
+    },
+    {
+      "cs": 0,
+      "address": 65,
+      "expected": 1,
+      "actual": 1,
+      "mask": 255
+    },
+    {
+      "cs": 1,
+      "address": 17,
+      "expected": 0,
+      "actual": 0,
+      "mask": 255
+    },
+    {
+      "cs": 1,
+      "address": 15,
+      "expected": 2,
+      "actual": 2,
+      "mask": 255
+    },
+    {
+      "cs": 1,
+      "address": 16,
+      "expected": 3,
+      "actual": 131,
+      "mask": 127
+    }
+  ],
+  "samples": [],
+  "completed": false,
+  "initial_ids": [
+    30,
+    15
+  ],
+  "post_reset_ids": [
+    30,
+    15
+  ],
+  "accel_error_before": 255,
+  "error": "AssertionError()",
+  "finished_utc": "2026-10-07T15:52:29.542154+00:00",
+  "executed_source": "import datetime, importlib.metadata, json, math, platform, statistics, struct, time\nimport spidev\nr={'started_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'hostname':platform.node(),'kernel':platform.release(),'spidev_version':importlib.metadata.version('spidev'),'test':'BMI088 initialization and 10-second live bench capture after stable chip IDs','mode':3,'requested_spi_hz':1000000,'clock_note':'requested speed only; wire clock not measured','axes':'raw sensor axes; no body transform or calibration','stationarity':'owner asked to keep board still; not independently confirmed','config':{'accel_range_g':6,'gyro_range_dps':500,'accel_odr_hz':400,'gyro_odr_hz':400,'host_poll_hz':100,'accel_sensor_time_tick_s':0.0000390625},'writes':[],'readback':[],'samples':[],'completed':False}\nhandles=[]\ndef read(cs,address,count=1):\n    tx=[address|0x80]+[0]*(count+(1 if cs==0 else 0))\n    rx=list(handles[cs].xfer2(tx))\n    return rx[2:] if cs==0 else rx[1:]\ndef write(cs,address,value,pause=.01):\n    handles[cs].xfer2([address&0x7f,value]); r['writes'].append({'cs':cs,'address':address,'value':value}); time.sleep(pause)\ndef ids(): return [read(0,0)[0],read(1,0)[0]]\ndef temperature():\n    raw=read(0,0x22,2); value=(raw[0]<<3)|(raw[1]>>5)\n    if value>=1024: value-=2048\n    return {'raw':raw,'celsius':23+value*.125}\ntry:\n    for cs in (0,1):\n        spi=spidev.SpiDev(); spi.open(0,cs); handles.append(spi)\n        spi.mode=3; spi.max_speed_hz=1000000; spi.bits_per_word=8; spi.lsbfirst=False; spi.cshigh=False; spi.no_cs=False\n    read(0,0); time.sleep(.01)\n    r['initial_ids']=ids(); assert r['initial_ids']==[0x1e,0x0f], r['initial_ids']\n    write(0,0x7e,0xb6,.05); write(1,0x14,0xb6,.05)\n    read(0,0); time.sleep(.01)\n    r['post_reset_ids']=ids(); assert r['post_reset_ids']==[0x1e,0x0f], r['post_reset_ids']\n    for cs,address,value in ((0,0x7c,0),(0,0x7d,4),(0,0x40,0xaa),(0,0x41,1),(1,0x11,0),(1,0x0f,2),(1,0x10,3)):\n        write(cs,address,value)\n        actual=read(cs,address)[0]; mask=0x7f if cs==1 and address==0x10 else 0xff\n        r['readback'].append({'cs':cs,'address':address,'expected':value,'actual':actual,'mask':mask})\n        assert actual&mask==value, r['readback'][-1]\n    time.sleep(.5)\n    r['accel_error_before']=read(0,2)[0]; assert r['accel_error_before']==0\n    r['temperature_before']=temperature()\n    start=time.monotonic_ns()\n    for i in range(1000):\n        wait=(start+i*10000000-time.monotonic_ns())/1e9\n        if wait>0: time.sleep(wait)\n        a0=time.monotonic_ns(); a=read(0,0x12,9); a1=time.monotonic_ns()\n        g0=time.monotonic_ns(); g=read(1,2,6); g1=time.monotonic_ns()\n        raw_a=list(struct.unpack('<hhh',bytes(a[:6]))); raw_g=list(struct.unpack('<hhh',bytes(g)))\n        r['samples'].append({'host_accel_mid_ns':(a0+a1)//2,'host_gyro_mid_ns':(g0+g1)//2,'accel_transfer_ns':a1-a0,'gyro_transfer_ns':g1-g0,'accel_rx':a,'gyro_rx':g,'accel_raw':raw_a,'gyro_raw':raw_g,'accel_sensor_ticks':a[6]|a[7]<<8|a[8]<<16})\n    r['final_ids']=ids(); r['accel_error_after']=read(0,2)[0]; r['temperature_after']=temperature()\n    accel=[[v*6*9.80665/32768 for v in s['accel_raw']] for s in r['samples']]\n    gyro=[[v*500/32768 for v in s['gyro_raw']] for s in r['samples']]\n    norms=[math.sqrt(sum(v*v for v in a)) for a in accel]\n    intervals=[(b['host_accel_mid_ns']-a['host_accel_mid_ns'])/1e9 for a,b in zip(r['samples'],r['samples'][1:])]\n    tick_steps=[(b['accel_sensor_ticks']-a['accel_sensor_ticks'])%(1<<24) for a,b in zip(r['samples'],r['samples'][1:])]\n    r['summary']={'samples':len(accel),'duration_s':sum(intervals),'mean_accel_mss':[statistics.mean(a[k] for a in accel) for k in range(3)],'accel_norm_mean_mss':statistics.mean(norms),'accel_norm_std_mss':statistics.pstdev(norms),'accel_norm_minmax_mss':[min(norms),max(norms)],'mean_gyro_dps':[statistics.mean(g[k] for g in gyro) for k in range(3)],'std_gyro_dps':[statistics.pstdev(g[k] for g in gyro) for k in range(3)],'max_gyro_norm_dps':max(math.sqrt(sum(v*v for v in g)) for g in gyro),'unique_accel_triplets':len(set(tuple(s['accel_raw']) for s in r['samples'])),'unique_gyro_triplets':len(set(tuple(s['gyro_raw']) for s in r['samples'])),'mean_poll_interval_s':statistics.mean(intervals),'max_poll_interval_s':max(intervals),'zero_sensor_tick_steps':sum(v==0 for v in tick_steps),'minmax_sensor_tick_steps':[min(tick_steps),max(tick_steps)],'saturated_accel_samples':sum(any(abs(v)>=32760 for v in s['accel_raw']) for s in r['samples']),'saturated_gyro_samples':sum(any(abs(v)>=32760 for v in s['gyro_raw']) for s in r['samples'])}\n    r['completed']=True\nexcept Exception as exc: r['error']=repr(exc)\nfinally:\n    for spi in handles:\n        try: spi.close()\n        except Exception: pass\n    r['finished_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat()\nprint(json.dumps(r))\n",
+  "source_sha256": "b4b69f932cc8d5218ce74c4b2dfafb7b678ad42675738cd0ff40ac8836540699"
+}

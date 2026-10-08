@@ -210,10 +210,13 @@ class Odometry:
         self._alignment_gyro.clear()
         self._alignment_accel.clear()
 
-    def step(self, wheels, *, gyro, accel, dt):
+    def step(self, wheels, *, gyro, accel, dt, gyro_samples=None):
         """
         One cycle: gyro [rad/s] and accel [m/s^2] in the body frame,
         with sensor biases still included. dt is elapsed time in seconds.
+        Optional gyro_samples are ordered FIFO rates spanning dt uniformly;
+        predict each one, then apply the observations once per wheel cycle.
+        Accel is held across this interval (no accel/gyro hardware sync).
 
         gyro and accel are keyword-only on purpose. They are both plain
         3-vectors, so swapping them is silent -- no exception, no shape
@@ -224,6 +227,13 @@ class Odometry:
         """
         gyro = np.asarray(gyro, dtype=float)
         accel = np.asarray(accel, dtype=float)
+        if gyro_samples is not None:
+            gyro_samples = np.asarray(gyro_samples, dtype=float)
+            if (gyro_samples.ndim != 2 or gyro_samples.shape[1] != 3
+                    or len(gyro_samples) == 0 or not np.isfinite(gyro_samples).all()
+                    or not np.isfinite(dt) or dt <= 0
+                    or not np.allclose(gyro, gyro_samples.mean(axis=0), atol=1e-5)):
+                raise ValueError("Invalid ordered gyro batch/mean/interval")
         s = self.state
         output_position_before = self._position.copy()
 
@@ -254,7 +264,11 @@ class Odometry:
             self.cycles += 1
             return self
 
-        eskf.predict(s, gyro, accel, dt)
+        if gyro_samples is None:
+            eskf.predict(s, gyro, accel, dt)
+        else:
+            for rate in gyro_samples:
+                eskf.predict(s, rate, accel, dt / len(gyro_samples))
 
         self.quiet = self.quiet + 1 if self.stopped else 0
 

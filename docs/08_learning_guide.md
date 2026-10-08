@@ -5,7 +5,8 @@ learning Python for the first time. Start with the physical behavior you need to
 understand: **when the rover turns, how does it estimate the angle?**
 
 The first working lesson is [09 — turn angle](09_turn_angle_lesson.md).
-The current inspection findings are in [10 — code review](10_code_review.md).
+Current findings and their status are in [the roadmap](05_한계와_로드맵.md).
+The [2026-09-17 code review in the document archive](archive/README.md) is historical evidence.
 The older theory and implementation documents remain useful, but are in Korean.
 This learning path and its first lesson are in English.
 
@@ -55,37 +56,25 @@ numerical prediction to make before showing the answer.” Try the prediction yo
 
 ## 3. Start without hardware
 
-From the project root, these commands perform calculations or read existing logs:
+From the repository root:
 
 ```powershell
 python -B rover/learn_turn_angle.py
-python -B rover/test_filter.py
-python -B rover/replay_gui.py
 ```
 
-The first command is the starting lesson. The second runs the existing math and
-simulation checks and may take several minutes. The third opens the local replay
-tool; use its timeline and `Filter cycle` panel to inspect a recorded sample.
-An offline replay recomputes the estimate using today's code and configuration.
-It does not automatically reconstruct the exact configuration used on recording day.
+This small lesson uses NumPy and the real predictor, writes no files and opens no
+hardware. Predict the answer first, then follow [the line-by-line lesson](09_turn_angle_lesson.md).
+If NumPy is missing, install it in your learning environment with `python -m pip install "numpy<2"`.
 
-The pipeline test requires an explicit fake mode to avoid hardware. Its output
-file is deleted by default, so give it a new temporary name:
+The older simulator, unit tests and replay GUI are kept in the
+[source archive](../data/archive/README.md), not installed in the field runtime.
+For a deeper study, extract them into a separate folder with copied recordings;
+check their recorded dependencies and configuration before running. Today's filter
+settings do not automatically recreate a historical experiment.
 
-```powershell
-$lessonLog = Join-Path $env:TEMP ("rover-lesson-" + [guid]::NewGuid() + ".csv")
-python -B rover/test_pipeline.py --fake --seconds 5 --log $lessonLog
-```
-
-Dependencies are listed in [requirements.txt](../requirements.txt). If setting up
-a new environment, use `python -m pip install -r requirements.txt` from the root.
-This list is not a lock file. The reviewed desktop environment is recorded in [10](10_code_review.md).
-Jetson camera dependencies belong to the JetPack environment and need separate setup.
-
-Use debugger breakpoints only in the lesson, tests, and offline replay while
-learning. Pausing a live motor-control loop also pauses its software stop logic.
-Do not run `teleop.py`, `dxl_control.py`, or Jetson deployment scripts as an
-experiment in learning Python syntax.
+Use debugger breakpoints only in the offline example or a deliberately isolated
+replay. Pausing live motor-control code pauses its software stop logic. Read
+hardware/deployment code without executing it as a Python syntax exercise.
 
 ## 4. The order to learn this project
 
@@ -96,13 +85,13 @@ not the same as understanding its contents.
 |---|---|---|---|
 | 1. Python through angle | How does rate become angle? | [lesson](../rover/learn_turn_angle.py), `eskf.predict()` rotation block | Predict raw and corrected angles for a known bias. |
 | 2. Wheel kinematics | How does shaft speed become forward speed? | `config.WHEELS`, `wheel_speeds_mps()`, `body_velocity()` | Explain the right-wheel sign and `v = rω` with units. |
-| 3. Coordinates | Which way does a measured vector point? | `ARDUINO_IMU_TO_BODY`, `ArduinoIMU.read()`, `quat_to_rot()` | Map sensor +Y to body −X, and body +X to world +Y at yaw +90 degrees. |
+| 3. Coordinates | Which way does a measured vector point? | sensor-specific mounting matrix, IMU reader, `quat_to_rot()` | Distinguish Arduino and BMI088 mounting maps; rotate body +X to world +Y at yaw +90 degrees. |
 | 4. Startup and time | What establishes the initial heading and bias? | `StillnessDetector`, `_collect_alignment()`, `Odometry.step()` | Explain why movement resets alignment and why yaw starts at zero. |
 | 5. Translation | Why does the displayed rover move? | final pose block in `Odometry.step()`, `snapshot()` | Distinguish public wheel-integrated position from internal ESKF position. |
 | 6. Estimation basics | How should two uncertain estimates be combined? | scalar example below, then `model_wheel_velocity()` and `_ekf_update()` | Calculate innovation, gain, and corrected velocity by hand. |
 | 7. Error-state filter | Why 15 error states and a quaternion? | `create_state()`, `predict()`, `_inject()`, five `model_*` functions | Label every block of `P`, `F`, and one `H`; explain their units. |
-| 8. Evidence | How do we know a result is credible? | `sim.py`, `test_filter.py`, `replay.py`, `analyze_drive.py` | Distinguish a passing test, consistent NIS, and measured accuracy. |
-| 9. Hardware and failure | What if a sample or command does not arrive? | readers, control, logging, `record.py`, `teleop.py` | Trace the failure path as carefully as the successful path. |
+| 8. Evidence | How do we know a result is credible? | archived simulator/replay methods, [data summaries](../data/README.md) | Distinguish a passing test, consistent NIS, and measured accuracy. |
+| 9. Hardware and failure | What if a sample or command does not arrive? | readers, control, logging, `rover_main.py` | Trace the failure path as carefully as the successful path. |
 | 10. Interfaces | How do data reach a browser or camera stream? | dashboards, firmware, Jetson tools | Trace one value through serialization, transport, and display. |
 
 This sequence reaches every application layer. It deliberately starts with the
@@ -148,8 +137,8 @@ this overview. Internal ESKF position is a separate diagnostic output.
 | `try` / `finally` | Run cleanup when leaving the protected block, including after exceptions. | Release a port or request a motor stop; only covers code inside the `try`. |
 | `if __name__ == '__main__':` | Run this block when executing a file directly. | Allow importing its functions without starting its main program. |
 
-Do not assume every file has the last protection: the old Jetson `exp_probe.py`
-and `fps_probe.py` perform camera work at module level.
+Do not assume every module is safe to import: inspect hardware initialization and
+module-level code before executing an unfamiliar file.
 
 ## 6. Quantities that must not be confused
 
@@ -167,14 +156,14 @@ and `fps_probe.py` perform camera work at module level.
 | `R` in `_ekf_update` | `(m,m)` | Measurement-noise covariance; `m` here means number of residual components, not metres. |
 | `R_WHEEL_VELOCITY` | m/s | Despite its name, a **standard deviation**; squared when constructing measurement covariance. |
 | `WHEELBASE_M` | m | Legacy name for **left–right track width**, not front–rear axle spacing. |
-| `stopped` / `zupt_active` | Boolean | A detector result / intended held-stop status. The disabled-ZUPT inconsistency is recorded in [10](10_code_review.md). |
+| `stopped` / `zupt_active` | Boolean | A detector result / intended held-stop status. The disabled-ZUPT inconsistency is recorded in [the archived 2026-09-17 code review](archive/README.md). |
 
 The nominal state stores 16 scalars: `3+3+4+3+3`. The error state has 15:
 `3+3+3+3+3`. Orientation uses a unit quaternion for the nominal state and a local
 three-component rotation error for the correction.
 
 For translation, check this example: wheel shaft rates `[2,-2,2,-2] rad/s`,
-multiplied by signs `[+1,-1,+1,-1]` and radius `0.0625 m`, all give `+0.125 m/s`.
+multiplied by signs `[+1,-1,+1,-1]` and radius `0.055 m`, all give `+0.110 m/s`.
 The current public model assumes the mean of these speeds is body forward speed.
 Slipping wheels violate that assumption.
 
@@ -204,64 +193,30 @@ ensemble**. A single value of 3.2 does not prove the filter is wrong. The projec
 0.33–3 mean-ratio display band is a heuristic, not a formal confidence test.
 Wrong geometry, timing, bias, model assumptions, `Q`, or `R` can all affect it.
 
-## 8. Complete source map
+## 8. Source map for the retained code
 
-“Offline” describes the named use, not permission to execute every standalone
-test block in a file. Preserve `logs/`: these are experimental inputs.
+Use [02 — code walkthrough](02_구현_코드해설.md) to connect equations to functions.
 
-### Rover Python and browser code
+| Start here | Question to trace |
+|---|---|
+| [config.py](../rover/config.py) | What are the units, coordinate maps and geometry? |
+| [eskf.py](../rover/eskf.py) | How do prediction, residual, gain and state correction work? |
+| [odometry.py](../rover/odometry.py) | When does alignment finish, which updates run, and which position is displayed? |
+| [imu_reader.py](../rover/imu_reader.py) | How are raw counts, axes, gyro FIFO and host intervals handled? |
+| [dxl_reader.py](../rover/dxl_reader.py), [dxl_control.py](../rover/dxl_control.py) | How does a motor value become SI data, or a drive command become a register write? |
+| [logger.py](../rover/logger.py) | What is saved with each sample? How are legacy frames decoded? Existing filenames are refused. |
+| [rover_main.py](../rover/rover_main.py) | Follow one live cycle and its failure/shutdown paths. Reading code is enough here. |
+| [station_link.py](../rover/station_link.py), [websocket.py](../rover/websocket.py) | Follow one telemetry message to the browser. |
+| [station/web/](../station/web/) | Follow the DRIVE pad through `drive.js`, `main.js`, and `link.js`. |
+| [pico_link.py](../rover/pico_link.py), [Pico firmware](../firmware/pico/main.py) | Follow one servo command and one battery measurement. |
+| [camera.py](../rover/camera.py) | Follow an H.264 frame without a second encoder. |
 
-| File | Responsibility | How to study / effect |
-|---|---|---|
-| [config.py](../rover/config.py) | Hardware settings, units, geometry, noise and gates. | First reference; importing defines values without opening ports. |
-| [learn_turn_angle.py](../rover/learn_turn_angle.py) | Known-angle teaching experiment using the real predictor. | Offline starting point; writes no files. |
-| [eskf.py](../rover/eskf.py) | Quaternion algebra, state, prediction, observations, updates, trace. | Pure calculation; study in the staged order above. |
-| [odometry.py](../rover/odometry.py) | Wheel conversion, stillness, alignment, update order, public pose. | The central cycle shared by live and offline callers. |
-| [sim.py](../rover/sim.py) | Synthetic trajectories and sensor samples with known truth. | Offline; its slip parameter multiplies wheel readings, not a general terrain model. |
-| [test_filter.py](../rover/test_filter.py) | Numerical Jacobians, invariants and scenario checks. | Offline evidence for assumptions covered by those tests. |
-| [imu_reader.py](../rover/imu_reader.py) | Fake, Arduino and planned BMI088 IMU interfaces. | Fake is offline; Arduino opens serial; `RealIMU` is a stub. |
-| [dxl_reader.py](../rover/dxl_reader.py) | Port management, Sync Read, signed conversion to SI. | Hardware reads; start by tracing one returned wheel dictionary. |
-| [dxl_control.py](../rover/dxl_control.py) | Mode, torque, goal-velocity commands and stop. | **Actuation**; inspect before any motor-enabled run. |
-| [dxl_tool.py](../rover/dxl_tool.py) | Port/baud/ID discovery and register diagnostics. | Hardware read operations; interpret each register using vendor docs. |
-| [sdk_path.py](../rover/sdk_path.py) | Select the bundled SDK on Python's import path. | Explains which dependency is actually imported. |
-| [logger.py](../rover/logger.py) | CSV schema, filenames, serialization and legacy replay conversion. | Creates files when logging; explicit existing filenames can be overwritten. |
-| [record.py](../rover/record.py) | Periodic sensor collection, estimation and recording. | Hardware and file I/O; does not command driving. |
-| [test_pipeline.py](../rover/test_pipeline.py) | Timing, logging and replay audit. | Use `--fake` and a unique temporary `--log` while learning. |
-| [replay.py](../rover/replay.py) | Recompute a log, report NIS and optionally plot. | Offline; plotting writes the requested output file. |
-| [analyze_drive.py](../rover/analyze_drive.py) | Compare reach, return and lateral motion with external measurements. | Offline; distinguish estimated path length from tape-measured reach. |
-| [replay_gui.py](../rover/replay_gui.py) | Replay backend, experiment metadata, frame/trace API. | Offline local web server; calls production odometry. |
-| [templates/replay.html](../rover/templates/replay.html) | HTML structure, CSS appearance, JavaScript playback and plots. | Study one API field from response to displayed number. |
-| [teleop.py](../rover/teleop.py) | Joystick web server and live sensing/control loop. | **Actuation** in normal mode; contains embedded HTML/JavaScript. |
-| [live_panel.py](../rover/live_panel.py) | Telemetry preparation and embedded dashboard. | Observe live data; separate Python payload code from browser rendering. |
-| [vendor/PATCHES.md](../rover/vendor/PATCHES.md) | Record of the local DYNAMIXEL SDK change. | Read before upgrading or replacing the bundled SDK. |
-
-`rover/vendor/dynamixel_sdk/` is third-party implementation code. Learn the calls
-this rover relies on and the local patch first; a line-by-line SDK audit is a
-separate task from understanding the application's own source.
-
-### Firmware and camera subsystem
-
-| File | Responsibility | Effect / prerequisite |
-|---|---|---|
-| [imu_stream.ino](../arduino/imu_stream/imu_stream.ino) | Arduino C++ initialization, fresh IMU reads and serial CSV lines. | Needs the board and Arduino IMU library; flashing changes firmware. |
-| [cam_stream.py](../jetson/cam_stream.py) | HTTP MJPEG preview. | Opens camera and network server; existing server handles one request at a time. |
-| [cam_burst.py](../jetson/cam_burst.py) | Capture a timed burst and save results. | Opens camera, holds frames in memory and writes files. |
-| [cam_test.py](../jetson/cam_test.py) | Basic camera capture probe. | Camera and output files. |
-| [band_probe.py](../jetson/band_probe.py) | Image-band/frequency diagnostic. | Camera experiment; inspect sampling assumptions. |
-| [exp_probe.py](../jetson/exp_probe.py) | Exposure experiment. | Opens camera at module level; do not casually import. |
-| [fps_probe.py](../jetson/fps_probe.py) | Frame-rate experiment. | Opens camera at module level; do not casually import. |
-| [v4l_ctrl.py](../jetson/v4l_ctrl.py) | Linux V4L2 control access through ioctl. | OS/device-specific reads and writes. |
-| [v4l_formats.py](../jetson/v4l_formats.py) | V4L2 format enumeration. | Linux camera device queries. |
-| [cam_check.sh](../jetson/cam_check.sh) | Shell diagnostics for connected cameras. | Jetson/Linux tools and devices. |
-| [cam_defaults.sh](../jetson/cam_defaults.sh) | Apply camera settings. | Device-control writes; contains deployment-path assumptions. |
-| [rec_h264.sh](../jetson/rec_h264.sh) | GStreamer hardware-encoded recording. | Jetson encoder/plugins and output files. |
-| [camtest.ps1](../jetson/camtest.ps1) | Windows-to-Jetson SSH/capture workflow. | Stops a remote stream, deletes named remote scratch paths, downloads files; inspect paths before use. |
-
-Project documents explain design and experiment history. `logs/experiments.json`
-describes manual measurements, not filter tuning. Images, recordings, and CSVs are
-data, not source code. `.vscode/settings.json` configures the editor;
-`requirements.txt` lists desktop dependencies; `.gitignore` lists generated
-Python files to exclude if version control is introduced.
+Study application calls before the full third-party SDK. Its local change is in
+[vendor/PATCHES.md](../rover/vendor/PATCHES.md). Hardware setup instructions stay
+in [README](../README.md) and [Jetson notes](11_jetson_bringup.md).
+Older replay/simulation/test code remains in the archive for learning and evidence,
+not as a requirement to launch the rover. Raw recordings and their limitations are
+listed in [logs](../logs/README.md).
 
 ## 9. Questions to answer before advancing to slip handling
 

@@ -1,0 +1,612 @@
+{
+  "method": "Windows .NET ICMP Ping.Send, 100 requests, 1000 ms timeout, 200 ms pause; idle test, no video",
+  "target": "192.168.50.57",
+  "attempts": 100,
+  "replies": 100,
+  "lost": 0,
+  "min_ms": 2.0,
+  "mean_ms": 3.73,
+  "max_ms": 19.0,
+  "samples": [
+    {
+      "sequence": 1,
+      "sent_at_utc": "2026-10-07T16:27:50.3108125+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 2,
+      "sent_at_utc": "2026-10-07T16:27:50.5786039+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 3,
+      "sent_at_utc": "2026-10-07T16:27:50.7833606+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 4,
+      "sent_at_utc": "2026-10-07T16:27:50.9963310+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 5,
+      "sent_at_utc": "2026-10-07T16:27:51.2035871+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 6,
+      "sent_at_utc": "2026-10-07T16:27:51.4073866+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 7,
+      "sent_at_utc": "2026-10-07T16:27:51.6159286+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 8,
+      "sent_at_utc": "2026-10-07T16:27:51.8204836+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 9,
+      "sent_at_utc": "2026-10-07T16:27:52.0284573+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 10,
+      "sent_at_utc": "2026-10-07T16:27:52.2367067+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 11,
+      "sent_at_utc": "2026-10-07T16:27:52.4410740+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 12,
+      "sent_at_utc": "2026-10-07T16:27:52.6452135+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 13,
+      "sent_at_utc": "2026-10-07T16:27:52.8534903+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 14,
+      "sent_at_utc": "2026-10-07T16:27:53.0621368+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 15,
+      "sent_at_utc": "2026-10-07T16:27:53.2699631+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 16,
+      "sent_at_utc": "2026-10-07T16:27:53.4788499+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 17,
+      "sent_at_utc": "2026-10-07T16:27:53.6827743+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 18,
+      "sent_at_utc": "2026-10-07T16:27:53.8915391+00:00",
+      "status": "Success",
+      "rtt_ms": 6
+    },
+    {
+      "sequence": 19,
+      "sent_at_utc": "2026-10-07T16:27:54.0989063+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 20,
+      "sent_at_utc": "2026-10-07T16:27:54.3077840+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 21,
+      "sent_at_utc": "2026-10-07T16:27:54.5210921+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 22,
+      "sent_at_utc": "2026-10-07T16:27:54.7284229+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 23,
+      "sent_at_utc": "2026-10-07T16:27:54.9490890+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 24,
+      "sent_at_utc": "2026-10-07T16:27:55.1575774+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 25,
+      "sent_at_utc": "2026-10-07T16:27:55.3657887+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 26,
+      "sent_at_utc": "2026-10-07T16:27:55.5743994+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 27,
+      "sent_at_utc": "2026-10-07T16:27:55.7790389+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 28,
+      "sent_at_utc": "2026-10-07T16:27:55.9869908+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 29,
+      "sent_at_utc": "2026-10-07T16:27:56.1952961+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 30,
+      "sent_at_utc": "2026-10-07T16:27:56.4074907+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 31,
+      "sent_at_utc": "2026-10-07T16:27:56.6118755+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 32,
+      "sent_at_utc": "2026-10-07T16:27:56.8162023+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 33,
+      "sent_at_utc": "2026-10-07T16:27:57.0244092+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 34,
+      "sent_at_utc": "2026-10-07T16:27:57.2323435+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 35,
+      "sent_at_utc": "2026-10-07T16:27:57.4404965+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 36,
+      "sent_at_utc": "2026-10-07T16:27:57.6449450+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 37,
+      "sent_at_utc": "2026-10-07T16:27:57.8489605+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 38,
+      "sent_at_utc": "2026-10-07T16:27:58.0531329+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 39,
+      "sent_at_utc": "2026-10-07T16:27:58.2662653+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 40,
+      "sent_at_utc": "2026-10-07T16:27:58.4785273+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 41,
+      "sent_at_utc": "2026-10-07T16:27:58.6823380+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 42,
+      "sent_at_utc": "2026-10-07T16:27:58.8866461+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 43,
+      "sent_at_utc": "2026-10-07T16:27:59.0951310+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 44,
+      "sent_at_utc": "2026-10-07T16:27:59.3030349+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 45,
+      "sent_at_utc": "2026-10-07T16:27:59.5114035+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 46,
+      "sent_at_utc": "2026-10-07T16:27:59.7117509+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 47,
+      "sent_at_utc": "2026-10-07T16:27:59.9160056+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 48,
+      "sent_at_utc": "2026-10-07T16:28:00.1365996+00:00",
+      "status": "Success",
+      "rtt_ms": 19
+    },
+    {
+      "sequence": 49,
+      "sent_at_utc": "2026-10-07T16:28:00.3573615+00:00",
+      "status": "Success",
+      "rtt_ms": 11
+    },
+    {
+      "sequence": 50,
+      "sent_at_utc": "2026-10-07T16:28:00.5697542+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 51,
+      "sent_at_utc": "2026-10-07T16:28:00.7783981+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 52,
+      "sent_at_utc": "2026-10-07T16:28:00.9864914+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 53,
+      "sent_at_utc": "2026-10-07T16:28:01.1910769+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 54,
+      "sent_at_utc": "2026-10-07T16:28:01.3990014+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 55,
+      "sent_at_utc": "2026-10-07T16:28:01.6072920+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 56,
+      "sent_at_utc": "2026-10-07T16:28:01.8117265+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 57,
+      "sent_at_utc": "2026-10-07T16:28:02.0248242+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 58,
+      "sent_at_utc": "2026-10-07T16:28:02.2324984+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 59,
+      "sent_at_utc": "2026-10-07T16:28:02.4405779+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 60,
+      "sent_at_utc": "2026-10-07T16:28:02.6449013+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 61,
+      "sent_at_utc": "2026-10-07T16:28:02.8490037+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 62,
+      "sent_at_utc": "2026-10-07T16:28:03.0533514+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 63,
+      "sent_at_utc": "2026-10-07T16:28:03.2614153+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 64,
+      "sent_at_utc": "2026-10-07T16:28:03.4699333+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 65,
+      "sent_at_utc": "2026-10-07T16:28:03.6745385+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 66,
+      "sent_at_utc": "2026-10-07T16:28:03.8793627+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 67,
+      "sent_at_utc": "2026-10-07T16:28:04.0867935+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 68,
+      "sent_at_utc": "2026-10-07T16:28:04.2948392+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 69,
+      "sent_at_utc": "2026-10-07T16:28:04.5038393+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 70,
+      "sent_at_utc": "2026-10-07T16:28:04.7115790+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 71,
+      "sent_at_utc": "2026-10-07T16:28:04.9324332+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 72,
+      "sent_at_utc": "2026-10-07T16:28:05.1531751+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 73,
+      "sent_at_utc": "2026-10-07T16:28:05.3698532+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 74,
+      "sent_at_utc": "2026-10-07T16:28:05.5868698+00:00",
+      "status": "Success",
+      "rtt_ms": 2
+    },
+    {
+      "sequence": 75,
+      "sent_at_utc": "2026-10-07T16:28:05.7950350+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 76,
+      "sent_at_utc": "2026-10-07T16:28:05.9994287+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 77,
+      "sent_at_utc": "2026-10-07T16:28:06.2071486+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 78,
+      "sent_at_utc": "2026-10-07T16:28:06.4200842+00:00",
+      "status": "Success",
+      "rtt_ms": 8
+    },
+    {
+      "sequence": 79,
+      "sent_at_utc": "2026-10-07T16:28:06.6323376+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 80,
+      "sent_at_utc": "2026-10-07T16:28:06.8405845+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 81,
+      "sent_at_utc": "2026-10-07T16:28:07.0460370+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 82,
+      "sent_at_utc": "2026-10-07T16:28:07.2573150+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 83,
+      "sent_at_utc": "2026-10-07T16:28:07.4659775+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 84,
+      "sent_at_utc": "2026-10-07T16:28:07.6740003+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 85,
+      "sent_at_utc": "2026-10-07T16:28:07.8780928+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 86,
+      "sent_at_utc": "2026-10-07T16:28:08.0824025+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 87,
+      "sent_at_utc": "2026-10-07T16:28:08.2906582+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 88,
+      "sent_at_utc": "2026-10-07T16:28:08.4988745+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 89,
+      "sent_at_utc": "2026-10-07T16:28:08.7072295+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 90,
+      "sent_at_utc": "2026-10-07T16:28:08.9115738+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 91,
+      "sent_at_utc": "2026-10-07T16:28:09.1160286+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 92,
+      "sent_at_utc": "2026-10-07T16:28:09.3239969+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 93,
+      "sent_at_utc": "2026-10-07T16:28:09.5330768+00:00",
+      "status": "Success",
+      "rtt_ms": 4
+    },
+    {
+      "sequence": 94,
+      "sent_at_utc": "2026-10-07T16:28:09.7404722+00:00",
+      "status": "Success",
+      "rtt_ms": 7
+    },
+    {
+      "sequence": 95,
+      "sent_at_utc": "2026-10-07T16:28:09.9494873+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 96,
+      "sent_at_utc": "2026-10-07T16:28:10.1536063+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 97,
+      "sent_at_utc": "2026-10-07T16:28:10.3614836+00:00",
+      "status": "Success",
+      "rtt_ms": 3
+    },
+    {
+      "sequence": 98,
+      "sent_at_utc": "2026-10-07T16:28:10.5745576+00:00",
+      "status": "Success",
+      "rtt_ms": 5
+    },
+    {
+      "sequence": 99,
+      "sent_at_utc": "2026-10-07T16:28:10.7822559+00:00",
+      "status": "Success",
+      "rtt_ms": 6
+    },
+    {
+      "sequence": 100,
+      "sent_at_utc": "2026-10-07T16:28:10.9908320+00:00",
+      "status": "Success",
+      "rtt_ms": 6
+    }
+  ]
+}
