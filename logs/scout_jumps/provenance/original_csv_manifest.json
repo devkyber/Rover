@@ -1,0 +1,9 @@
+{
+  "remote_path": "/home/taeholee/Rover/logs/jumper/scout_2/19700101T012437_695725Z_jumper_b03f32cd/scout_0006_cb00b4ba.csv",
+  "bytes": 85473355,
+  "sha256": "104c183d4cf309a321e9394df6fba6bb3648afca8331a5438046f51578386701",
+  "remote_sha256": "104c183d4cf309a321e9394df6fba6bb3648afca8331a5438046f51578386701",
+  "verified": true,
+  "local_path": "logs/scout_two_jumps_20261023T174135_527113Z/logs/jumper/scout_2/19700101T012437_695725Z_jumper_b03f32cd/scout_0006_cb00b4ba.csv",
+  "note": "Closed original SDK CSV, byte-for-byte copy. Raw binary also contains rows excluded by SDK timing checks."
+}

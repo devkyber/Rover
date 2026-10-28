@@ -1,0 +1,9 @@
+{
+  "remote_path": "/home/taeholee/Rover/logs/jumper/scout_2/19700101T012437_695725Z_jumper_b03f32cd/events.jsonl",
+  "start_byte": 0,
+  "end_byte_exclusive": 50023108,
+  "bytes": 50023108,
+  "sha256": "3bceda9b1c48bc11e01af822daec57cdbce524aa979511bd5a404e0dd5607f13",
+  "local_path": "logs/scout_two_jumps_20261023T174135_527113Z/events_before_suffix.jsonl",
+  "note": "Prefix joins capture_manifest events suffix exactly; preserved byte-for-byte."
+}

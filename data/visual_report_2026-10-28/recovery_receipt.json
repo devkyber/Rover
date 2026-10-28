@@ -1,0 +1,113 @@
+{
+  "schema": "rover_recording_recovery_v1",
+  "restored_at_kst": "2026-10-28T18:31:37.768299+09:00",
+  "reason": "New user steering that October24 latest Rover data should exist required reevaluating the earlier removal of uncertain recordings. Root explicitly authorized recovery of these eight byte-identical original files only.",
+  "method": "Read-only Git object inventory, batch size/SHA256 matching against pre-deletion receipt; restore exact blob bytes to a new canonical folder. No ref/index/history mutation, no network/hardware access.",
+  "prior_closure_manifest": {
+    "path": "data/final_vehicle_2026-10-28/recording_manifest.json",
+    "sha256": "9172338811f80890689875a44bb56bc0ebc8d56116cefc7393fae1e5da676129",
+    "note": "Historical closure/removal decision remains unchanged; this is a subsequent recovery."
+  },
+  "prior_run_inventory_sha256": "60e3bad9e56de61eef059aa52a0929783f0b0204e52b6d4b2cc7187fd86dbd69",
+  "files": [
+    {
+      "original_path": "logs/pan_continuity_2026-10-24/recurrence_20261023T174904_245557Z/capture_manifest.json",
+      "previous_removed_path": "logs/drives/pending_classification/recent_684775d5/capture_manifest.json",
+      "restored_path": "logs/drives/recent_684775d5/capture_manifest.json",
+      "git_blob": "40a6e96b0b5cc2f2a6e8e92661cd44da9df65d36",
+      "bytes": 7188,
+      "sha256": "63e258c27d64cca1a1bd8079c3ddfc8078a0111292e747bdcd08ee868d9c42bf",
+      "matches_pre_deletion_sha256": true
+    },
+    {
+      "original_path": "logs/pan_continuity_2026-10-24/recurrence_20261023T174904_245557Z/metadata.json",
+      "previous_removed_path": "logs/drives/pending_classification/recent_684775d5/metadata.json",
+      "restored_path": "logs/drives/recent_684775d5/metadata.json",
+      "git_blob": "b89367b65ed594a8468d64520b9abb90bfc9fc00",
+      "bytes": 517397,
+      "sha256": "ce3928c68e7a7db477a42d48ef59d20e9903f2d57b0f7acbd3248179a7a934e6",
+      "matches_pre_deletion_sha256": true
+    },
+    {
+      "original_path": "logs/pan_continuity_2026-10-24/recurrence_20261023T174904_245557Z/rover/commands.jsonl",
+      "previous_removed_path": "logs/drives/pending_classification/recent_684775d5/rover/commands.jsonl",
+      "restored_path": "logs/drives/recent_684775d5/rover/commands.jsonl",
+      "git_blob": "787d92fb7fe3486c928b3935839efa1ef8a0e31e",
+      "bytes": 2097023,
+      "sha256": "13982946f387831bcab96cc07deb45121961cf493cbf221c90be4c0f1bb3bf86",
+      "matches_pre_deletion_sha256": true
+    },
+    {
+      "original_path": "logs/pan_continuity_2026-10-24/recurrence_20261023T174904_245557Z/rover/events.jsonl",
+      "previous_removed_path": "logs/drives/pending_classification/recent_684775d5/rover/events.jsonl",
+      "restored_path": "logs/drives/recent_684775d5/rover/events.jsonl",
+      "git_blob": "669a21742c541c0335d0da4f183524614e0bcf81",
+      "bytes": 12021,
+      "sha256": "2119de9631e426c9479443af2690406fee0f88a1a45042b790fde301e5b25480",
+      "matches_pre_deletion_sha256": true
+    },
+    {
+      "original_path": "logs/pan_continuity_2026-10-24/recurrence_20261023T174904_245557Z/rover/system_0013.csv",
+      "previous_removed_path": "logs/drives/pending_classification/recent_684775d5/rover/system_0013.csv",
+      "restored_path": "logs/drives/recent_684775d5/rover/system_0013.csv",
+      "git_blob": "dbfd0e577244571476f48093a0c8d8a6f60f5b98",
+      "bytes": 1364486,
+      "sha256": "77362e3a9bffea4a5ebf4514fd84979ac3c367c0c8795db18b5146340f66cd7c",
+      "matches_pre_deletion_sha256": true
+    },
+    {
+      "original_path": "logs/pan_continuity_2026-10-24/recurrence_20261023T174904_245557Z/rover/system_0014.csv",
+      "previous_removed_path": "logs/drives/pending_classification/recent_684775d5/rover/system_0014.csv",
+      "restored_path": "logs/drives/recent_684775d5/rover/system_0014.csv",
+      "git_blob": "1c183a80954281e1ca2daa76fb41a018f0d753de",
+      "bytes": 1353464,
+      "sha256": "4586569ea5c9c4d957ec728c53656efd88684c02216e6932d95a8ea56f210b73",
+      "matches_pre_deletion_sha256": true
+    },
+    {
+      "original_path": "logs/pan_continuity_2026-10-24/recurrence_20261023T174904_245557Z/rover/system_0015.csv",
+      "previous_removed_path": "logs/drives/pending_classification/recent_684775d5/rover/system_0015.csv",
+      "restored_path": "logs/drives/recent_684775d5/rover/system_0015.csv",
+      "git_blob": "d22b77cb6832d62e3d59573868489a7817fa22e6",
+      "bytes": 1317158,
+      "sha256": "82c5010eb7adfc7ccf071903f964da8946d0ada1b86210c9713bf80b3cbd4b0a",
+      "matches_pre_deletion_sha256": true
+    },
+    {
+      "original_path": "logs/pan_continuity_2026-10-24/recurrence_20261023T174904_245557Z/rover/telemetry_0015.jsonl",
+      "previous_removed_path": "logs/drives/pending_classification/recent_684775d5/rover/telemetry_0015.jsonl",
+      "restored_path": "logs/drives/recent_684775d5/rover/telemetry_0015.jsonl",
+      "git_blob": "7dc4e695c4674081eabcb8f5209d82a0157993bc",
+      "bytes": 8382368,
+      "sha256": "498e64da5196d3e2543f384e29fac72582705044df71f8912ee22671df28e8e5",
+      "matches_pre_deletion_sha256": true
+    }
+  ],
+  "total_bytes": 15051105,
+  "physical_ground_motion_independently_confirmed": false,
+  "native_host_calendar_valid": false,
+  "other_seven_uncertain_recordings_restored": false,
+  "remote_originals_modified": false,
+  "git_gc_run": false,
+  "observed_metrics": {
+    "csv_rows": 7382,
+    "incomplete_csv_rows_excluded": 0,
+    "duration_s": 369.04679321599997,
+    "wheel_motion_time_s": 13.145363967999401,
+    "command_motion_time_s": 11.999791487998664,
+    "nominal_travel_m": 0.719518114879918,
+    "covered_interval_s": 369.04679321599997,
+    "peak_wheel_speed_mps": 0.115,
+    "first_runtime_t_s": 1656.82,
+    "last_runtime_t_s": 2025.87,
+    "command_jsonl_rows": 2054,
+    "drive_command_rows": 1027,
+    "nonzero_drive_command_rows": 41,
+    "pose_valid_row_counts": {
+      "True": 6388,
+      "False": 994
+    },
+    "nominal_travel_kind": "New descriptive audit: trapezoid integral of absolute mean signed wheel speed over0<dt<=0.5s; not surveyed chassis distance."
+  },
+  "motion_interpretation": "Recorded nonzero drive commands and encoder-speed feedback demonstrate recorded actuation/wheel activity. Independent physical chassis-ground motion or surveyed route not newly confirmed."
+}

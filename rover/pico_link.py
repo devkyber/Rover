@@ -3,15 +3,15 @@ The Jetson's side of the Pico 2 I/O board (firmware: firmware/pico/main.py).
 
     pico = pico_link.open_pico("usb", on_event=print)
     pico.start()
-    pico.set_servos(lift, pan)   # both -1..+1; call it every control cycle
+    pico.set_servos(wind, pan, release)   # independent speeds -1..+1; call it every control cycle
     pico.state()                 # battery and servo outputs, for telemetry
     pico.close()
 
 Bench check, with the Pico on USB:
 
     python pico_link.py                          # watch the battery reading
-    python pico_link.py --lift 0.2 --seconds 3   # run the lift servos for 3 s
-    python pico_link.py --pulse 1500 1500 1500   # raw pulse widths, to find each stop pulse
+    python pico_link.py --wind 0.2 --seconds 3   # run the winding servo for 3 s
+    python pico_link.py --pulse 0 0 1500 0   # raw pulse widths, to find each stop pulse
     python pico_link.py fake                     # no Pico: this computer plays one
 
 A thread owns the serial port, the same way camera.py owns the camera. If
@@ -36,6 +36,7 @@ different shunt.
 import argparse
 import collections
 import importlib.util
+import hashlib
 import math
 import os
 import queue
@@ -49,28 +50,36 @@ import config
 BUS_VOLTS_PER_COUNT = 1.25e-3
 SHUNT_VOLTS_PER_COUNT = 2.5e-6
 
-FIRMWARE_VERSION = 1             # the H line this file was written against
+FIRMWARE_VERSION = config.PICO_FIRMWARE["VERSION"]             # the H line this file was written against
 FLAG_FAILSAFE, FLAG_NO_BATTERY, FLAG_DEFAULT_STOP = 1, 2, 4
 
-SETPOINT_MAX_AGE_S = 0.2         # set_servos() older than this is not sent
-REPORT_TIMEOUT_S = 0.5           # the Pico reports every 50 ms; this long without = lost
-RETRY_S = 2
+SETPOINT_MAX_AGE_S = config.PICO_SETPOINT_MAX_AGE_S         # set_servos() older than this is not sent
+REPORT_TIMEOUT_S = config.PICO_REPORT_TIMEOUT_S           # the Pico reports every 50 ms; this long without = lost
+RETRY_S = config.PICO_RETRY_S
 
 FIRMWARE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              "..", "firmware", "pico", "main.py")
 
 
-def servo_pulses(lift, pan):
+def servo_pulses(wind=0.0, pan=0.0, release=0.0, aux=0.0):
     """Operator commands, -1..+1, to a pulse width for each servo (microseconds)."""
     pulses = []
-    for (_, stop, offset, direction), command in zip(config.SERVOS, (lift, lift, pan)):
+    for (role, stop, offset, direction), command in zip(config.SERVOS, (wind, release, pan, aux)):
         command = max(-1.0, min(1.0, command)) if math.isfinite(command) else 0.0
-        pulses.append(round(stop + direction * command * offset))
+        # Right is the positive operator command, even if configured direction is reversed.
+        if role == "pan" and command > 0:
+            offset = config.PAN_RIGHT_OFFSET_US
+        pulse = round(stop + direction * command * offset) if stop else 0
+        # Nominal neutral is not a calibrated stop. Also suppress tiny commands
+        # that round back to neutral instead of leaving that pulse on indefinitely.
+        if role == "pan" and config.PAN_IDLE_PWM_OFF and pulse == stop:
+            pulse = 0
+        pulses.append(pulse)
     return pulses
 
 
 def stop_pulses():
-    return [servo[1] for servo in config.SERVOS]
+    return servo_pulses()
 
 
 class PicoLink:
@@ -85,6 +94,8 @@ class PicoLink:
         self._report_at = -math.inf
         self._running = False
         self._thread = None
+        self._generation = 0
+        self._compatible = False
         self.bad_lines = 0                   # lines from the Pico that did not parse
 
     # ── called by the control loop ─────────────────────────────────
@@ -94,13 +105,22 @@ class PicoLink:
         self._thread = threading.Thread(target=self._run, daemon=True)
         self._thread.start()
 
-    def set_servos(self, lift, pan):
-        """Speed commands, -1..+1: both lift servos together, and the camera pan."""
-        self.set_pulses(servo_pulses(lift, pan))
+    def set_servos(self, wind, pan, release=0.0):
+        """Independent WIND, camera PAN and RELEASE speeds; spare AUX stays stopped."""
+        self.set_pulses(servo_pulses(wind, pan, release))
 
     def set_pulses(self, pulses):
+        # A command always has four bounded outputs; bad values become OFF.
+        bounded = []
+        for pulse in list(pulses)[:len(config.SERVOS)]:
+            if type(pulse) not in (int, float) or (type(pulse) is float and not math.isfinite(pulse)) or pulse == 0:
+                bounded.append(0)
+            else:
+                bounded.append(round(max(config.PICO_FIRMWARE['PULSE_MIN_US'],
+                                         min(config.PICO_FIRMWARE['PULSE_MAX_US'], pulse))))
+        bounded.extend([0] * (len(config.SERVOS) - len(bounded)))
         with self._lock:
-            self._pulses = list(pulses)
+            self._pulses = bounded
             self._pulses_at = time.monotonic()
 
     def zero_charge(self):
@@ -116,11 +136,12 @@ class PicoLink:
         """
         with self._lock:
             report = self._report
-            fresh = time.monotonic() - self._report_at < REPORT_TIMEOUT_S
+            fresh = self._compatible and time.monotonic() - self._report_at < REPORT_TIMEOUT_S
         if report is None or not fresh:
             return {"status": "lost", "battery": None, "servo_us": None, "failsafe": None}
         return {"status": "ok", "battery": report["battery"],
-                "servo_us": report["servo_us"], "failsafe": report["failsafe"]}
+                "servo_us": report["servo_us"], "failsafe": report["failsafe"], "generation": self._generation,
+                "charge_complete": report["charge_complete"], "ina_age_ms": report["ina_age_ms"]}
 
     def close(self):
         self._running = False
@@ -153,58 +174,90 @@ class PicoLink:
                 time.sleep(RETRY_S)
 
     def _talk(self, name, port):
-        port.write(b"?\n")                   # ask who is there; the answer is an H line
         announced = False
-        next_send = 0.0
+        next_send = next_query = 0.0
         last_ms = None
+        report = None
+        report_at = -math.inf
+        compatible = False
+        with self._lock:
+            self._report = None
+            self._compatible = False
+            self._pulses_at = -math.inf
+            self._generation += 1
         try:
             while self._running:
-                raw = port.readline()        # returns within the port's short timeout
+                raw = port.readline()
                 if raw:
                     kind, value = self._parse(raw)
-                    if kind == "P":
-                        if last_ms is not None and value["ms"] < last_ms:
-                            self.on_event("pico: restarted")
-                        last_ms = value["ms"]
+                    if kind == "H":
+                        compatible = value[1] == len(config.SERVOS)
+                        # A hello may be an unsolicited Pico reboot. Never
+                        # reuse the pre-reboot report or moving setpoint, even
+                        # before the first post-reboot P line arrives.
+                        report, report_at, last_ms = None, -math.inf, None
                         with self._lock:
-                            self._report, self._report_at = value, time.monotonic()
-                    elif kind == "H":
+                            self._compatible = compatible
+                            self._report = None
+                            self._report_at = -math.inf
+                            self._pulses_at = -math.inf
+                            self._generation += 1
                         if not announced:
+                            self.on_event(f"pico: {name}: " + ("connected" if compatible
+                                          else "unsupported channel count"))
                             announced = True
-                            self.on_event(f"pico: connected on {name}, firmware v{value}")
-                        if value != FIRMWARE_VERSION:
-                            self.on_event(f"pico: firmware v{value}, this program expects "
-                                          f"v{FIRMWARE_VERSION} -- copy firmware/pico/main.py to the Pico")
+                        if compatible:
+                            port.write(_line("N", stop_pulses()))
+                    elif kind == "P" and compatible:
+                        if last_ms is not None and value["ms"] < last_ms:
+                            # Reset or tick wrap: require a new hello and N handshake.
+                            compatible = False
+                            with self._lock:
+                                self._compatible = False
+                                self._generation += 1
+                            next_query = 0
+                            self.on_event("pico: restarted or clock wrapped; rechecking")
+                        else:
+                            report, report_at = value, time.monotonic()
+                            with self._lock:
+                                self._report, self._report_at = value, report_at
+                        last_ms = value["ms"]
                     elif kind == "E":
                         self.on_event("pico: " + value)
-                    else:
+                    elif kind is None:
                         self.bad_lines += 1
-
                 now = time.monotonic()
+                if now >= next_query and not compatible:
+                    port.write(b"?\n")
+                    next_query = now + 1.0
                 if now < next_send:
                     continue
                 next_send = now + 1.0 / config.PICO_COMMAND_HZ
-                with self._lock:
-                    report = self._report
-                    pulses = (self._pulses
-                              if now - self._pulses_at < SETPOINT_MAX_AGE_S else None)
-                    zero, self._zero_charge = self._zero_charge, False
-                # A Pico that has just (re)started only knows the nominal
-                # stop pulse. Give it the trimmed ones before anything else.
-                if report is None or report["default_stop"]:
+                if not compatible:
+                    continue
+                if report is None or now - report_at >= REPORT_TIMEOUT_S:
+                    # Do not keep a moving command alive on a one-way/lost link.
+                    port.write(_line("S", stop_pulses()))
+                    continue
+                if report["default_stop"]:
                     port.write(_line("N", stop_pulses()))
+                    continue
+                with self._lock:
+                    pulses = self._pulses if now - self._pulses_at < SETPOINT_MAX_AGE_S else None
+                    zero, self._zero_charge = self._zero_charge, False
                 if zero:
                     port.write(b"Z\n")
                 if pulses is not None:
                     port.write(_line("S", pulses))
         finally:
-            # Stop now rather than 300 ms from now, when the failsafe would.
             try:
-                port.write(_line("S", stop_pulses()))
+                if compatible:
+                    port.write(_line("S", stop_pulses()))
             except OSError:
                 pass
             with self._lock:
                 self._report_at = -math.inf
+                self._compatible = False
 
     def _parse(self, raw):
         """One line from the Pico -> ('P', report) | ('H', version) | ('E', text) | (None, None)."""
@@ -213,24 +266,34 @@ class PicoLink:
         except UnicodeDecodeError:
             return None, None
         try:
-            if fields[0] == "P" and len(fields) == 10:
-                ms, bus, shunt, charge, a, b, pan, flags, bad = (int(f) for f in fields[1:])
+            if fields[0] == "P" and len(fields) == 12:
+                ms, bus, shunt, charge, a, b, pan, aux, flags, bad, age = (int(f) for f in fields[1:])
                 return "P", {
                     "ms": ms,
                     "battery": (None if flags & FLAG_NO_BATTERY
                                 else battery_reading(bus, shunt, charge)),
-                    "servo_us": [a, b, pan],
+                    "servo_us": [a, b, pan, aux],
+                    "charge_complete": not bool(flags & 8),
+                    "ina_age_ms": age,
                     "failsafe": bool(flags & FLAG_FAILSAFE),
                     "default_stop": bool(flags & FLAG_DEFAULT_STOP),
                     "rejected": bad,         # our lines the Pico refused
                 }
-            if fields[0] == "H" and len(fields) == 5:
-                return "H", int(fields[1])
+            if fields[0] == "H":
+                if len(fields) == 7:
+                    return "H", (int(fields[1]), int(fields[5]), fields[6])
+                return "H", (int(fields[1]), 0, "")
         except ValueError:
             return None, None
         if fields[0] == "E":
             return "E", ",".join(fields[1:])
         return None, None
+
+
+def expected_config_id():
+    values = dict(config.PICO_FIRMWARE, BOOT_STOP_US=tuple(stop_pulses()))
+    body = "".join(f"{key} = {value!r}\n" for key, value in values.items())
+    return hashlib.sha256(body.encode()).hexdigest()[:16]
 
 
 def _line(kind, pulses):
@@ -254,7 +317,7 @@ class NoPico:
     def start(self):
         pass
 
-    def set_servos(self, lift, pan):
+    def set_servos(self, wind, pan, release=0.0):
         pass
 
     def zero_charge(self):
@@ -296,7 +359,7 @@ class _SimulatedHardware:
         self._config = 0x4127                # INA226 reset value
         self.to_pico = collections.deque()   # bytes, host -> firmware
         self.to_host = queue.Queue()         # whole lines, firmware -> host
-        self.pulse_us = [0, 0, 0]
+        self.pulse_us = [0] * len(config.SERVOS)
 
     def ticks_ms(self):
         return int((time.monotonic() - self._t0) * 1000)
@@ -320,6 +383,10 @@ class _SimulatedHardware:
         fw = self._fw
         if register == fw.REG_MANUFACTURER:
             return fw.MANUFACTURER_TI
+        if register == fw.REG_DIE:
+            return 0x2260
+        if register == fw.REG_MASK:
+            return fw.CONVERSION_READY
         if register == fw.REG_CONFIG:
             return self._config
         seconds = time.monotonic() - self._t0
@@ -400,10 +467,11 @@ def open_pico(kind="usb", on_event=print):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="Bench check for the Pico 2 I/O board.")
     ap.add_argument("kind", nargs="?", default="usb", choices=["usb", "fake"])
-    ap.add_argument("--lift", type=float, default=0.0, help="lift command, -1..+1")
+    ap.add_argument("--wind", type=float, default=0.0, help="wind command, -1..+1")
+    ap.add_argument("--release", type=float, default=0.0, help="release servo speed, -1..+1 (bench only)")
     ap.add_argument("--pan", type=float, default=0.0, help="pan command, -1..+1")
-    ap.add_argument("--pulse", type=int, nargs=3, metavar=("A", "B", "PAN"),
-                    help="raw pulse widths in microseconds instead of --lift/--pan")
+    ap.add_argument("--pulse", type=int, nargs=4, metavar=("WIND", "RELEASE", "PAN", "AUX"),
+                    help="raw pulse widths in microseconds instead of --wind/--pan")
     ap.add_argument("--seconds", type=float, default=0.0,
                     help="how long to send the command (0 = send nothing, just watch)")
     ap.add_argument("--zero", action="store_true", help="restart the mAh count")
@@ -414,7 +482,7 @@ if __name__ == "__main__":
     if args.zero:
         pico.zero_charge()
     driving = args.seconds > 0
-    wanted = args.pulse or servo_pulses(args.lift, args.pan)
+    wanted = args.pulse or servo_pulses(args.wind, args.pan, args.release)
     if driving:
         print(f"Sending {wanted} us for {args.seconds:.1f} s, then nothing. "
               "The servos must stop by themselves 0.3 s later.")

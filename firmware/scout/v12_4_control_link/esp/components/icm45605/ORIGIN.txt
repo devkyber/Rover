@@ -1,0 +1,4 @@
+Official ICM-45605 driver: https://github.com/tdk-invn-oss/motion.mcu.icm45605.driver
+Commit: 80533dd8716d2466ef1bf88cff25ec0ee254c838
+Driver copied unchanged from the final PCB firmware_init package.
+scout_icm45605.c is the existing board-specific pull configuration wrapper.

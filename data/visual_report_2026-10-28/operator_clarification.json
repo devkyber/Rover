@@ -1,0 +1,49 @@
+{
+  "schema": "rover_operator_clarification_v1",
+  "recorded_at_kst": "2026-10-28T18:38:08.781805+09:00",
+  "source": "New human user statements relayed by parent agent during visual report and local Git recovery audit.",
+  "user_statements": [
+    "10/24 run was the record with the actual contest log",
+    "it should have ran around15min",
+    "maybe around that time? not sure",
+    "Yes, that is the contest footage"
+  ],
+  "interpretation": {
+    "contest_date_kst": "2026-10-24",
+    "approximate_duration_s": 900,
+    "duration_basis": "Operator recollection, not a measured timestamp interval.",
+    "associated_run_id": "e2c0c0d377de495d8d423acefa0d2710",
+    "association_status": "Confirmed contest-video identity via user recognition plus explicit run_id in original video metadata; exact time remains unresolved.",
+    "possible_scope": "Approximately15minutes could describe physical driving, a recording interval or multiple runs; not resolved."
+  },
+  "protected_interpretations": [
+    "Original recording bytes, native1970 clocks and earlier operator labels remain unchanged.",
+    "Use operatorOctober24 date for confirmed e2contest footage; exact UTC and local time are unknown.",
+    "Do not automatically identify related218 or early-morning684 as the confirmed contest run.",
+    "User timing was uncertain. Separate captured spans must not be silently concatenated into a continuous run."
+  ],
+  "statement_provenance": "Human user statements relayed by parent; final exact image confirmation supplied as \"Yes, that is the contest footage\". Time recollection is uncertain.",
+  "confirmed_association": {
+    "classification": "Actual contest footage, recognized by the human operator.",
+    "operator_event_date_kst": "2026-10-24",
+    "video_id": "practice_e2c0c0d3",
+    "rover_run_id": "e2c0c0d377de495d8d423acefa0d2710",
+    "association_strength": "Strong: user identified frames decoded from this retained video; video metadata explicitly links that exact Rover run ID.",
+    "metadata_link": "logs/video/practice_e2c0c0d3_19700101T000717.904946Z_b94e84c0/metadata.json#/context/run_id",
+    "absolute_physical_time_utc": null,
+    "native_host_calendar_valid": false,
+    "earlier_labels_preserved": [
+      "logs/drives/operator_labels/operator_label_20261023T115428Z_1a56302f.json",
+      "logs/drives/operator_labels/operator_label_correction_20261023T115527Z_01e23b30.json"
+    ],
+    "historical_conflict": "Earlier labels called the drives practice and used October23 operator report date. New direct image recognition identifies this e2 video as actual October24 contest footage; historical original labels are not rewritten."
+  },
+  "related_continuation_candidate": {
+    "run_id": "218d0d5b716b4e2d9f7350a90107c12b",
+    "association_status": "Tentative. Historical operator context mentioned two drives and a reboot, but image confirmation identifies only e2.",
+    "date_kst": null,
+    "combined_captured_spans_s": 1008.4912804799998,
+    "combined_span_meaning": "Arithmetic sum of two separate captured scalar spans (~16min48s). Not proof of one continuous contest recording, chronological adjacency or total driving duration."
+  },
+  "updated_at_kst": "2026-10-28T18:43:45.428739+09:00"
+}

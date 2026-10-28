@@ -20,7 +20,7 @@ export function fitCanvas(canvas) {
 export const colors = {};
 export function refreshColors() {
   const css = getComputedStyle(document.documentElement);
-  for (const name of ['bg', 'panel', 'border', 'border-soft', 'fg', 'muted', 'accent',
+  for (const name of ['bg', 'panel', 'border', 'border-soft', 'fg', 'muted', 'accent', 'warn',
                       'grid', 'axis', 's1', 's2', 's3', 's4']) {
     colors[name] = css.getPropertyValue('--' + name).trim();
   }
@@ -30,7 +30,7 @@ export function refreshColors() {
 export const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 // "+0.123" / "-0.123": the sign always shown, so columns of numbers line up.
-export const signed = (v, digits) => (v < 0 ? '-' : '+') + Math.abs(v).toFixed(digits);
+export const signed = (v, digits) => Number.isFinite(v) ? (v < 0 ? '-' : '+') + Math.abs(v).toFixed(digits) : '--';
 
 // A "nice" step (1, 2 or 5 times a power of ten) near the wanted one.
 export function niceStep(rough) {

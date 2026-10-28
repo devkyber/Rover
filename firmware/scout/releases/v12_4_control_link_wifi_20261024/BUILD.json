@@ -1,0 +1,71 @@
+{
+  "schema": "scout_v12_4_control_link_wifi_offline_build_v1",
+  "created_utc": "2026-10-23T19:12:09.4040751Z",
+  "result": "success",
+  "build_exit_code": 0,
+  "scope": "Offline build only; remove sensor TCP data readiness from actuator permission; no hardware, flash, motor, servo, or motion commands",
+  "api": "scout-process-v12",
+  "firmware": "scout-process-v12.4-control-link-j5",
+  "launch_supported": true,
+  "behavior_change": "Only actuator_link_ready no longer requires scout_transport_data_ready. Sensor status.healthy and actuator/control protection unchanged.",
+  "variant": "wifi",
+  "idf_version": "v5.5.3",
+  "idf_commit": "2c211b236707889e8400c4dc5644dd5c4ee071e0",
+  "idf_tracked_tree_clean": true,
+  "idf_tracked_changes": [],
+  "compiler": "xtensa-esp-elf-gcc (crosstool-NG esp-14.2.0_20251107) 14.2.0",
+  "execution_environment": "WSL Ubuntu-24.04",
+  "sdk_root": "/home/tae06/.cache/rover-scout-sdk-v5.5.3",
+  "repository_source": "firmware/scout/v12_4_control_link/esp",
+  "build_directory": "output/scout_firmware_build/v12_4_control_link_wifi",
+  "native_source_directory": "/home/tae06/.cache/rover-scout-builds/v12_4_control_link_wifi/source",
+  "native_build_directory": "/home/tae06/.cache/rover-scout-builds/v12_4_control_link_wifi/build",
+  "compiled_source_mapping": "compiled_source.json",
+  "repository_and_compiled_source_files_match": true,
+  "build_script": "firmware/scout/releases/v12_4_control_link_wifi_20261024/build_wifi.sh",
+  "cmake_defines": {
+    "IDF_TARGET": "esp32s3",
+    "SDKCONFIG": "/home/tae06/.cache/rover-scout-builds/v12_4_control_link_wifi/build/sdkconfig",
+    "SDKCONFIG_DEFAULTS": [
+      "/home/tae06/.cache/rover-scout-builds/v12_4_control_link_wifi/source/sdkconfig.defaults",
+      "/home/tae06/.cache/rover-scout-builds/v12_4_control_link_wifi/source/sdkconfig.defaults.wifi"
+    ]
+  },
+  "selected_config": {
+    "CONFIG_SCOUT_LINK_WIFI": true,
+    "CONFIG_SCOUT_LINK_USB": false,
+    "CONFIG_SCOUT_SHOCK_PROFILE": false
+  },
+  "source_file_count": 54,
+  "source_files_match_before_and_after_build": true,
+  "source_edits": [
+    "main/app_main.c",
+    "main/network.c"
+  ],
+  "compiled_project_source_files": [
+    "components/icm45605/imu/inv_imu_driver.c",
+    "components/icm45605/imu/inv_imu_transport.c",
+    "components/icm45605/scout_icm45605.c",
+    "main/actuators.c",
+    "main/app_main.c",
+    "main/capture.c",
+    "main/control.c",
+    "main/network.c",
+    "main/protocol.c",
+    "main/sensors.c",
+    "main/settings.c",
+    "main/transport.c",
+    "main/urgent.c",
+    "main/usb_tx.c",
+    "main/wire.c"
+  ],
+  "application_offset": "0x10000",
+  "application_partition_bytes": 2097152,
+  "application_bytes": 822752,
+  "application_sha256": "293dac4d98e688be1bb56284b71e7195b4cdc073f4c518859e15455426df79d7",
+  "partition_table_matches_v12_3": true,
+  "image_info_valid": true,
+  "compiler_warning_lines": [],
+  "installation_status": "not_performed_offline_build_only",
+  "note": "Final build identity retained at project closure; verbose build logs and compiler command cache removed. Installation is recorded separately."
+}

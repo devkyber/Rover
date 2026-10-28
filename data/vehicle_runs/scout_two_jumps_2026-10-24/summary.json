@@ -1,0 +1,139 @@
+{
+  "scout_id": "scout_2",
+  "field_calibrated": false,
+  "flight_duration_validated": false,
+  "launch_burst_separation_s": 119.45816100000002,
+  "shots": [
+    {
+      "jump": 1,
+      "source_raw": "logs\\scout_two_jumps_20261023T174135_527113Z\\logs\\jumper\\scout_2\\19700101T012437_695725Z_jumper_b03f32cd\\scout_0006_cb00b4ba.records.bin",
+      "source_sha256": "15d953afc1f9aebc314aa948cb401f47a4bf12f7a45c9b3e3c418013098b8223",
+      "source_record_slot_start": 454538,
+      "source_record_slot_end_exclusive": 457861,
+      "source_byte_start": 18181520,
+      "source_byte_end_exclusive": 18314440,
+      "crc_checked_records": 3323,
+      "device_window_s": [
+        396.7,
+        399.5
+      ],
+      "launch_burst_onset_device_s": 397.12149,
+      "low_g_interval_device_s": [
+        397.419086,
+        398.006313
+      ],
+      "low_g_duration_s": 0.5872269999999844,
+      "contact_burst_onset_device_s": 398.010433,
+      "burst_onset_interval_s": 0.8889429999999834,
+      "icm_peak_nominal_g": 27.71112146523527,
+      "adxl_peak_nominal_g": 51.371937446430806,
+      "icm_saturation_flag_samples": 11,
+      "global_sequence_gaps": 0,
+      "global_sequence_regressions": 0,
+      "icm_launch_peak_nominal_g": 20.640505222201153,
+      "icm_launch_peak_device_s": 397.152307,
+      "icm_contact_peak_nominal_g": 27.71112146523527,
+      "icm_contact_peak_device_s": 398.02079,
+      "icm_timestamp_nonincreasing_samples": 3,
+      "icm_largest_positive_timestamp_step_ms": 5.051999999977852,
+      "adxl_launch_peak_nominal_g": 51.371937446430806,
+      "adxl_launch_peak_device_s": 397.127376,
+      "adxl_contact_peak_nominal_g": 49.734903448182145,
+      "adxl_contact_peak_device_s": 398.02079,
+      "adxl_timestamp_nonincreasing_samples": 53,
+      "adxl_largest_positive_timestamp_step_ms": 4.5130000000312975,
+      "pull_result": {
+        "request_id": "748d5320-80db-4e42-9311-d0945d1d7dfc",
+        "action": "prepare",
+        "connection_id": "bd4359dad983455d970e01d31e5a3277",
+        "ok": true,
+        "cancelled": false,
+        "ack": {
+          "event": "ack",
+          "api": "scout-process-v12",
+          "session": 3990465682,
+          "seq": 3884,
+          "ok": true,
+          "error": "none",
+          "cycle_id": 8,
+          "time_us": 397059182,
+          "state": "loaded",
+          "motor_running": false,
+          "motor_action": "stopped",
+          "servo_role": "pull"
+        },
+        "scout_id": "scout_2"
+      },
+      "pull_ack_device_s": 397.059182
+    },
+    {
+      "jump": 2,
+      "source_raw": "logs\\scout_two_jumps_20261023T174135_527113Z\\logs\\jumper\\scout_2\\19700101T012437_695725Z_jumper_b03f32cd\\scout_0006_cb00b4ba.records.bin",
+      "source_sha256": "15d953afc1f9aebc314aa948cb401f47a4bf12f7a45c9b3e3c418013098b8223",
+      "source_record_slot_start": 591147,
+      "source_record_slot_end_exclusive": 594467,
+      "source_byte_start": 23645880,
+      "source_byte_end_exclusive": 23778680,
+      "crc_checked_records": 3320,
+      "device_window_s": [
+        516.2,
+        519.0
+      ],
+      "launch_burst_onset_device_s": 516.579651,
+      "low_g_interval_device_s": [
+        516.827384,
+        517.150776
+      ],
+      "low_g_duration_s": 0.32339199999989887,
+      "contact_burst_onset_device_s": 517.163537,
+      "burst_onset_interval_s": 0.5838860000000068,
+      "icm_peak_nominal_g": 25.13629437898291,
+      "adxl_peak_nominal_g": 56.103544959298254,
+      "icm_saturation_flag_samples": 7,
+      "global_sequence_gaps": 0,
+      "global_sequence_regressions": 0,
+      "icm_launch_peak_nominal_g": 25.13629437898291,
+      "icm_launch_peak_device_s": 516.600372,
+      "icm_contact_peak_nominal_g": 23.545124102767858,
+      "icm_contact_peak_device_s": 517.174348,
+      "icm_timestamp_nonincreasing_samples": 7,
+      "icm_largest_positive_timestamp_step_ms": 6.519000000025699,
+      "adxl_launch_peak_nominal_g": 56.103544959298254,
+      "adxl_launch_peak_device_s": 516.580323,
+      "adxl_contact_peak_nominal_g": 21.966050191147247,
+      "adxl_contact_peak_device_s": 517.173098,
+      "adxl_timestamp_nonincreasing_samples": 51,
+      "adxl_largest_positive_timestamp_step_ms": 5.020999999942433,
+      "pull_result": {
+        "request_id": "e604a10a-1fcc-45e3-b6ff-ecc6f976fa49",
+        "action": "prepare",
+        "connection_id": "bd4359dad983455d970e01d31e5a3277",
+        "ok": true,
+        "cancelled": false,
+        "ack": {
+          "event": "ack",
+          "api": "scout-process-v12",
+          "session": 3990465682,
+          "seq": 5074,
+          "ok": true,
+          "error": "none",
+          "cycle_id": 13,
+          "time_us": 516518158,
+          "state": "loaded",
+          "motor_running": false,
+          "motor_action": "stopped",
+          "servo_role": "pull"
+        },
+        "scout_id": "scout_2"
+      },
+      "pull_ack_device_s": 516.518158
+    }
+  ],
+  "method": {
+    "scales": "ICM raw/2048 g; ADXL raw*0.049 g; gyro raw/16.4 deg/s",
+    "selection": "Latest two pronounced launch/freefall/contact bursts in raw 0006; consistent with latest two PULL requests. Raw 0007 was also checked and has no later comparable burst.",
+    "event_candidates": "Launch: first ICM magnitude >3g in each selected window. Low-g: longest contiguous received ICM run below0.2g. Contact: first ICM >3g after that run. Heuristic event candidates, not independent physical labels.",
+    "plot": "All selected received samples, original order. Insert line breaks on nonincreasing timestamps or intervals above3 nominal periods. No smoothing, sorting, interpolation or resampling.",
+    "limits": "Nominal scales and FIFO estimated timestamps. ICM axis clipping, missing records and timestamp overlap retained. No height, range, trajectory or calibrated peak claim."
+  }
+}

@@ -4,8 +4,8 @@
 //   chart.push(t, [0.18, 0.17]);     // once per telemetry message
 //   chart.draw();
 //
-// One y-axis per chart, always. Numbers with different units or very
-// different sizes get their own chart instead of a second axis.
+// Most charts use one y-axis. A named rightAxis gives selected series their
+// own scale and units; the battery pairs voltage (left) and current (right).
 // Hovering shows a hairline at the nearest sample and every series' value
 // there, so nobody has to aim at a 2-pixel line.
 
@@ -15,12 +15,28 @@ export const WINDOW_S = 30;
 
 const PAD_LEFT = 44, PAD_RIGHT = 8, PAD_TOP = 6, PAD_BOTTOM = 18;
 
+export function axisRange(values, minSpan) {
+  let lo = Infinity, hi = -Infinity;
+  for (const series of values) for (const value of series) {
+    if (!Number.isFinite(value)) continue;
+    lo = Math.min(lo, value); hi = Math.max(hi, value);
+  }
+  if (!Number.isFinite(lo)) { lo = -minSpan / 2; hi = minSpan / 2; }
+  if (hi - lo < minSpan) { const mid = (hi + lo) / 2; lo = mid - minSpan / 2; hi = mid + minSpan / 2; }
+  const step = niceStep((hi - lo) / 3);
+  return { lo: Math.floor(lo / step) * step, hi: Math.ceil(hi / step) * step, step };
+}
+
 export class StripChart {
-  constructor(parent, { title, unit, series, digits = 2, minSpan = 0.1 }) {
+  constructor(parent, { title, unit, series, digits = 2, minSpan = 0.1, rightAxis = null }) {
     this.series = series;
     this.digits = digits;
     this.unit = unit;
     this.minSpan = minSpan;        // the y-range never shrinks below this, so
+    this.seriesAxes = series.map((_, i) => rightAxis?.series.includes(i) ? 1 : 0);
+    this.axes = [{ unit, minSpan }];
+    if (rightAxis) this.axes.push({ unit: rightAxis.unit, minSpan: rightAxis.minSpan ?? minSpan });
+    this.seriesUnits = this.seriesAxes.map(i => this.axes[i].unit);
     this.times = [];               // sensor noise is not blown up to full height
     this.values = series.map(() => []);
     this.hoverX = null;
@@ -29,7 +45,7 @@ export class StripChart {
     this.root.className = 'plot';
     const head = document.createElement('div');
     head.className = 'plot-head';
-    head.append(this._span('plot-title', title), this._span('plot-unit', unit));
+    head.append(this._span('plot-title', title), this._span('plot-unit', rightAxis ? `${unit} left / ${rightAxis.unit} right` : unit));
 
     // Legend: a line key in the series colour, the name, and the newest
     // value. The text itself stays in the normal text colours.
@@ -83,12 +99,15 @@ export class StripChart {
     // sit in the "future", so start clean.
     if (this.times.length && t < this.times[this.times.length - 1]) this.clear();
     this.times.push(t);
-    values.forEach((v, i) => this.values[i].push(v));
+    this.values.forEach((a, i) => a.push(Number.isFinite(values[i]) ? values[i] : null));
     while (this.times.length && this.times[0] < t - WINDOW_S) {
       this.times.shift();
       this.values.forEach(a => a.shift());
     }
-    values.forEach((v, i) => { this.latest[i].textContent = v.toFixed(this.digits); });
+    this.latest.forEach((element, i) => {
+      const value = Number.isFinite(values[i]) ? values[i].toFixed(this.digits) : '--';
+      element.textContent = value + (this.axes.length > 1 ? ' ' + this.seriesUnits[i] : '');
+    });
   }
 
   clear() {
@@ -102,35 +121,39 @@ export class StripChart {
       key.style.background = colors.series[+key.dataset.series];
     });
     const { g, w, h } = fitCanvas(this.canvas);
-    if (w < 60 || h < 40) return;
-    const x0 = PAD_LEFT, x1 = w - PAD_RIGHT, y0 = PAD_TOP, y1 = h - PAD_BOTTOM;
+    const dualAxis = this.axes.length > 1;
+    if (w < (dualAxis ? 120 : 60) || h < 40) return;
+    const x0 = PAD_LEFT, x1 = w - (dualAxis ? PAD_LEFT : PAD_RIGHT), y0 = dualAxis ? 18 : PAD_TOP, y1 = h - PAD_BOTTOM;
 
     // y-range: the data, widened to at least minSpan, on round numbers.
-    let lo = Infinity, hi = -Infinity;
-    for (const a of this.values) for (const v of a) { if (v < lo) lo = v; if (v > hi) hi = v; }
-    if (!isFinite(lo)) { lo = -this.minSpan / 2; hi = this.minSpan / 2; }
-    if (hi - lo < this.minSpan) { const mid = (hi + lo) / 2; lo = mid - this.minSpan / 2; hi = mid + this.minSpan / 2; }
-    const step = niceStep((hi - lo) / 3);
-    lo = Math.floor(lo / step) * step;
-    hi = Math.ceil(hi / step) * step;
+    const ranges = this.axes.map((axis, i) => axisRange(this.values.filter((_, j) => this.seriesAxes[j] === i), axis.minSpan));
 
     const tEnd = this.times.length ? this.times[this.times.length - 1] : 0;
     const X = t => x1 - (tEnd - t) / WINDOW_S * (x1 - x0);
-    const Y = v => y1 - (v - lo) / (hi - lo) * (y1 - y0);
+    const axisY = (v, axis) => y1 - (v - ranges[axis].lo) / (ranges[axis].hi - ranges[axis].lo) * (y1 - y0);
+    const Y = (v, series) => axisY(v, this.seriesAxes[series]);
 
     // Grid: solid hairlines, one step off the panel colour. Zero a touch stronger.
     g.font = '11px ' + getComputedStyle(document.body).fontFamily;
     g.textBaseline = 'middle';
     g.lineWidth = 1;
-    const tickDigits = Math.max(0, -Math.floor(Math.log10(step) + 1e-9));
-    for (let v = lo; v <= hi + step / 2; v += step) {
-      const y = Math.round(Y(v)) + 0.5;
-      g.strokeStyle = Math.abs(v) < step / 2 ? colors.axis : colors.grid;
-      g.beginPath(); g.moveTo(x0, y); g.lineTo(x1, y); g.stroke();
-      g.fillStyle = colors.muted;
-      g.textAlign = 'right';
-      g.fillText(v.toFixed(tickDigits), x0 - 6, y);
-    }
+    ranges.forEach(({ lo, hi, step }, axis) => {
+      const tickDigits = Math.max(0, -Math.floor(Math.log10(step) + 1e-9));
+      const color = dualAxis ? colors.series[this.seriesAxes.indexOf(axis)] : colors.muted;
+      for (let v = lo; v <= hi + step / 2; v += step) {
+        const y = Math.round(axisY(v, axis)) + 0.5;
+        g.strokeStyle = axis === 0 ? Math.abs(v) < step / 2 ? colors.axis : colors.grid : color;
+        g.beginPath(); g.moveTo(axis === 0 ? x0 : x1, y); g.lineTo(axis === 0 ? x1 : x1 + 4, y); g.stroke();
+        g.fillStyle = color;
+        g.textAlign = axis === 0 ? 'right' : 'left';
+        g.fillText(v.toFixed(tickDigits), axis === 0 ? x0 - 6 : x1 + 6, y);
+      }
+      if (dualAxis) {
+        g.fillStyle = color;
+        g.textAlign = axis === 0 ? 'right' : 'left';
+        g.fillText(this.axes[axis].unit, axis === 0 ? x0 - 6 : x1 + 6, 7);
+      }
+    });
     g.textBaseline = 'alphabetic';
     for (let s = 0; s <= WINDOW_S; s += 10) {
       const x = X(tEnd - s);
@@ -146,9 +169,12 @@ export class StripChart {
       if (a.length < 2) return;
       g.strokeStyle = colors.series[i];
       g.beginPath();
+      let connected = false;
       for (let k = 0; k < a.length; k++) {
-        const x = X(this.times[k]), y = Y(a[k]);
-        if (k) g.lineTo(x, y); else g.moveTo(x, y);
+        if (!Number.isFinite(a[k])) { connected = false; continue; }
+        const x = X(this.times[k]), y = Y(a[k], i);
+        if (connected) g.lineTo(x, y); else g.moveTo(x, y);
+        connected = true;
       }
       g.stroke();
     });
@@ -168,10 +194,11 @@ export class StripChart {
     g.lineWidth = 1;
     g.beginPath(); g.moveTo(Math.round(x) + 0.5, y0); g.lineTo(Math.round(x) + 0.5, y1); g.stroke();
     this.values.forEach((a, i) => {
+      if (!Number.isFinite(a[k])) return;
       g.fillStyle = colors.panel;          // ring in the surface colour keeps the dot readable on a crossing
-      g.beginPath(); g.arc(x, Y(a[k]), 6, 0, 2 * Math.PI); g.fill();
+      g.beginPath(); g.arc(x, Y(a[k], i), 6, 0, 2 * Math.PI); g.fill();
       g.fillStyle = colors.series[i];
-      g.beginPath(); g.arc(x, Y(a[k]), 4, 0, 2 * Math.PI); g.fill();
+      g.beginPath(); g.arc(x, Y(a[k], i), 4, 0, 2 * Math.PI); g.fill();
     });
 
     // Tooltip: value first and strong, name after it. Built with textContent.
@@ -188,9 +215,9 @@ export class StripChart {
       const key = document.createElement('i');
       key.style.background = colors.series[i];
       const value = document.createElement('b');
-      value.textContent = a[k].toFixed(this.digits);
+      value.textContent = Number.isFinite(a[k]) ? a[k].toFixed(this.digits) : '--';
       const name = document.createElement('span');
-      name.textContent = (this.series.length > 1 ? this.series[i] + ' ' : '') + this.unit;
+      name.textContent = (this.series.length > 1 ? this.series[i] + ' ' : '') + this.seriesUnits[i];
       line.append(key, value, name);
       tip.append(line);
     });

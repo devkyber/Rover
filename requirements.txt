@@ -1,5 +1,6 @@
 # Jetson runtime; GStreamer Python bindings come from JetPack/system packages.
-# The laptop station uses only the Python standard library.
+# The basic laptop dashboard uses the standard library; Clegg plotting uses
+# tools/requirements-laptop.txt in its own laptop virtual environment.
 numpy<2
 pyserial
 spidev==3.8; sys_platform == "linux"

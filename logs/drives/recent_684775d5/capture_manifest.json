@@ -1,0 +1,139 @@
+{
+  "method": "Read only /proc and bounded existing file tails; no sockets, serial, control commands or actuator motion requested. Raw extracted records retain original bytes. Partial first/last lines are omitted from JSONL tails. CSV snapshots retain their header. Live source files may append.",
+  "session": "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a",
+  "processes": [
+    {
+      "pid": 89835,
+      "cmdline": "python rover_main.py --tag field ",
+      "session_fds": [
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/metadata.json",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/events.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/commands.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/jumper/commands.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/jumper/events.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/telemetry_0015.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/jumper/telemetry_0015.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/system_0015.csv",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/sensors_0013.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/jumper/scout_1/telemetry_0015.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/jumper/scout_2/telemetry_0015.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/jumper/scout_1/events.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/jumper/scout_2/commands.jsonl",
+        "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/jumper/scout_2/events.jsonl"
+      ]
+    }
+  ],
+  "source_hashes": {
+    "rover/config.py": {
+      "sha256": "89bc9913d055b647e7b95519c1c4dc37a7605e055900cd452b377c1b06641a2e",
+      "bytes": 34309
+    },
+    "rover/pico_link.py": {
+      "sha256": "4e6e854db133028ae5d348cad66645dec1edb3def37e5390cbd12fc6420c2dfe",
+      "bytes": 21554
+    },
+    "rover/station_link.py": {
+      "sha256": "ab2ec8ee93b75883b11e6e7cb3e2342341e0622f655563d3145daa3f9759aac4",
+      "bytes": 21885
+    },
+    "station/web/drive.js": {
+      "sha256": "12539d3c165be591467f2bd13da1dbf6207a03937e124ab330c4f48304a0c5ec",
+      "bytes": 11902
+    },
+    "station/web/main.js": {
+      "sha256": "79727549df04b376d6de194605525331149fe864ebc2540c4d7c4e6ec42c1a4e",
+      "bytes": 51559
+    },
+    "station/web/link.js": {
+      "sha256": "f0184261319ea8d3df1924ab8c78881c7f37fd2ba9983b3aff07ef356c7e2dd7",
+      "bytes": 3804
+    }
+  },
+  "remote_uptime_s": 7076.48,
+  "files": [
+    {
+      "source_path": "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/commands.jsonl",
+      "source_size_at_open": 51468071,
+      "read_offset": 49370919,
+      "read_bytes": 2097152,
+      "read_sha256": "73b8347814c593ef6602b99e731e29771b90ade0f19cd81674c9cdb737bd3cb7",
+      "kept_offset": 49371048,
+      "kept_source_bytes": 2097023,
+      "extracted_sha256": "13982946f387831bcab96cc07deb45121961cf493cbf221c90be4c0f1bb3bf86",
+      "csv_header_prepended": false,
+      "extracted_path": "rover/commands.jsonl"
+    },
+    {
+      "source_path": "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/events.jsonl",
+      "source_size_at_open": 12021,
+      "read_offset": 0,
+      "read_bytes": 12021,
+      "read_sha256": "2119de9631e426c9479443af2690406fee0f88a1a45042b790fde301e5b25480",
+      "kept_offset": 0,
+      "kept_source_bytes": 12021,
+      "extracted_sha256": "2119de9631e426c9479443af2690406fee0f88a1a45042b790fde301e5b25480",
+      "csv_header_prepended": false,
+      "extracted_path": "rover/events.jsonl"
+    },
+    {
+      "source_path": "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/metadata.json",
+      "source_size_at_open": 517397,
+      "read_offset": 0,
+      "read_bytes": 517397,
+      "read_sha256": "ce3928c68e7a7db477a42d48ef59d20e9903f2d57b0f7acbd3248179a7a934e6",
+      "kept_offset": 0,
+      "kept_source_bytes": 517397,
+      "extracted_sha256": "ce3928c68e7a7db477a42d48ef59d20e9903f2d57b0f7acbd3248179a7a934e6",
+      "csv_header_prepended": false,
+      "extracted_path": "metadata.json"
+    },
+    {
+      "source_path": "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/telemetry_0015.jsonl",
+      "source_size_at_open": 32975750,
+      "read_offset": 24587142,
+      "read_bytes": 8388608,
+      "read_sha256": "88eecc3239bbdceb23190c2e75ef40453b3cb0da47db0f702f2658c27adc0a79",
+      "kept_offset": 24593382,
+      "kept_source_bytes": 8382368,
+      "extracted_sha256": "498e64da5196d3e2543f384e29fac72582705044df71f8912ee22671df28e8e5",
+      "csv_header_prepended": false,
+      "extracted_path": "rover/telemetry_0015.jsonl"
+    },
+    {
+      "source_path": "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/system_0013.csv",
+      "source_size_at_open": 1364486,
+      "read_offset": 0,
+      "read_bytes": 1364486,
+      "read_sha256": "77362e3a9bffea4a5ebf4514fd84979ac3c367c0c8795db18b5146340f66cd7c",
+      "kept_offset": 0,
+      "kept_source_bytes": 1364486,
+      "extracted_sha256": "77362e3a9bffea4a5ebf4514fd84979ac3c367c0c8795db18b5146340f66cd7c",
+      "csv_header_prepended": false,
+      "extracted_path": "rover/system_0013.csv"
+    },
+    {
+      "source_path": "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/system_0014.csv",
+      "source_size_at_open": 1353464,
+      "read_offset": 0,
+      "read_bytes": 1353464,
+      "read_sha256": "4586569ea5c9c4d957ec728c53656efd88684c02216e6932d95a8ea56f210b73",
+      "kept_offset": 0,
+      "kept_source_bytes": 1353464,
+      "extracted_sha256": "4586569ea5c9c4d957ec728c53656efd88684c02216e6932d95a8ea56f210b73",
+      "csv_header_prepended": false,
+      "extracted_path": "rover/system_0014.csv"
+    },
+    {
+      "source_path": "/home/taeholee/Rover/logs/sessions/19700101T012437.628624Z_684775d574ad45d0a7eb_f607409a/rover/system_0015.csv",
+      "source_size_at_open": 1317158,
+      "read_offset": 0,
+      "read_bytes": 1317158,
+      "read_sha256": "82c5010eb7adfc7ccf071903f964da8946d0ada1b86210c9713bf80b3cbd4b0a",
+      "kept_offset": 0,
+      "kept_source_bytes": 1317158,
+      "extracted_sha256": "82c5010eb7adfc7ccf071903f964da8946d0ada1b86210c9713bf80b3cbd4b0a",
+      "csv_header_prepended": false,
+      "extracted_path": "rover/system_0015.csv"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "BUILD.json": {
+    "sha256": "1d4a5c7346b49d66226d5c949f926aead550afc78ed0c011680258033255a730",
+    "bytes": 3185
+  },
+  "build_wifi.sh": {
+    "sha256": "6315fbbd170cf80cf30ae2465eb24eb3a410f0940456f33657b7fa8b1dc5e23f",
+    "bytes": 2416
+  },
+  "compiled_source.json": {
+    "sha256": "5da266495dd78d60bf2a419fc31d3ea52a3d13d7a5404f96b50a82485c18f0d6",
+    "bytes": 8247
+  },
+  "image_info.txt": {
+    "sha256": "21ca6f5e7e7ca70a477f1c354af452ea4fcbf1a22773e5ce91405c3eb7b941a6",
+    "bytes": 668
+  },
+  "jumping_scout.bin": {
+    "sha256": "293dac4d98e688be1bb56284b71e7195b4cdc073f4c518859e15455426df79d7",
+    "bytes": 822752
+  },
+  "partition-table.bin": {
+    "sha256": "f2341f1dffb5e6a930920548e5c1d2555e50dd089518c9a7a073f2ee168ef26b",
+    "bytes": 3072
+  },
+  "README.md": {
+    "sha256": "953f4399a4c61ff5e10a480dab9b01dfc3791e05875f7e8047d3389196efaba5",
+    "bytes": 2465
+  },
+  "sdkconfig": {
+    "sha256": "3e2d23dfc8836b953a0bea7d54263501ca9e920a54fc7bf20ca913391e60ac9a",
+    "bytes": 73492
+  },
+  "SOURCE.json": {
+    "sha256": "f508511226a813419862cd7c34a8f5cfbf65eb42ecea1a934adabb63e3ff097c",
+    "bytes": 15280
+  }
+}

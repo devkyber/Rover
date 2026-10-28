@@ -20,7 +20,9 @@ Sign convention: a sensor lying flat reads accel = [0, 0, +g]. It
 measures SPECIFIC FORCE (the reaction pushing up against gravity), not
 the gravity vector. The ESKF assumes this everywhere.
 """
+from copy import deepcopy
 import hashlib
+import math
 from pathlib import Path
 import time
 
@@ -219,6 +221,11 @@ class ArduinoIMU:
 class IMUError(RuntimeError):
     """Acquisition failed; restart the reader and stationary alignment."""
 
+
+class IMUSampleError(IMUError):
+    """A sample interval was lost; realign, but keep the healthy reader open."""
+
+
 class RealIMU:
     """
     BMI088 SPI reader. read() drains every queued gyro frame and returns
@@ -231,8 +238,13 @@ class RealIMU:
     phase uncertainty (plus bus/scheduling delay). It is not hardware sync.
     Accel is the latest 40 Hz low-pass reading, held across the batch.
 
-    Fail closed on reset/config drift, stale accel, FIFO overrun, clipping,
-    excessive gap or transport error. No automatic reset/hidden lost motion.
+    Invalid batches never reach the estimator. Clipping, FIFO loss and
+    inconsistent clock/count evidence explicitly report rejected intervals.
+    A slow read alone is diagnostic, not proof of sample loss: retained FIFO
+    rates keep their original count-snapshot timestamp and elapsed interval.
+    The delivery service separately reports original sample age and backlog.
+    Identity/configuration, stopped sensor clock and transport faults still
+    require a full reopening. No estimate may span either kind of fault.
     sensor_frame=True is for bench diagnostics ONLY and reports that frame.
     """
     def __init__(self, *, sensor_frame=False, spi_factory=None,
@@ -242,10 +254,24 @@ class RealIMU:
         self._closed = False
         self._fault = None
         self.n_parsed = self.n_frames = self.n_bad = 0
+        self.n_resync = 0
+        self._last_rejection = None
+        self._last_rejected_batch = None
+        self._batch_trace = {}
+        self._last_health_check = None
+        self._saturation_raw_limit = 32760
         self._max_gap = 0.0
+        self._slow_reads = 0
+        self._acquisition_latency = self._max_acquisition_latency = 0.0
+        self._delivery_lag = self._max_delivery_lag = 0.0
+        self._fifo_timestamp_uncertainty = self._accel_gyro_skew = 0.0
+        self._previous_count_read_width = 0.0
+        self._timing_tolerated_batches = 0
         self._startup_discarded = 0
         self._startup_id_mismatches = 0
         self._last_tick = None
+        self._previous_accel_host = None
+        self._previous_accel_read_width = 0.0
         self._ticks = 0
         self.frame = 'bmi088_sensor' if sensor_frame else 'body'
         matrix = np.eye(3) if sensor_frame else config.BMI088_IMU_TO_BODY
@@ -351,94 +377,209 @@ class RealIMU:
 
     def _health(self):
         # Burst adjacent registers to bound SPI ioctl overhead at 100 Hz.
-        acc_status = self._read(self.acc, 0, 4)
-        gyro_status = self._read(self.gyr, 0, 18)
-        if (acc_status[0], gyro_status[0]) != (0x1E, 0x0F):
-            raise IMUError("BMI088 chip identity lost during acquisition")
-        if acc_status[2] != 0:
-            raise IMUError("BMI088 accelerometer error flag")
-        if (gyro_status[0x0F] != self._gyr_range
-                or gyro_status[0x10] & 0x7F != config.BMI088_GYRO_BANDWIDTH
-                or gyro_status[0x11] != 0):
-            raise IMUError("BMI088 gyro config/reset")
-        expected = ((self.acc, 0x7C, [0, 4]),
-                    (self.acc, 0x40, [config.BMI088_ACCEL_CONF, self._acc_range]),
-                    (self.gyr, 0x3E, [0x40]))
-        for dev, address, values in expected:
-            actual = self._read(dev, address, len(values))
-            if actual != values:
-                raise IMUError(f"BMI088 config/reset at 0x{address:02X}: {actual} != {values}")
+        # Capture facts from these existing reads, never perform diagnostic
+        # SPI transfers. A failed/partial check must not appear as a pass.
+        check = {'started_host_s': self._clock(), 'passed': False, 'registers': {}}
+        self._last_health_check = check
+        try:
+            acc_status = self._read(self.acc, 0, 4)
+            check.update(accel_chip_id=acc_status[0], accel_error=acc_status[2])
+            gyro_status = self._read(self.gyr, 0, 18)
+            check.update(gyro_chip_id=gyro_status[0], gyro_range=gyro_status[0x0F],
+                         gyro_bandwidth=gyro_status[0x10], gyro_mode=gyro_status[0x11])
+            if (acc_status[0], gyro_status[0]) != (0x1E, 0x0F):
+                raise IMUError("BMI088 chip identity lost during acquisition")
+            if acc_status[2] != 0:
+                raise IMUError("BMI088 accelerometer error flag")
+            if (gyro_status[0x0F] != self._gyr_range
+                    or gyro_status[0x10] & 0x7F != config.BMI088_GYRO_BANDWIDTH
+                    or gyro_status[0x11] != 0):
+                raise IMUError("BMI088 gyro config/reset")
+            expected = ((self.acc, 0x7C, [0, 4]),
+                        (self.acc, 0x40, [config.BMI088_ACCEL_CONF, self._acc_range]),
+                        (self.gyr, 0x3E, [0x40]))
+            for dev, address, values in expected:
+                actual = self._read(dev, address, len(values))
+                name = 'accel' if dev is self.acc else 'gyro'
+                check['registers'][f'{name}_0x{address:02X}'] = actual
+                if actual != values:
+                    raise IMUError(f"BMI088 config/reset at 0x{address:02X}: {actual} != {values}")
+            check['passed'] = True
+            return check
+        finally:
+            check['finished_host_s'] = self._clock()
+
+    def _record_rejection(self, exc):
+        """Bounded sensor-frame evidence from this read, before recovery."""
+        trace = self._batch_trace
+        now = self._clock()
+        raw = {}
+        for name in ('accel', 'gyro'):
+            values = trace.get(name + '_raw')
+            if values is None:
+                raw[name] = None  # Rejected before this transfer; not zero.
+                continue
+            rows = np.asarray(values).reshape(-1, 3)
+            clipped = np.abs(rows) >= self._saturation_raw_limit
+            raw[name] = {'frames': len(rows), 'first': rows[0].tolist(),
+                         'last': rows[-1].tolist(), 'min': rows.min(axis=0).tolist(),
+                         'max': rows.max(axis=0).tolist(),
+                         'saturated_axis_counts': clipped.sum(axis=0).tolist(),
+                         'saturated_frames': int(np.any(clipped, axis=1).sum())}
+        diagnostic = {k: v for k, v in trace.items() if not k.endswith('_raw')}
+        diagnostic.update(
+            schema=1, rejection_id=self.n_bad + 1, accepted_batches_before=self.n_parsed,
+            rejected_host_s=now, reason=str(exc)[:240], raw_sensor_axes=raw,
+            saturation_threshold_raw=self._saturation_raw_limit,
+            accel_range_g=config.BMI088_ACCEL_RANGE_G,
+            gyro_range_dps=config.BMI088_GYRO_RANGE_DPS,
+            acquisition_latency_s=now - trace['started_host_s'],
+            latest_health_check=self._last_health_check)
+        self._last_rejected_batch = deepcopy(diagnostic)
 
     def read(self):
         if self._closed or self._fault:
             raise IMUError(f"BMI088 reader unavailable: {self._fault or 'closed'}")
         try:
-            return self._acquire()
+            try:
+                return self._acquire()
+            except IMUSampleError as exc:
+                # This does not reset either sensor or change its ranges.
+                # Check identity/configuration before touching the FIFO. A
+                # real bus/reset fault during recovery takes the fatal path.
+                self._record_rejection(exc)
+                try:
+                    self._health()
+                finally:
+                    self._last_rejected_batch['recovery_health_check'] = deepcopy(self._last_health_check)
+                self._write(self.gyr, 0x3E, 0x40)
+                self._previous_host = self._clock()
+                self._previous_count_read_width = 0.0
+                self._last_tick = None
+                self._previous_accel_host = None
+                self._previous_accel_read_width = 0.0
+                self._ticks = 0
+                self.n_bad += 1
+                self.n_resync += 1
+                self._last_rejection = str(exc)
+                raise
+        except IMUSampleError:
+            raise
         except (OSError, RuntimeError, ValueError) as exc:
+            if (self._last_rejected_batch is not None
+                    and self._last_rejected_batch['rejection_id'] == self.n_bad + 1):
+                self._last_rejected_batch['recovery_error'] = str(exc)[:240]
+            else:
+                self._record_rejection(exc)
             self.n_bad += 1
             self._fault = str(exc)
             raise IMUError(f"BMI088 stopped: {exc}; restart and realign") from exc
 
     def _acquire(self):
         start = self._clock()
-        if self.n_parsed == 0 and start - self._previous_host > config.BMI088_MAX_GAP_S:
-            # Camera/link/log setup can take seconds after construction.
-            # The first estimator sample starts acquisition; data preceding
-            # it is startup history, not part of an integrated interval.
-            self._health()
-            self._startup_discarded = self._read(self.gyr, 0x0E)[0] & 0x7F
-            self._write(self.gyr, 0x3E, 0x40)
-            self._previous_host = start = self._clock()
-        if start - self._previous_host > config.BMI088_MAX_GAP_S:
-            raise IMUError("acquisition gap exceeds limit")
-        self._health()
+        self._batch_trace = {'started_host_s': start, 'previous_fifo_host_s': self._previous_host,
+                             'previous_sensor_tick': self._last_tick}
+        trace = self._batch_trace
+        trace['health_before'] = self._health()
         deadline = start + config.BMI088_READ_TIMEOUT_S
         while True:
             before = self._clock()
             status = self._read(self.gyr, 0x0E)[0]
-            host = (before + self._clock()) / 2.0
+            after = self._clock()
+            host = (before + after) / 2.0
+            count_read_width = after - before
             count = status & 0x7F
+            trace.update(fifo_status=status, fifo_count=count, fifo_host_s=host,
+                         fifo_count_read_width_s=count_read_width,
+                         previous_fifo_count_read_width_s=self._previous_count_read_width,
+                         dt_s=host - self._previous_host,
+                         expected_fifo_count=(host - self._previous_host) * config.IMU_RATE_HZ)
             if status & 0x80 or count >= 100:
-                raise IMUError("gyro FIFO overflow/full; motion was lost")
+                raise IMUSampleError("gyro FIFO overflow/full; motion was lost")
             if count and self._read(self.acc, 3)[0] & 0x80:
                 break
             if self._clock() >= deadline:
                 raise IMUError("timeout waiting for fresh gyro/accel")
             self._sleep(0.0002)
         dt = host - self._previous_host
-        if not 0 < dt <= config.BMI088_MAX_GAP_S:
-            raise IMUError("invalid host acquisition interval")
-        # +/- two frames covers count-snapshot phase and startup. Larger
-        # discrepancy indicates a stall/reset/rate error, not a scale fix.
-        if abs(count - dt * config.IMU_RATE_HZ) > 2.0:
-            raise IMUError("gyro FIFO count inconsistent with host elapsed time")
+        if not math.isfinite(dt) or dt <= 0:
+            raise IMUSampleError("invalid host acquisition interval")
+        # The actual snapshot can fall anywhere within each SPI-call bracket.
+        # Midpoint elapsed time therefore has both half-widths of uncertainty.
+        # A slow call widens measured timestamp uncertainty; it is not itself
+        # evidence of lost FIFO frames. Keep coherent data and its brackets.
+        phase = config.BMI088_FIFO_PHASE_TOLERANCE_FRAMES
+        timing_slack = config.IMU_RATE_HZ * (count_read_width + self._previous_count_read_width) / 2.0
+        mismatch = abs(count - dt * config.IMU_RATE_HZ)
+        trace.update(fifo_count_mismatch=mismatch, fifo_count_tolerance=phase + timing_slack)
+        if (not math.isfinite(count_read_width) or count_read_width < 0
+                or mismatch > phase + timing_slack):
+            raise IMUSampleError("gyro FIFO count inconsistent with host elapsed time")
         gyro_bytes = self._read(self.gyr, 0x3F, count * 6)
         gyro_raw = np.frombuffer(bytes(gyro_bytes), dtype='<i2').reshape(count, 3).astype(int)
+        trace['gyro_raw'] = gyro_raw
         before = self._clock()
         accel_bytes = self._read(self.acc, 0x12, 9)
-        accel_host = (before + self._clock()) / 2.0
+        after = self._clock()
+        accel_host = (before + after) / 2.0
+        accel_read_width = after - before
         accel_raw = np.frombuffer(bytes(accel_bytes[:6]), dtype='<i2').astype(int)
         tick = int.from_bytes(bytes(accel_bytes[6:]), 'little')
+        trace.update(accel_raw=accel_raw, accel_host_s=accel_host, sensor_tick=tick)
+        if (not math.isfinite(accel_host) or not math.isfinite(accel_read_width)
+                or accel_read_width < 0):
+            raise IMUError("invalid accel acquisition timestamp bracket")
         if self._last_tick is not None:
             delta = (tick - self._last_tick) & 0xFFFFFF
-            if delta == 0 or delta * 39.0625e-6 > config.BMI088_MAX_GAP_S * 1.5:
-                raise IMUError("accel sensor clock stopped/reset or excessive gap")
+            tick_period = 39.0625e-6
+            sensor_interval = delta * tick_period
+            host_interval = accel_host - self._previous_accel_host
+            # Distinguish a stopped/reset clock from a long, observed interval.
+            # Use the sensor-clock allowance and actual SPI-call brackets;
+            # elapsed wall time alone does not invalidate a coherent clock.
+            tolerance = (config.BMI088_SENSOR_CLOCK_TOLERANCE_S
+                         + (accel_read_width + self._previous_accel_read_width) / 2.
+                         + tick_period)
+            trace.update(sensor_tick_delta=delta, sensor_interval_s=sensor_interval,
+                         accel_host_interval_s=host_interval, sensor_clock_tolerance_s=tolerance)
+            if (delta == 0 or not math.isfinite(host_interval) or host_interval <= 0
+                    or not math.isfinite(accel_read_width) or accel_read_width < 0
+                    or abs(sensor_interval - host_interval) > tolerance):
+                raise IMUError("accel sensor clock stopped/reset or inconsistent with host interval")
             self._ticks += delta
         else:
             self._ticks = tick
-        if np.any(np.abs(gyro_raw) >= 32760) or np.any(np.abs(accel_raw) >= 32760):
-            raise IMUError("sensor saturation (near full-scale)")
+        if (np.any(np.abs(gyro_raw) >= self._saturation_raw_limit)
+                or np.any(np.abs(accel_raw) >= self._saturation_raw_limit)):
+            raise IMUSampleError("sensor saturation (near full-scale)")
         temp = self._read(self.acc, 0x22, 2)
         value = (temp[0] << 3) | (temp[1] >> 5)
         temperature = 23.0 + (value - 2048 if value >= 1024 else value) * 0.125
         # Detect reset/config changes during acquisition before publishing.
-        self._health()
-        if self._read(self.gyr, 0x0E)[0] & 0x80:
-            raise IMUError("gyro FIFO overrun during read")
-        if self._clock() - start > config.BMI088_READ_TIMEOUT_S:
-            raise IMUError("SPI acquisition latency exceeds limit")
+        trace['health_after'] = self._health()
+        trace['fifo_status_after'] = self._read(self.gyr, 0x0E)[0]
+        if trace['fifo_status_after'] & 0x80:
+            raise IMUSampleError("gyro FIFO overrun during read")
+        # READ_TIMEOUT bounds waiting for fresh data above. Total wall-clock
+        # duration also contains scheduler pauses and post-capture health
+        # checks; it cannot establish that already acquired frames were lost.
+        # Keep the acquisition stamp (never re-stamp on delivery). FIFO/count,
+        # sensor-clock, overflow and health checks still decide integrity;
+        # IMUService reports original sample age without delivery restamping.
+        finished = self._clock()
+        self._acquisition_latency = finished - start
+        self._delivery_lag = finished - host
+        self._fifo_timestamp_uncertainty = count_read_width / 2.0
+        self._accel_gyro_skew = accel_host - host
+        self._max_acquisition_latency = max(self._max_acquisition_latency, self._acquisition_latency)
+        self._max_delivery_lag = max(self._max_delivery_lag, self._delivery_lag)
+        self._slow_reads += int(self._acquisition_latency > config.BMI088_READ_TIMEOUT_S)
         rates = (gyro_raw * self._gyr_scale) @ self._rotation.T
         self._previous_host, self._last_tick = host, tick
+        self._previous_accel_host = accel_host
+        self._previous_accel_read_width = accel_read_width
+        self._previous_count_read_width = count_read_width
+        self._timing_tolerated_batches += int(mismatch > phase)
         self.n_parsed += 1
         self.n_frames += count
         self._max_gap = max(self._max_gap, dt)
@@ -447,6 +588,10 @@ class RealIMU:
                 'gyro': rates.mean(axis=0), 'frame': self.frame,
                 'dt': dt, 'gyro_samples': rates.tolist(),
                 'accel_timestamp': accel_host, 'temperature_c': temperature,
+                'acquisition_latency_s': self._acquisition_latency,
+                'delivery_lag_s': self._delivery_lag,
+                'fifo_timestamp_uncertainty_s': self._fifo_timestamp_uncertainty,
+                'accel_gyro_skew_s': self._accel_gyro_skew,
                 'sensor_tick': tick, 'accel_raw': accel_raw.tolist(),
                 'gyro_raw': gyro_raw.tolist(), 'source': 'bmi088'}
 
@@ -459,7 +604,8 @@ class RealIMU:
         except PackageNotFoundError:
             spi_version = None
         sources = {}
-        for name in ('imu_reader.py', 'config.py', 'odometry.py', 'eskf.py', 'logger.py'):
+        for name in ('imu_reader.py', 'imu_service.py', 'rover_main.py', 'config.py',
+                     'odometry.py', 'eskf.py', 'logger.py'):
             path = Path(__file__).with_name(name)
             data = path.read_bytes()
             sources[name] = {'sha256': hashlib.sha256(data).hexdigest(),
@@ -475,15 +621,28 @@ class RealIMU:
                 'gyro_bandwidth': config.BMI088_GYRO_BANDWIDTH,
                 'accel_range_g': config.BMI088_ACCEL_RANGE_G,
                 'gyro_range_dps': config.BMI088_GYRO_RANGE_DPS,
+                'sensor_clock_tolerance_s': config.BMI088_SENSOR_CLOCK_TOLERANCE_S,
                 'gyro_timing': 'host FIFO-count intervals divided by frame count; estimated',
                 'accel_timing': 'latest filtered sample; independent unsynchronized clock',
                 'bias_removed_in_driver': False, 'scale_calibration': 'datasheet only',
                 'startup_id_mismatches': self._startup_id_mismatches,
+                'sample_loss_policy': 'reject batch, verify health, resync FIFO; new estimator generation',
+                'latency_policy': 'measured SPI-call brackets included in count/clock coherence gates; elapsed time alone does not reject retained FIFO data; original acquisition time retained',
                 'sources': sources}
 
     def stats(self):
         return {'parsed': self.n_parsed, 'gyro_frames': self.n_frames,
-                'bad': self.n_bad, 'dropped': None if self._fault else 0, 'stale': 0,
+                'timing_tolerated_batches': self._timing_tolerated_batches,
+                'bad': self.n_bad, 'dropped': None if self.n_bad else 0, 'stale': 0,
+                'resyncs': self.n_resync, 'last_rejection': self._last_rejection,
+                'last_rejected_batch': deepcopy(self._last_rejected_batch),
+                'slow_reads': self._slow_reads,
+                'acquisition_latency_s': self._acquisition_latency,
+                'max_acquisition_latency_s': self._max_acquisition_latency,
+                'delivery_lag_s': self._delivery_lag,
+                'max_delivery_lag_s': self._max_delivery_lag,
+                'fifo_timestamp_uncertainty_s': self._fifo_timestamp_uncertainty,
+                'accel_gyro_skew_s': self._accel_gyro_skew,
                 'startup_fifo_discarded': self._startup_discarded,
                 'startup_id_mismatches': self._startup_id_mismatches,
                 'max_gap_s': self._max_gap, 'fault': self._fault}

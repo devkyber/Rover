@@ -1,0 +1,881 @@
+{
+  "digest_method": "SHA256 of sorted UTF-8 path+NUL+sha256+NUL+decimal_bytes+LF rows; CONTEST_RELEASE, results and receipts excluded",
+  "source_tree_sha256": "8869c2d45e6b6c8dc2736b6a4820ab1060bfc6fbf78e8f3fdb94f1d21e11decf",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "d26ce947d042682b8e54e857821175274f69687778fb1af59391b50c39ec3435",
+      "bytes": 607
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "8b10091f2fce1b74e686ef2bca1028bb061736006af868d856a8c9ec90263c93",
+      "bytes": 336
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a518c4e55f74034073e40e7466cf4dd2e4795bc0911186720e12b27b393e2b95",
+      "bytes": 2306
+    },
+    {
+      "path": "README.md",
+      "sha256": "9180b0a4e9bb74d4689c27f66307861aaf7ab03e5b157a8a2631b48a386445e1",
+      "bytes": 5703
+    },
+    {
+      "path": "docs/01_이론_오도메트리와_ESKF.md",
+      "sha256": "f5cc9b7cf2399b6a7605ad3486d0d3859b5def7c450748e709da3fb4fdde4b19",
+      "bytes": 15310
+    },
+    {
+      "path": "docs/05_한계와_로드맵.md",
+      "sha256": "6953151a90022641a63671d3750969b566f9e7ecfb2fd000b02290fef5746afd",
+      "bytes": 4593
+    },
+    {
+      "path": "docs/06_하드웨어.md",
+      "sha256": "5262088a5ec06b673e4f221588568597faeb558729a337518005e27c7d2cf3a0",
+      "bytes": 11791
+    },
+    {
+      "path": "docs/11_jetson_bringup.md",
+      "sha256": "cf2ac3de9c4b926b2c0e5a689cfdb762c00d6f11162ec868d0b46b1306d5e6cc",
+      "bytes": 9230
+    },
+    {
+      "path": "docs/13_scout_integration.md",
+      "sha256": "00ee8b056da1a378a8ea42bad9ef75c3fa16999759e0bf3a56ba2079fd0c3c57",
+      "bytes": 13183
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "ff34da73102185ff2da7f34b577a63bff8395ca05e7959d5974a0c1124d37a7c",
+      "bytes": 968
+    },
+    {
+      "path": "firmware/clegg_wireless_sdk/CMakeLists.txt",
+      "sha256": "18c36b05fea683afeadb72a2010bcd8d8b62f302cb4d2f2b2a4eab0034d04b6d",
+      "bytes": 619
+    },
+    {
+      "path": "firmware/clegg_wireless_sdk/README.md",
+      "sha256": "33ba165b068d09ae8fe7b2d31288a793533d84384c59812e0d2d5752caac4d7d",
+      "bytes": 2737
+    },
+    {
+      "path": "firmware/clegg_wireless_sdk/clegg_wireless_sdk.c",
+      "sha256": "bb7c2d58d9b4a4726cfabf4cb22668bc062b42e7a533f9b4ba5bec24c94a8756",
+      "bytes": 15750
+    },
+    {
+      "path": "firmware/clegg_wireless_sdk/nina.c",
+      "sha256": "98328e2a789679446cace15345f46240c44cc1138d6ee4b781479d2b9d042187",
+      "bytes": 13883
+    },
+    {
+      "path": "firmware/clegg_wireless_sdk/nina.h",
+      "sha256": "4817d630607be7179f3f684dafc1903268d0c03e2298f8f529f28ff89ab26262",
+      "bytes": 2626
+    },
+    {
+      "path": "firmware/pico/main.py",
+      "sha256": "7ff255e2b1ed9fc350614ffce28d77e3e1d8aaf845e1fee63702d1b4bc33f70e",
+      "bytes": 15243
+    },
+    {
+      "path": "firmware/scout/README.md",
+      "sha256": "04c73d913273e2620853d257d8ba1027ee2abd1668605b8d6eb426c2a83538d4",
+      "bytes": 767
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/BUILD.json",
+      "sha256": "1d4a5c7346b49d66226d5c949f926aead550afc78ed0c011680258033255a730",
+      "bytes": 3185
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/README.md",
+      "sha256": "953f4399a4c61ff5e10a480dab9b01dfc3791e05875f7e8047d3389196efaba5",
+      "bytes": 2465
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/SHA256.json",
+      "sha256": "b8b3adb11123a7af826885ef0126c59636269ca61860d1d5a7ed756b295e5f0b",
+      "bytes": 1145
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/SOURCE.json",
+      "sha256": "f508511226a813419862cd7c34a8f5cfbf65eb42ecea1a934adabb63e3ff097c",
+      "bytes": 15280
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/build_wifi.sh",
+      "sha256": "6315fbbd170cf80cf30ae2465eb24eb3a410f0940456f33657b7fa8b1dc5e23f",
+      "bytes": 2416
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/compiled_source.json",
+      "sha256": "5da266495dd78d60bf2a419fc31d3ea52a3d13d7a5404f96b50a82485c18f0d6",
+      "bytes": 8247
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/image_info.txt",
+      "sha256": "21ca6f5e7e7ca70a477f1c354af452ea4fcbf1a22773e5ce91405c3eb7b941a6",
+      "bytes": 668
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/jumping_scout.bin",
+      "sha256": "293dac4d98e688be1bb56284b71e7195b4cdc073f4c518859e15455426df79d7",
+      "bytes": 822752
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/partition-table.bin",
+      "sha256": "f2341f1dffb5e6a930920548e5c1d2555e50dd089518c9a7a073f2ee168ef26b",
+      "bytes": 3072
+    },
+    {
+      "path": "firmware/scout/releases/v12_4_control_link_wifi_20261024/sdkconfig",
+      "sha256": "3e2d23dfc8836b953a0bea7d54263501ca9e920a54fc7bf20ca913391e60ac9a",
+      "bytes": 73492
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/CMakeLists.txt",
+      "sha256": "9af1e81b1cc788de7518ea84958583aedf2300b632b7f99aa13e71dd8c022b4e",
+      "bytes": 110
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/board_pins.h",
+      "sha256": "c73c9bc68d315423da8b99757b44819e52c865d17aca540e61815f988833fe6d",
+      "bytes": 1684
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/CMakeLists.txt",
+      "sha256": "6f8d42700855786ef5bab3f143e704051582ba144e309411d7438a1f55ba7a89",
+      "bytes": 114
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/LICENSE.txt",
+      "sha256": "7d5b82484cc0486d9caf2c174988491c50fde1bff931aa6d123404f470a4a571",
+      "bytes": 1503
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/ORIGIN.txt",
+      "sha256": "52bf26f0243b9f03da174b8b60fc9c4cf922cf6542aa0b6822018d3be224d111",
+      "bytes": 277
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/README.md",
+      "sha256": "a33bb773cac091437953cc86a967fb491607848ff6752a779727232b7f6d9ffb",
+      "bytes": 5769
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu.h",
+      "sha256": "601969637a34ef81dcdee4ef56c0d5c000d591d867df2b797b1bd572acf9307e",
+      "bytes": 1399
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_defs.h",
+      "sha256": "2b738ec978601406536944dc5bc7212d670357ab593055685939e20869b5bba3",
+      "bytes": 21028
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_driver.c",
+      "sha256": "54fb369757735c5015047084ed244cac148fe995b09defee715024ab5df877ba",
+      "bytes": 22214
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_driver.h",
+      "sha256": "485550c4aed9d536aefff9f293b54f0b23a484c38809975bb2e798c4aa5fd7c3",
+      "bytes": 11424
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_driver_advanced.c",
+      "sha256": "e04f9bf2b3208694f37e5686cba2047c4d4ec3a8d691fbec3c5d07c78b7653df",
+      "bytes": 47909
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_driver_advanced.h",
+      "sha256": "bdb1d76855077406fe95273fca1b60db66c70647633f16e4b1de52d2a13a083c",
+      "bytes": 15207
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_edmp.c",
+      "sha256": "fd64aaebc66a3ad93b155a0ecab294e4f605c6e71823c9189ecd34f847cb54e3",
+      "bytes": 32738
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_edmp.h",
+      "sha256": "edfc5da444071f0714288b8f284e92b03fcea7f7d5814b9194e02b51766e1c0d",
+      "bytes": 15833
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_edmp_defs.h",
+      "sha256": "a4c1ec2ed84c14757355945a836a59678edf0cae813aaffa99d000694e19d88d",
+      "bytes": 1690
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_edmp_memmap.h",
+      "sha256": "4be2dbbe179b7e2834ce58a7f12e08dc4e7c12d01ff53c82174d3022b3623cb1",
+      "bytes": 23330
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_regmap_be.h",
+      "sha256": "eb48aa837742235933a085352ed2056edf97a355a50d52c5a1316ab13fe18b0e",
+      "bytes": 64255
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_regmap_le.h",
+      "sha256": "f76d63af8b2b4ca0ed60d5f4a6178405be150bc7d1f27042b11ca20707426748",
+      "bytes": 64255
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_selftest.c",
+      "sha256": "4d913c92a2d85b67c5973bd347c653bc834c0cb9bc34c9b1edcbdb4b97471fc8",
+      "bytes": 7368
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_selftest.h",
+      "sha256": "504586d6825f1b21232a74e18ab850c9b0c45c9b35caac6fbab10ad8ecc117c8",
+      "bytes": 5521
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_transport.c",
+      "sha256": "3c939d52cc61c14c30656175763f87e52cc0f75c1a987b58c7ccd385919db274",
+      "bytes": 4826
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_transport.h",
+      "sha256": "940afb19f2ddff303cb7abd10c97ad41a9734315ff8294f532e02dfcd70b334d",
+      "bytes": 4516
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/imu/inv_imu_version.h",
+      "sha256": "2fda9eff22f6501cc93fb70af476fc067fdab846ab554f1336cf1db61ed7799c",
+      "bytes": 898
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/scout_icm45605.c",
+      "sha256": "1c1c96afd7698291587fc3ac8cd10013dfa9ac4948a05d9b3199fff0762e63ad",
+      "bytes": 1247
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/components/icm45605/scout_icm45605.h",
+      "sha256": "2916dea01c81371755ecce82bf6b9a87a8ed2af16cea4621af1f483e9a322b8a",
+      "bytes": 431
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/CMakeLists.txt",
+      "sha256": "0f59e00f37eec61baa8d378a8e48540d5c562aa442dcfe9817f9f8d328f9ab8a",
+      "bytes": 460
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/Kconfig.projbuild",
+      "sha256": "6bcec8abd5eda4b1f1cb2224d677b0ca01a870e70b1109d3708a4777e1d71c9a",
+      "bytes": 378
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/actuators.c",
+      "sha256": "428dc7117804cce1e0bbaaf1c6ef498ac1d163169d354784b64ce6d9e60eb3c5",
+      "bytes": 4033
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/actuators.h",
+      "sha256": "e879591026b8cddbde37cd07a913d7ad77e75e15e7396eac61bb4a2b2ad11b38",
+      "bytes": 281
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/app_main.c",
+      "sha256": "14606ef7e512a3c35dc4f13815ec147df33b254a7ac3bfda1db190479f800e28",
+      "bytes": 16297
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/capture.c",
+      "sha256": "c821b455f6d2f985fe4cb890eb4961b965d52ffe1bfea9accde9bc5e95dbdb70",
+      "bytes": 5271
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/capture.h",
+      "sha256": "cb7fef21f604c564ff3c106185022ccf80f317341e2a0cea2115a2d13bbcfe68",
+      "bytes": 800
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/control.c",
+      "sha256": "13a146a04ae3b3a46ea23276fba652914a2937763cec5b98141ca716d1bfeb5a",
+      "bytes": 6723
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/control.h",
+      "sha256": "b8f5e431c1b4b3f1d03147225d947870f7cf4b3d0fc4aa43673fedae1f94a5c6",
+      "bytes": 2780
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/network.c",
+      "sha256": "32ba704c8f4fefa62c656d5587dd4ef2ff194baa64afbcc9267f3984e0303731",
+      "bytes": 9427
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/network.h",
+      "sha256": "b607456e2dcd848536fa45b40dedb848475e8bfbaf5315d7706f0e00b06cd49d",
+      "bytes": 201
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/protocol.c",
+      "sha256": "37d17d2939db985b849d4a25e36358f93684f2be1da7d5a165fd07197c0f6fdb",
+      "bytes": 1046
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/protocol.h",
+      "sha256": "2fbfc469cc8e089e2b3c6a886fd3a1fe1ef74d90214f1e7218f563021c78a109",
+      "bytes": 265
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/sensors.c",
+      "sha256": "1ee2ba04c1b9f58feca73529acb3bcab46dec1d7472017529fa17186d1b03b62",
+      "bytes": 15894
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/sensors.h",
+      "sha256": "af75c98ec54fabc8de89527d239f7e49d42f4b0d14af907213b4c0ca2be4ac71",
+      "bytes": 924
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/settings.c",
+      "sha256": "8c48206a4a324ec267cabe72b435f3d0d3ea34bdbaaad7dc4218e7b141f3184a",
+      "bytes": 2342
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/settings.h",
+      "sha256": "95a232848fa80305e63a7e874d682d98ee190c864e5b077fa12b97291b86e3e0",
+      "bytes": 179
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/transport.c",
+      "sha256": "0626c902ea39850e886254efbeb064baed01f185dab90359088c65c5259d8022",
+      "bytes": 15637
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/transport.h",
+      "sha256": "e66984da915d7e123847823ecffefd8b8ea559f3a8b44d34d03332387dee9da9",
+      "bytes": 822
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/urgent.c",
+      "sha256": "d15957a0c43652b3bc488f2a0742dfc17f240789964bcf2f65c46e6a4c7e2d18",
+      "bytes": 2493
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/urgent.h",
+      "sha256": "9a2d1a0984e4e97759e1af0032ff7ea83af82ab378c53f6a79a8273c6ce2fbd4",
+      "bytes": 910
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/usb_tx.c",
+      "sha256": "bb471ddacadf71eb27f59c023dad7a3e6a9075b50c8a14658c47edd79b8f2c38",
+      "bytes": 1277
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/usb_tx.h",
+      "sha256": "f21f0187545d1648e5904f9df0a468da33ac76084bef0b063aba29595f50a8d6",
+      "bytes": 1019
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/wire.c",
+      "sha256": "f04b125aa480248b0b7e6bd27079943b34aa5cb3c8cdb9fd2a53f85793dd81de",
+      "bytes": 970
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/main/wire.h",
+      "sha256": "e6543079269f46d5b99a727efe3fdb93011142e1ae542c7460d28be6ed28ddbd",
+      "bytes": 1286
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/partitions.csv",
+      "sha256": "fdc050e222f467abb9498d957cee742df18cbd551c6138a245b09a7bd2e1589e",
+      "bytes": 170
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/sdkconfig.defaults",
+      "sha256": "7d38810e496786dadc06cc09efe670ed245eda0bc246bddd3652d568272b3670",
+      "bytes": 394
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/sdkconfig.defaults.usb",
+      "sha256": "93428d98c8d729689284a6971c05a39bcb4ae0d799046ecc6b42345c096b6b7a",
+      "bytes": 24
+    },
+    {
+      "path": "firmware/scout/v12_4_control_link/esp/sdkconfig.defaults.wifi",
+      "sha256": "2fbd5f0c7633d9b8861bb0ff0988e07bb98b5334d46ed5b1d175568a14c13a45",
+      "bytes": 25
+    },
+    {
+      "path": "jetson/99-rover-serial.rules",
+      "sha256": "4cd70bb2659fa6359af2c8c931db6e9b55e85d24160c224e6ff323460c78ef95",
+      "bytes": 1347
+    },
+    {
+      "path": "jetson/install_wifi_recovery.py",
+      "sha256": "59d13dd57258fa31605dfbb8df3b327b90e78247a4544560a15a6fb979d5b413",
+      "bytes": 17246
+    },
+    {
+      "path": "jetson/rover-field.service",
+      "sha256": "ab74ab67d30888dd86e3cb57be8a294d9983299cbc0340c6f61538a95a6664a9",
+      "bytes": 471
+    },
+    {
+      "path": "jetson/rover-wifi-recover.service",
+      "sha256": "2b97a31fa934fcd47ddc08028c6a6891b665d32c49217b5a6207306e21447316",
+      "bytes": 711
+    },
+    {
+      "path": "jetson/rover-wifi-recover.timer",
+      "sha256": "be20cbe5235b2722e20602df5b5e7135682a0dd0f026a0ec0c0a354529f9a2eb",
+      "bytes": 361
+    },
+    {
+      "path": "jetson/setup_jetson.sh",
+      "sha256": "f741474810771d81a28155d783089894f2ccced3d58ef5ebfd1b3de66852af81",
+      "bytes": 3080
+    },
+    {
+      "path": "jetson/wifi_field.sh",
+      "sha256": "068118901399d1f376b5a3ae4f3d6a55b588b7cece5d711e1938fb6072729dd8",
+      "bytes": 3286
+    },
+    {
+      "path": "jetson/wifi_recover.py",
+      "sha256": "b9220466ad3e50535e33003f6e47d1de98efeeb2a0d8574a940db8b061389178",
+      "bytes": 15062
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "db5b4490b53b526eb6e6b94ae6258d321a62e0d1ce4271ca37e548518657d112",
+      "bytes": 286
+    },
+    {
+      "path": "rover/battery.py",
+      "sha256": "d53d8ab0b29c8645bcdbf71ecb8593488d67b1682d413d24f9c592397038c3f7",
+      "bytes": 1399
+    },
+    {
+      "path": "rover/camera.py",
+      "sha256": "71be777f4fc771bc369817dfdf7499b6b2614b8f439cefa436f72c4d02d28e11",
+      "bytes": 10593
+    },
+    {
+      "path": "rover/clegg.py",
+      "sha256": "bbe63b5cd949e100dbf95c4f41735d32c0318def8a8d07b595e7353bcf2ee5ed",
+      "bytes": 6352
+    },
+    {
+      "path": "rover/clegg_service.py",
+      "sha256": "aee4d02acbbaa781bc6236744bc9a8ef4eb225febed6812e0950a9567d8807fc",
+      "bytes": 42424
+    },
+    {
+      "path": "rover/config.py",
+      "sha256": "7165f307feb729a83e48942f7a759bb221d70a152fc8e34b77735ce1926fa204",
+      "bytes": 32098
+    },
+    {
+      "path": "rover/dxl_control.py",
+      "sha256": "1b86395cef3333eb44ceea0d0f1410df948177ea59bd0eda575fc8fa7f511f13",
+      "bytes": 6474
+    },
+    {
+      "path": "rover/dxl_reader.py",
+      "sha256": "0ee273f1ea17c1ec24c69dd7f333f3cf4841639ec8522db1c59611498f8b5899",
+      "bytes": 7023
+    },
+    {
+      "path": "rover/eskf.py",
+      "sha256": "1c638958c9f7ec4a17779718458a525b91c2765d0dfe8935a248605702c6e06c",
+      "bytes": 32369
+    },
+    {
+      "path": "rover/estimation_process.py",
+      "sha256": "cd0acb43a7908fc753f6338bf249acf9c081994a2615289091e0625dd75fa3e6",
+      "bytes": 32620
+    },
+    {
+      "path": "rover/hammer.py",
+      "sha256": "72a07ec21cc1cfc1fb33dbc7c765b12628b020131321cc3bcb4f08e24aa75e08",
+      "bytes": 8598
+    },
+    {
+      "path": "rover/hammer_lift.py",
+      "sha256": "6364974033460b5f20d0a3f6759303379ae04ef9f0ba17e5886164102332c512",
+      "bytes": 11815
+    },
+    {
+      "path": "rover/imu_process.py",
+      "sha256": "cbfa7a88a5519185aa00a32bc5004ed9012fdc37e17cf963e5c727ebde4124d1",
+      "bytes": 11158
+    },
+    {
+      "path": "rover/imu_reader.py",
+      "sha256": "697d37b4a4c5f948d8e48cdc197fbffd49a7a69be6f0d3ff38d44b2424b2fe9e",
+      "bytes": 34149
+    },
+    {
+      "path": "rover/imu_service.py",
+      "sha256": "62f9468ac878840723ed0afdeed6ae18da286601ccec414649db09322d6c0fbe",
+      "bytes": 13239
+    },
+    {
+      "path": "rover/jumper_service.py",
+      "sha256": "ac022b640f540d450d77e23cdf5a50531de357b955b251bfc561fce71719daa9",
+      "bytes": 36113
+    },
+    {
+      "path": "rover/learn_turn_angle.py",
+      "sha256": "0e0b18bbde7cd1c25c0deca8f424213a4c41107dc69ae4768ea365fa5b728c29",
+      "bytes": 2072
+    },
+    {
+      "path": "rover/logger.py",
+      "sha256": "24b9fe8e3108d0600405962eb9211165f76d83a159f655ad27aae7d8d6481bba",
+      "bytes": 29863
+    },
+    {
+      "path": "rover/loop_timing.py",
+      "sha256": "e291c8f5a4a4d5037c32d295444601f1134b477de46f013a6b8a2d1dba6940ce",
+      "bytes": 3906
+    },
+    {
+      "path": "rover/mission_map.py",
+      "sha256": "ca13bdff79e030ae229e0241b6aa34ec78763abc2eb3ca9fd301fad34d0e83de",
+      "bytes": 39099
+    },
+    {
+      "path": "rover/motors.py",
+      "sha256": "56b30f3bb2e1ed2dedf19dc2603eb0fcef6cd5263394362f420048b1db8cb070",
+      "bytes": 2500
+    },
+    {
+      "path": "rover/odometry.py",
+      "sha256": "9e1343629ff90a96676f9676a5d2de49dc42b30d51eaca68c4cb0f3b6b5b5ad2",
+      "bytes": 36909
+    },
+    {
+      "path": "rover/odometry_calibration.py",
+      "sha256": "c9035fac2a8e987e095e3b43159f1feb39921520d73e133e464bcb92913a7777",
+      "bytes": 10938
+    },
+    {
+      "path": "rover/pico_link.py",
+      "sha256": "4e6e854db133028ae5d348cad66645dec1edb3def37e5390cbd12fc6420c2dfe",
+      "bytes": 21554
+    },
+    {
+      "path": "rover/rover_main.py",
+      "sha256": "456832abf8d56f4e7bf6627d37d6a5ab479f8098796a62600ae2cd816325b1bc",
+      "bytes": 65891
+    },
+    {
+      "path": "rover/scout_plot_feed.py",
+      "sha256": "2b5bf8786086b3c934ab2b59d254110c1a6631bf1d1a6c81680bd9edfd53f726",
+      "bytes": 17374
+    },
+    {
+      "path": "rover/scouts.py",
+      "sha256": "4d79b7ebc81c031555b79173592d02e76f4544392f1a222ccd85fceccd80f504",
+      "bytes": 4691
+    },
+    {
+      "path": "rover/sdk_path.py",
+      "sha256": "6229ec428e1d188217cc6595f2abfba72fc497ca75fe480879e4ecb88d619a48",
+      "bytes": 983
+    },
+    {
+      "path": "rover/station_link.py",
+      "sha256": "d0b0e5a772d733d90e40e8d5439ef87649df721d0fa38cf4295f5d890ce0e5e9",
+      "bytes": 28777
+    },
+    {
+      "path": "rover/telemetry_log.py",
+      "sha256": "0840e7780d49c9e521d04fd229061882b3646e7f506c4a63dfe5fd38dc50bcca",
+      "bytes": 23260
+    },
+    {
+      "path": "rover/vendor/PATCHES.md",
+      "sha256": "992dbdf5720a96bfc1ec3691f0d4121152991f4f2a27aea713e3a3ee9a258bb6",
+      "bytes": 723
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/LICENSE.txt",
+      "sha256": "c5accbbd8546e94c34aed24afe689a617627d18eed5a6c48277e48db57c23851",
+      "bytes": 11356
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/__init__.py",
+      "sha256": "03dfd07d4a094745e2747d733ac1239f3205c8403bcea34ac4560852069be928",
+      "bytes": 1007
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/group_bulk_read.py",
+      "sha256": "d7e5d176d6ab36023c0c947b599b7e2ffe73f83fd926befb1026ef71984ba5ed",
+      "bytes": 6309
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/group_bulk_write.py",
+      "sha256": "723604c0f6bec0052b092541e6e89ce1d8266f5653ae6e48eee890a3c968b6a3",
+      "bytes": 3298
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/group_sync_read.py",
+      "sha256": "8802b859e2b8fdf1cbc2b157f42234cd616a12c1b763793c3addbd4f6ef9420f",
+      "bytes": 6077
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/group_sync_write.py",
+      "sha256": "837b1b103bff4822331f771869eef7fdd7a767d5077d5514958dd495a19ffdcd",
+      "bytes": 2752
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/packet_handler.py",
+      "sha256": "8ba41cbd2f3c7e701ae86b0b26b7f676fa46e5256bce3944591e6e9e8b65a8e4",
+      "bytes": 1213
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/port_handler.py",
+      "sha256": "c2d6e650551e57d64d23874ad9138d8a7d1fccbd8f6e0ba207380b1024d034df",
+      "bytes": 4535
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/protocol1_packet_handler.py",
+      "sha256": "98f98563c4531f791f4e473fe810b28d1def926f58762b308ff623b9dc2061fb",
+      "bytes": 18292
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/protocol2_packet_handler.py",
+      "sha256": "b67d515ec5c89c73ac9096e463253e1fb4e95f47f7a67bb598c709921ef97f3d",
+      "bytes": 32482
+    },
+    {
+      "path": "rover/vendor/dynamixel_sdk/robotis_def.py",
+      "sha256": "8b5b751973ff54ee4c039440bc7501e0ad2ffaf313387d7fad548ced0a24fa1a",
+      "bytes": 2117
+    },
+    {
+      "path": "rover/vendor/jumper/__init__.py",
+      "sha256": "24c01b031b495f14ac220810cb7e81f403355abe97c5f0d9f58b8689aeb4d69f",
+      "bytes": 262
+    },
+    {
+      "path": "rover/vendor/jumper/manager.py",
+      "sha256": "fbbc4aaeb60262c013cc4933200d0b217d7dcb9c82266f4839deefed1cd3f2d0",
+      "bytes": 12278
+    },
+    {
+      "path": "rover/vendor/jumper/scout_client.py",
+      "sha256": "5b9f38ad7c1ccca98db17ba53926949d9d4f4df961bc6ae196d2c3bec69b3eae",
+      "bytes": 44086
+    },
+    {
+      "path": "rover/video_recording.py",
+      "sha256": "ec12ab2bea76776823f3a09bbb83c6febc46b28c8d64d7b08cf78895467bd1e2",
+      "bytes": 21898
+    },
+    {
+      "path": "rover/websocket.py",
+      "sha256": "3b0f478762d07950de54d6d4447e479ececca2ba8d2af988033bf1ecb4033456",
+      "bytes": 5764
+    },
+    {
+      "path": "station/station.py",
+      "sha256": "d1466ac5d1fc6481fb5b79c4d3c068a3509f3101c81f1543c46eb389d782098f",
+      "bytes": 7668
+    },
+    {
+      "path": "station/web/battery.js",
+      "sha256": "2d540cc4c95bbc1cda1197a8e30da4754b6a22f9d5a1eac907296b1884df3d78",
+      "bytes": 637
+    },
+    {
+      "path": "station/web/clegg_release.js",
+      "sha256": "64c87181b0106b19f8eb16ae7f67e337c3a8f54733852f25ffd75478eeeda7d1",
+      "bytes": 1921
+    },
+    {
+      "path": "station/web/cylinder.js",
+      "sha256": "332f0fc5dc2f5e06fd62c8ddbb51c0f29206fa662befe6227a85dc90c96cf49c",
+      "bytes": 1575
+    },
+    {
+      "path": "station/web/drive.js",
+      "sha256": "12539d3c165be591467f2bd13da1dbf6207a03937e124ab330c4f48304a0c5ec",
+      "bytes": 11902
+    },
+    {
+      "path": "station/web/hammer.js",
+      "sha256": "e6ceb46ace9db449cb6537d90d66a2100f4b2a923c07dbd85a4c1241bb508b60",
+      "bytes": 11357
+    },
+    {
+      "path": "station/web/index.html",
+      "sha256": "b820c63434f19fa58284c963125bbb009481843f00d89afb06f14bf0c2be72a9",
+      "bytes": 30706
+    },
+    {
+      "path": "station/web/jumper.js",
+      "sha256": "39a134ce09c2211d40208330a74a588d5b6e3de1a2dd651a4db25d225445f1a4",
+      "bytes": 14699
+    },
+    {
+      "path": "station/web/link.js",
+      "sha256": "698c0f2fd565552df626e7de337f8156164f0af2433fcc40d986ce339851bd3a",
+      "bytes": 6123
+    },
+    {
+      "path": "station/web/link_policy.js",
+      "sha256": "048554eaae788d623ee4cda172487215d3e05bf2e4b4a1a9b3422c7352d51c1f",
+      "bytes": 327
+    },
+    {
+      "path": "station/web/main.js",
+      "sha256": "24b136152536ecd3bf5e4b3fa2424a2fb005153872d4526612998692a8da68a1",
+      "bytes": 51717
+    },
+    {
+      "path": "station/web/mapping.js",
+      "sha256": "9309e2bbe2f7e4840203d131a72f3a341d38277b6c23223300fe2fa25279bcf1",
+      "bytes": 25349
+    },
+    {
+      "path": "station/web/pan_reference.js",
+      "sha256": "49636417bf1aa8c5ad0bfad4f2541f266c721cc8b4e66251e51d0c33edb1d1ff",
+      "bytes": 3768
+    },
+    {
+      "path": "station/web/plots.js",
+      "sha256": "d3a2eb0fdd176bc44edfb7531ee022355d1aa8fe352c82c4ea76b7bea8387890",
+      "bytes": 9505
+    },
+    {
+      "path": "station/web/recording.js",
+      "sha256": "4fcdf2632332afd40dfc596ce7e797c5340360da7ae0be978a3da85f46bb9ac9",
+      "bytes": 4147
+    },
+    {
+      "path": "station/web/scout_landings.js",
+      "sha256": "11e5c7a97639622e3175caf521ed597f0e12302e4e14e928e8073db01041a679",
+      "bytes": 6042
+    },
+    {
+      "path": "station/web/scout_plots.js",
+      "sha256": "d320bc407fc81124ff5395210c60c052abc308f9ed9fdd9d9a5e7f7c187b29f7",
+      "bytes": 12198
+    },
+    {
+      "path": "station/web/scout_profiles.js",
+      "sha256": "d2dead46f415a23b5332432853b1da86aa7557de1c0a1f9120734c5c6336c411",
+      "bytes": 1330
+    },
+    {
+      "path": "station/web/station.css",
+      "sha256": "cf6e82342fa19175c005282beeae78e9a709af198d2c2ab3b085fa36bbc5edbf",
+      "bytes": 48201
+    },
+    {
+      "path": "station/web/ui.js",
+      "sha256": "c308589536e8795b720f38c2d8bf259896d9384bdd6125e22ba9fe809f2c3a19",
+      "bytes": 1594
+    },
+    {
+      "path": "station/web/util.js",
+      "sha256": "3a78421b7592939e2f1810de4197b526e56b08800e12c8bc5efb1852bbcf0822",
+      "bytes": 1891
+    },
+    {
+      "path": "station/web/video.js",
+      "sha256": "0c2f93ee98f793ecc64f155cb3e5fea5fd36e0d2a8b2e0143b7d8a76d3e3bdd5",
+      "bytes": 5722
+    },
+    {
+      "path": "station/web/video_recording.js",
+      "sha256": "6888911ce9a6e85c33ba723251d74e0e2b3e8d0355cba02c75e84f94aa8a4218",
+      "bytes": 4150
+    },
+    {
+      "path": "station/web/views.js",
+      "sha256": "232e6e3721d6b3fa3f69d6cf1ef0225b335922a98110435679e14c0b44cf81bd",
+      "bytes": 16363
+    },
+    {
+      "path": "tools/README.md",
+      "sha256": "1e72005788f3b671d921758b837e5b116bc73bdf0f816ced3bf5fb61e0476dbd",
+      "bytes": 1228
+    },
+    {
+      "path": "tools/build_clegg_wireless_sdk.py",
+      "sha256": "0bafc158a3b9b3bd26671a9e0b91e285fc877604cf8db3da147977a97454dd89",
+      "bytes": 2962
+    },
+    {
+      "path": "tools/build_link_policy.py",
+      "sha256": "66be94d9bb7c2d49a3e08fd70dcaf8793d267dc1671fcd3806e0af134858e74d",
+      "bytes": 1701
+    },
+    {
+      "path": "tools/build_pico_config.py",
+      "sha256": "aa64d8391f940f4e14ef2a95af5e6aa400e6e6a01376b4470123f26484015ebf",
+      "bytes": 2003
+    },
+    {
+      "path": "tools/build_scout_operator_profiles.py",
+      "sha256": "420e41f74e4d0d8d306517957c2290f24708d9965ee18afc653e1ce915ad9f82",
+      "bytes": 1443
+    },
+    {
+      "path": "tools/calibrate_wheel_distance.py",
+      "sha256": "7ae4bf50c2659119ce6afc87d63034f900ecb9efc17dde6d90069460df749da9",
+      "bytes": 10569
+    },
+    {
+      "path": "tools/check_docs.py",
+      "sha256": "7669ba52a2099ab8b92e3cc0ae2992aa047d30ca5aed4db928fc189c3f6ac7b8",
+      "bytes": 7322
+    },
+    {
+      "path": "tools/clegg_hotspot.ps1",
+      "sha256": "87b97d0496de1451e1dc5cbd674c308321bf6c615fa4b88651ecd764e5996b3e",
+      "bytes": 5931
+    },
+    {
+      "path": "tools/deploy_jetson.py",
+      "sha256": "e382c88b73ad966363b258cfa1c9e6de1691db622f9aa5b20b02796cec84cbb0",
+      "bytes": 20756
+    },
+    {
+      "path": "tools/inspect_lift.py",
+      "sha256": "35dc463521bec190c55299b90da40ff2509f330f3874a946f7676917951aa210",
+      "bytes": 1039
+    },
+    {
+      "path": "tools/plot_clegg.py",
+      "sha256": "5356c441bd993dd32616ebc3552e74074a3695c795365a65a482de409832f0e6",
+      "bytes": 15606
+    },
+    {
+      "path": "tools/requirements-laptop.txt",
+      "sha256": "566e33fc2059793acf714f24a5e78ade20d65f0e49b8a213660b8421b25bbe68",
+      "bytes": 262
+    },
+    {
+      "path": "tools/serve_clegg_context.py",
+      "sha256": "59b88508b1d61c3d55504aa456ee2cfcb733ec43050b16e38aa98bff6672ec20",
+      "bytes": 7293
+    },
+    {
+      "path": "tools/start_clegg_plot.ps1",
+      "sha256": "c4f9330411f40343ee9bc52e52b6055bcf90d57a119fc3795c1e4383a472c9c1",
+      "bytes": 4116
+    },
+    {
+      "path": "tools/start_clegg_station.ps1",
+      "sha256": "62ebf9170d75742b752330992489cd6884ae5a32fdca48b42e8807cb1a0dcbb9",
+      "bytes": 19212
+    }
+  ]
+}

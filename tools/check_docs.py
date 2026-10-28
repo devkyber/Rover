@@ -1,6 +1,6 @@
 """Check maintained Rover Markdown; run from any directory, with no dependencies.
 
-Historical reviews, archives, the submitted proposal, generated analysis reports,
+Historical reviews, archives, immutable release bundles, the submitted proposal,
 vendor material and machine-local notes are intentionally outside this check.
 Supports this repository's inline links, ATX headings and explicit HTML anchors.
 Sibling PCB links are checked when that checkout is present.
@@ -58,13 +58,26 @@ def maintained_files(root: Path) -> list[Path]:
     files = set(root.glob("*.md"))
     files.update(root.glob("docs/**/*.md"))
     files.update(root.glob("data/**/*.md"))
+    files.update(root.glob("tools/**/*.md"))
     files.update(root.glob("firmware/**/README.md"))
     files.update(root / rel for rel in ("station/README.md", "logs/README.md", "data/README.md"))
-    excluded = (root / "docs/archive", root / "docs/reviews")
+    excluded = (root / "docs/archive", root / "docs/reviews", root / "firmware/scout/releases",
+                root / "data/archive/field_evidence_2026-10-23",
+                root / "data/deployments/releases")
+    data_root = root / "data"
+    # These named trees preserve evidence/source snapshots, not current docs.
+    snapshot_dirs = {"before", "baseline", "rollback_before", "deployment_source", "merge_inputs",
+                     "merge_candidates", "remote_before_review", "remote_before_review_latest"}
+    # A deployer packet is identified by both metadata files, not a broad
+    # directory name such as stage/bundle that current documentation may use.
+    packet_roots = tuple(p.parent for p in data_root.rglob("bundle.json")
+                         if p.is_file() and p.with_name("manifest.json").is_file())
     return sorted(p for p in files if p.is_file()
                   and not p.name.endswith(".local.md")
                   and p.name != "91_KSRC_기술제안서.md"
-                  and not any(p.is_relative_to(folder) for folder in excluded))
+                  and not (p.is_relative_to(data_root)
+                           and snapshot_dirs.intersection(p.relative_to(data_root).parts[:-1]))
+                  and not any(p.is_relative_to(folder) for folder in excluded + packet_roots))
 
 
 def check(root: Path) -> tuple[list[str], int, int, int]:

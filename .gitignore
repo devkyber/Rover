@@ -4,6 +4,9 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 *.local.md
-# Raw logs, metadata, results and verified archives are intentionally NOT ignored.
+private/
+# Selected vehicle logs, metadata, results and final receipts are tracked.
 # Temporary laptop downloads are imported into logs/ with their metadata after review.
 field-logs/
+# Reproducible build/check scratch. Final identities and receipts belong in data/.
+output/

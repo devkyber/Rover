@@ -1,7 +1,7 @@
 """Offline lesson: follow a known turn through the production gyro predictor.
 
 Run from the project root: python -B rover/learn_turn_angle.py
-Read docs/09_turn_angle_lesson.md for a line-by-line explanation.
+Read docs/01_이론_오도메트리와_ESKF.md#12-회전각-계산-예제 for a line-by-line explanation.
 This generates ideal samples in memory; it does not access hardware or logs.
 """
 import math

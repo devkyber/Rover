@@ -1,0 +1,20 @@
+[Unit]
+Description=Rover field runtime independent of the SSH session
+After=NetworkManager.service
+
+[Service]
+Type=simple
+User=taeholee
+Group=taeholee
+WorkingDirectory=/home/taeholee/Rover/rover
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/taeholee/rover-venv/bin/python /home/taeholee/Rover/rover/rover_main.py --tag field
+StandardOutput=journal
+StandardError=journal
+KillSignal=SIGINT
+KillMode=mixed
+TimeoutStopSec=90
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

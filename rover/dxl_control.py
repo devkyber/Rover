@@ -39,9 +39,18 @@ def _write1(pkt_h, port_h, dxl_id, address, value, what):
 
 def set_torque(pkt_h, port_h, on, motor_ids=None):
     """Enable or disable torque on every motor."""
+    errors = []
     for dxl_id in (motor_ids or config.MOTOR_IDS):
-        _write1(pkt_h, port_h, dxl_id, ADDR_TORQUE_ENABLE,
-                1 if on else 0, f"torque {'on' if on else 'off'}")
+        try:
+            _write1(pkt_h, port_h, dxl_id, ADDR_TORQUE_ENABLE,
+                    1 if on else 0, f"torque {'on' if on else 'off'}")
+        except Exception as error:
+            if on:
+                raise
+            # One silent motor must not prevent stopping the reachable peers.
+            errors.append(str(error))
+    if errors:
+        raise RuntimeError('; '.join(errors))
 
 
 def setup_wheels(pkt_h, port_h, motor_ids=None):
@@ -69,6 +78,19 @@ def setup_wheels(pkt_h, port_h, motor_ids=None):
             raise RuntimeError(
                 f"ID {dxl_id}: Operating Mode is {mode}, expected "
                 f"{MODE_VELOCITY} (Velocity). The write did not stick.")
+
+    # Goal Velocity may retain a previous nonzero command while torque is OFF.
+    # Seed and verify every wheel before enabling any wheel's torque.
+    for dxl_id in ids:
+        comm, err = pkt_h.write4ByteTxRx(port_h, dxl_id, ADDR_GOAL_VELOCITY, 0)
+        if comm != COMM_SUCCESS or err != 0:
+            raise RuntimeError(f"ID {dxl_id}: clear startup velocity failed: "
+                               f"comm={comm}, error={err}")
+    for dxl_id in ids:
+        velocity, comm, err = pkt_h.read4ByteTxRx(port_h, dxl_id, ADDR_GOAL_VELOCITY)
+        if comm != COMM_SUCCESS or err != 0 or velocity != 0:
+            raise RuntimeError(f"ID {dxl_id}: startup velocity is {velocity}, expected 0: "
+                               f"comm={comm}, error={err}")
 
     set_torque(pkt_h, port_h, True, ids)
     print(f"Wheels {ids}: velocity mode, torque ON")
@@ -127,7 +149,10 @@ def drive(writer, forward, turn, motor_ids=None):
         side = v_left if i in config.WHEEL_LEFT else v_right
         raw.append(int(round(side * MAX_GOAL_VELOCITY * config.WHEEL_SIGN[i])))
 
-    write_velocities(writer, raw, ids)
+    if not write_velocities(writer, raw, ids):
+        # Returning an unsent goal would hide a bus failure from the runtime
+        # and allow the previous nonzero goal to remain latched indefinitely.
+        raise RuntimeError('Wheel Goal Velocity write failed; stopping runtime')
     return raw
 
 
@@ -135,7 +160,8 @@ def stop(writer, pkt_h, port_h, motor_ids=None):
     """Zero every wheel, then release torque. Always call this on exit."""
     ids = motor_ids or config.MOTOR_IDS
     try:
-        write_velocities(writer, [0] * len(ids), ids)
+        if not write_velocities(writer, [0] * len(ids), ids):
+            raise RuntimeError('Wheel stop Goal Velocity write failed')
     finally:
         set_torque(pkt_h, port_h, False, ids)
         print("Wheels stopped, torque OFF")

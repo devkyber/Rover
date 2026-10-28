@@ -1,0 +1,21 @@
+[Unit]
+Description=Recover a disconnected or packet-stalled Rover field Wi-Fi profile
+After=NetworkManager.service
+Requires=NetworkManager.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/default/rover-wifi-recover
+ExecStart=/usr/bin/python3 /usr/local/lib/rover/wifi_recover.py --settings /etc/rover/wifi-recovery.json --interface ${ROVER_WIFI_INTERFACE} --profile ${ROVER_WIFI_PROFILE}
+TimeoutStartSec=@SERVICE_TIMEOUT_S@s
+Restart=on-failure
+RestartSec=@TIMER_INTERVAL_S@s
+RuntimeDirectory=rover-wifi-recover
+RuntimeDirectoryPreserve=yes
+RuntimeDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+ReadWritePaths=/run/rover-wifi-recover @RECORD_DIR@

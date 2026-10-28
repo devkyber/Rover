@@ -1,0 +1,8 @@
+{
+  "record_type": "operator_observation",
+  "recorded_utc": "2026-10-23T18:01:36.909930+00:00",
+  "question_ko": "두 점프의 발사 지점과 첫 착지면 높이 차이를 알고 있나요?",
+  "answer_ko": "같은 높이",
+  "independent_survey": false,
+  "interpretation": "Operator reports equal launch/contact surface heights for both jumps. Equal sensor-origin height is an additional body-geometry approximation."
+}

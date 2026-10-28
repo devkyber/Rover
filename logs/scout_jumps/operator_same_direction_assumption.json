@@ -1,0 +1,7 @@
+{
+  "record_type": "operator_requested_assumption",
+  "recorded_utc": "2026-10-23T18:04:57.968490+00:00",
+  "operator_text_ko": "그냥 같다고 가정하고 하면 안되나",
+  "applied_assumption": "The two horizontal jump directions are assumed equal. Rotate each reconstructed net horizontal displacement into a common +X direction; origin is overlaid for comparison.",
+  "independently_measured_direction": false
+}

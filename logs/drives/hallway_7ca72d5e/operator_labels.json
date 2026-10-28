@@ -1,0 +1,21 @@
+{
+  "schema": "rover_operator_label_v1",
+  "session_run_id": "7ca72d5ef4044b1cadaad6afc84820c3",
+  "source": "Human user statements in antenna/wireless log review chat, 2026-10-23 KST",
+  "observations": {
+    "vehicle_physically_moved": true,
+    "operator_description": "Operator was inside a room, door open, vehicle moved along hallway.",
+    "approximate_distance_m": 15,
+    "distance_basis": "Operator estimate; user corrected initial 10 m estimate to about 15 m.",
+    "clear_radio_line_of_sight": null,
+    "router_exact_location": null,
+    "antenna_orientation_and_height": null,
+    "route_position_timestamps": null
+  },
+  "verbatim_user_statements": [
+    "we actually moved thje  vehicle as possible as wwe can",
+    "i was at the room inside and door opened and moved hallway 10m",
+    "about 15m"
+  ],
+  "limits": "Approximate indoor route label, not surveyed separation or independently measured position. No timestamp-to-route-position mapping; the weakest signal cannot be assigned an exact distance. No SSH transport recording in this runtime snapshot."
+}

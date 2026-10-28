@@ -1,0 +1,18 @@
+{
+  "schema": "rover_operator_label_v1",
+  "source": "Human user follow-up in antenna/wireless review chat, 2026-10-23 KST",
+  "verbatim": "at the site there were many devices and even lte was quite unstable",
+  "reported_observations": {
+    "many_devices_at_site": true,
+    "lte_unstable_at_site": true
+  },
+  "unknown": [
+    "Device count, traffic, Wi-Fi channels and channel utilization",
+    "LTE carrier, signal, coverage, capacity and outage cause",
+    "Exact temporal correspondence between venue observations and captured runtime",
+    "Interference or contention contribution to captured control gaps"
+  ],
+  "assessment": "Crowded-site context supports examining Wi-Fi airtime contention in addition to the measured weak Rover-side RSSI. LTE instability alone does not establish Wi-Fi interference or a common cause. Rover control topology is local AX210 Wi-Fi to router to notebook Ethernet and does not require LTE/internet.",
+  "next_comparison": "At the actual operating venue, compare same-route 80/40 MHz and, if crowded, 20 MHz while measuring channel activity/retry deltas and end-to-end command/video delivery. Retain current 0.5 s motion timeout. No network settings or runtime changed.",
+  "reference": "https://www.cisco.com/c/en/us/products/collateral/wireless/access-points/enterprise-best-practices-ios-ipados-wp.html"
+}

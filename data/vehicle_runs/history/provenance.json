@@ -1,0 +1,12 @@
+{
+  "source_archive": "docs/archive/references_2026-10-08.zip",
+  "source_archive_sha256": "c37eeb572bbb32b68fd80748f7e4d24bb1afae441ed918418ab0a2c2e03d3364",
+  "source_member": "logs/README.md",
+  "source_member_sha256": "21ae59c0cd91d66dd1129ccde8e9230fc54c0229f67b1d64c37de45b87959530",
+  "selected_original_lines": [
+    67,
+    105
+  ],
+  "legacy_metadata_limit": "Legacy CSV files contain no source/configuration sidecar. Current runtime settings must not be retroactively attributed to them.",
+  "source_archive_status": "Historical extraction source, omitted from this cleaned snapshot. The selected label text and original member hash are retained alongside this provenance record."
+}

@@ -1,0 +1,31 @@
+{
+  "original_directory": "logs/video/practice_e2c0c0d3_19700101T000717.904946Z_b94e84c0",
+  "run_id": "e2c0c0d377de495d8d423acefa0d2710",
+  "original_segments": 64,
+  "journal_events": {
+    "segment_opened": 64,
+    "frame": 3271,
+    "segment_closed": 63,
+    "gap": 685
+  },
+  "first_frame_monotonic_s": 412.554377568,
+  "last_frame_monotonic_s": 627.627551424,
+  "wall_span_s": 215.07317385599998,
+  "graph_elapsed_start_s": 344.746860096,
+  "graph_elapsed_end_s": 559.820033952,
+  "inferred_connection_cut_after_first_frame_s": 62.87331643199997,
+  "playback": {
+    "duration_s": 106.019956,
+    "codec": "h264",
+    "width": 1920,
+    "height": 1080,
+    "frames": 3271
+  },
+  "output": "data/run_video_inventory_2026-10-23/practice_e2c0c0d3.mp4",
+  "output_sha256": "bcb2ee13e693aaee77d3077dfe189a3837c446e3fa4d54bd8d248d5a35ea93bd",
+  "bytes": 142452246,
+  "reencoded": false,
+  "continuity": "Concatenated existing fragments. Missing intervals are not reconstructed; playback time is not wall time.",
+  "missing_summary": true,
+  "short_run_218d_matching_video_found": false
+}

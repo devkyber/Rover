@@ -153,31 +153,50 @@ export class PathView {
   constructor(canvas) {
     this.canvas = canvas;
     this.points = [];
+    this.landings = [];
     this.gridStep = 0.5;
     this.rover = { track_m: 0.16 };
   }
 
   setRover(rover) { this.rover = rover; }
 
+  setLandings(markers) { this.landings = markers.filter(m => Array.isArray(m.xy) && m.xy.every(Number.isFinite)); }
+
+  drawLandingsOnly() { this.draw(null, null, null, false, true); }
+
   clear() { this.points = []; }
 
+  break() {
+    if (this.points.length && this.points[this.points.length - 1] !== null) this.points.push(null);
+  }
+
   add(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return;
     const last = this.points[this.points.length - 1];
     if (last && Math.hypot(x - last[0], y - last[1]) < 0.005) return;   // not moved 5 mm yet
     this.points.push([x, y]);
     if (this.points.length > MAX_POINTS) this.points.splice(0, MAX_POINTS / 4);
   }
 
-  draw(x, y, yawDeg) {
+  draw(x, y, yawDeg, degraded = false, markersOnly = false) {
     const { g, w, h } = fitCanvas(this.canvas);
     if (w < 40 || h < 40) return;
+    const current = [x, y, yawDeg].every(Number.isFinite) && !markersOnly;
+    if (!current && (!markersOnly || !this.landings.length)) return;
+    if (!current) x = y = 0;
 
     // Fit the whole track, the start and the rover, never tighter than 1 m.
     let x0 = Math.min(0, x), x1 = Math.max(0, x), y0 = Math.min(0, y), y1 = Math.max(0, y);
     for (const p of this.points) {
+      if (p === null) continue;
       if (p[0] < x0) x0 = p[0]; if (p[0] > x1) x1 = p[0];
       if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1];
     }
+    for (const { xy: p } of this.landings) {
+      x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]);
+      y0 = Math.min(y0, p[1]); y1 = Math.max(y1, p[1]);
+    }
+    if (![x1 - x0, y1 - y0].every(Number.isFinite)) return;
     const s = Math.min(w / Math.max(y1 - y0, 1) , h / Math.max(x1 - x0, 1)) / 1.3;
     const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
     const X = wy => w / 2 - (wy - cy) * s;        // world y (left) -> screen x
@@ -201,12 +220,17 @@ export class PathView {
 
     // The track.
     if (this.points.length > 1) {
-      g.strokeStyle = colors.s1;
+      g.strokeStyle = degraded ? colors.warn : colors.s1;
       g.lineWidth = 2;
       g.lineJoin = g.lineCap = 'round';
       g.beginPath();
-      this.points.forEach((p, i) => { if (i) g.lineTo(X(p[1]), Y(p[0])); else g.moveTo(X(p[1]), Y(p[0])); });
-      g.lineTo(X(y), Y(x));
+      let connected = false;
+      for (const p of this.points) {
+        if (p === null) { connected = false; continue; }
+        if (connected) g.lineTo(X(p[1]), Y(p[0])); else g.moveTo(X(p[1]), Y(p[0]));
+        connected = true;
+      }
+      if (connected && current) g.lineTo(X(y), Y(x));
       g.stroke();
     }
 
@@ -214,21 +238,74 @@ export class PathView {
     g.strokeStyle = colors.muted;
     g.lineWidth = 2;
     g.beginPath(); g.arc(X(0), Y(0), 5, 0, 2 * Math.PI); g.stroke();
+    g.font = '10px monospace';
+    g.textAlign = 'left';
+    g.textBaseline = 'top';
+    g.fillStyle = colors.muted;
+    // Label the origin only when it is separate from the current rover.
+    if (Math.hypot(x, y) * s > 40) g.fillText('START', Math.min(X(0) + 8, w - 40), Math.min(Y(0) + 8, h - 14));
 
-    // The rover: its real footprint at map scale (never smaller than a
-    // readable mark), turned to its heading, nose marked in the accent colour.
-    const track = this.rover.track_m;
-    const halfW = Math.max(track / 2 * s, 6), halfL = Math.max(track * 0.75 * s, 9);
+    for (const marker of this.landings) {
+      const px = X(marker.xy[1]), py = Y(marker.xy[0]);
+      g.save();
+      g.strokeStyle = marker.synthetic ? colors.warn : marker.scoutId === 'scout_2' ? colors.s3 : colors.s2;
+      g.fillStyle = g.strokeStyle; g.lineWidth = 2;
+      if (marker.conditional) g.setLineDash([3, 2]);
+      g.beginPath();
+      if (marker.kind === 'rest') g.rect(px - 5, py - 5, 10, 10);
+      else g.arc(px, py, 6, 0, 2 * Math.PI);
+      g.stroke(); g.setLineDash([]);
+      const scout = marker.scoutId === 'scout_1' ? 'S1' : marker.scoutId === 'scout_2' ? 'S2' : String(marker.shotId).slice(0, 12);
+      const text = `${scout} ${marker.kind === 'rest' ? 'REST' : 'CONTACT'}${marker.conditional ? ' EST' : ''}`;
+      g.font = '10px monospace';
+      g.fillText(text, Math.max(4, Math.min(w - 130, px + 9)), Math.max(22, Math.min(h - 14, py - 10)));
+      g.restore();
+    }
+    if (!current) return;  // Static landings never supply a current Rover pose.
+
+    // A compact top-view symbol, not a scale footprint. Fixed CSS-pixel
+    // dimensions keep the heading legible without covering the track.
+    const markerColor = degraded ? colors.warn : colors.accent;
     g.save();
     g.translate(X(y), Y(x));
     g.rotate(-yawDeg * RAD);                      // + yaw is counter-clockwise, screen angles run clockwise
-    g.fillStyle = colors.fg;
-    g.strokeStyle = colors.panel;
-    g.lineWidth = 2;
-    g.beginPath(); g.rect(-halfW, -halfL, 2 * halfW, 2 * halfL); g.fill(); g.stroke();
-    g.fillStyle = colors.accent;
-    g.beginPath(); g.moveTo(0, -halfL - 7); g.lineTo(halfW, -halfL + 1); g.lineTo(-halfW, -halfL + 1); g.closePath(); g.fill();
+    g.lineJoin = g.lineCap = 'round';
+    g.lineWidth = 1.5;
+    g.fillStyle = colors.panel;
+    g.strokeStyle = degraded ? colors.warn : colors.muted;
+    for (const side of [-1, 1]) for (const axle of [-1, 1]) {
+      g.beginPath(); g.roundRect(side * 10 - 2, axle * 7 - 4, 4, 8, 1.5);
+      g.fill(); g.stroke();
+    }
+    g.strokeStyle = markerColor;
+    g.beginPath(); g.roundRect(-7, -13, 14, 26, 4); g.fill(); g.stroke();
+    // The inset chevron points forward; the chassis centre is the XY position.
+    g.beginPath(); g.moveTo(-3, -5); g.lineTo(0, -9); g.lineTo(3, -5); g.stroke();
+    g.fillStyle = markerColor;
+    g.beginPath(); g.arc(0, 0, 1.5, 0, 2 * Math.PI); g.fill();
     g.restore();
+
+    // Keep the quiet, unrotated label inside the viewport at every track extent.
+    const label = degraded ? 'ESTIMATE' : 'ROVER';
+    const labelW = degraded ? 68 : 50, labelH = 18;
+    const px = X(y), py = Y(x), radius = 21;
+    const lx = Math.max(4, Math.min(w - labelW - 4, px - labelW / 2));
+    const ly = Math.max(4, Math.min(h - labelH - 4,
+      py + radius + labelH < h - 4 ? py + radius : py - radius - labelH));
+    g.fillStyle = colors.panel;
+    g.beginPath(); g.roundRect(lx, ly, labelW, labelH, 3); g.fill();
+    g.fillStyle = markerColor;
+    g.font = `600 10px ${getComputedStyle(this.canvas).fontFamily}`;
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    g.fillText(label, lx + labelW / 2, ly + labelH / 2);
+    g.font = '10px monospace';
+    g.textAlign = 'left';
+    g.textBaseline = 'top';
+    g.fillStyle = colors.panel;
+    g.fillRect(4, 4, 72, 16);
+    g.fillStyle = colors.muted;
+    g.fillText('↑ +X  ← +Y', 8, 7);
   }
 }
 

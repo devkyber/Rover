@@ -1,0 +1,98 @@
+{
+  "closed_date_kst": "2026-10-28",
+  "purpose": "Resumable actual-vehicle core, essential handbook, selected original recordings and actual-run analysis methods. This revision changes documentation/layout, removes development scaffolding and deduplicates evidence.",
+  "baseline_commit": "ec4d2a2",
+  "baseline_upload_tree": {
+    "files": 479,
+    "bytes": 300637496
+  },
+  "final_upload_tree": {
+    "files": 331,
+    "bytes": 283998234
+  },
+  "cleanup": {
+    "removed_tracked_files": 148,
+    "development_test_files_removed": 83,
+    "handbook_files_before": 13,
+    "handbook_files_after": 6,
+    "handbook_markdown_bytes": 55075,
+    "other_removed": "Overlapping lessons/subject guides, report builders and duplicate media inputs, rendered PDF pages and image prompts, duplicate extracted jump CSVs/plots, repeated run READMEs, and separate test receipts. Original parsed installation receipts were consolidated.",
+    "retained": "Vehicle runtime, dashboard, actual board source/release images, operation/build/deploy/calibration tools, source/configuration identity, selected raw drives/jumps/video, actual-run methods and finished interactive report."
+  },
+  "source_manifest": "data/final_vehicle_2026-10-28/source_manifest.json",
+  "recording_manifest": "data/final_vehicle_2026-10-28/recording_manifest.json",
+  "verification": {
+    "protected_files_checked": 269,
+    "original_recording_files_sha256_unchanged": 124,
+    "vehicle_non_document_files_sha256_unchanged": 144,
+    "worked_example": "Only the module docstring link in rover/learn_turn_angle.py changed; executable AST is identical to baseline.",
+    "scout_zip_members_sha256_unchanged": 19,
+    "documentation_check": {
+      "command": "python -B tools/check_docs.py",
+      "documents": 18,
+      "links": 147,
+      "errors": 0
+    },
+    "report_file_index": 327,
+    "report_original_metrics_and_embedded_media_preserved": true,
+    "no_upload_file_above_25MiB": true,
+    "all_markdown_link_audit": {
+      "documents": 20,
+      "links": 151,
+      "errors": 0
+    }
+  },
+  "hardware": {
+    "access_performed": false,
+    "deployment_performed": false,
+    "restart_attempted": false,
+    "board_firmware_flashed": false,
+    "motion_commands_sent": false,
+    "identity_basis": "Historical installation receipts retained in installation_identity.json. Jetson unavailable; operator requested inference."
+  },
+  "private_reference_holding": {
+    "original": "docs/archive/references_2026-10-08.zip",
+    "preserved_private_copy": "private/references_2026-10-08.zip",
+    "sha256": "c37eeb572bbb32b68fd80748f7e4d24bb1afae441ed918418ab0a2c2e03d3364",
+    "reason": "Earlier automatic approval review blocked deletion; reversible preservation outside the distributable repository was used instead."
+  },
+  "resumption_constraints": [
+    "Ignored credentials and private Nano recovery image require separate local handover or documented rebuild.",
+    "Historical native 1970 clock values are invalid; operator identifies the contest footage as October 24, roughly 15 minutes. Captured intervals remain separate.",
+    "Jetson and board state have not been freshly read back during closure."
+  ],
+  "local_ignored_scratch": {
+    "removal_status": "Automatic approval review blocked deletion of local bytecode caches; no further deletion attempted. Existing ignored output scratch was left in place.",
+    "bytecode_files": 126,
+    "bytecode_bytes": 3468287,
+    "excluded_from_git": [
+      "__pycache__/",
+      "output/",
+      "private/",
+      "*.local.md"
+    ],
+    "upload_tree_affected": false
+  },
+  "final_cleanup_audit": {
+    "baseline_commit": "ba3f847",
+    "scope": "All remaining tracked files, Markdown documents, dependencies, package catalogs, originals, upload exclusions and historical references; no vehicle code changes.",
+    "removed_redundant_files": [
+      "rover/vendor/jumper/ORIGIN.md",
+      "firmware/scout/releases/v12_4_control_link_wifi_20261024/environment.json"
+    ],
+    "documentation": "Removed duplicated Scout/protocol/extension text, absent upstream AUX file descriptions and obsolete test commands; clarified contest-linked records, historical evidence pointers and build-time vs current document hashes.",
+    "protected_files_at_audit_start": 283,
+    "protected_files_sha256_unchanged": 281,
+    "metadata_exceptions": [
+      "firmware/scout/releases/v12_4_control_link_wifi_20261024/SHA256.json",
+      "firmware/scout/releases/v12_4_control_link_wifi_20261024/environment.json"
+    ],
+    "vehicle_code_and_firmware_bytes_unchanged": true,
+    "original_recordings_sha256_unchanged": 124,
+    "intentional_duplicates": "Original metadata is kept with both Rover and Scout contexts. Four small Scout ZIP access/provenance copies remain beside the immutable full archive. Current build configuration, original compiled-source identity and binary are distinct rebuild/recovery records.",
+    "upload": "Fresh cleaned files only, as selected by the user. Old Git history, private credentials/images, caches and scratch are excluded.",
+    "privacy": "No tracked ignored/private/output/venv/local credential paths; targeted known private-password scan found zero matches.",
+    "snapshot_directory": "C:\\Users\\tae06\\CODE\\Rover-private-upload-2026-10-28",
+    "source_comment_history": "Some unchanged source comments refer to the retired docs03 tuning note. Current theory and tuning interpretation are owned by docs01; executable files were not edited to update comments."
+  }
+}

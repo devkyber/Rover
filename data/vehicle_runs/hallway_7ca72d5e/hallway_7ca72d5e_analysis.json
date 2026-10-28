@@ -1,0 +1,99 @@
+{
+  "schema": "rover_latest_drive_delivery_v1",
+  "run_id": "7ca72d5ef4044b1cadaad6afc84820c3",
+  "method": "Original captured scalar outputs only; no estimator replay or hardware access.",
+  "sources": [
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/rover/system_0001.csv",
+      "bytes": 1594299,
+      "sha256": "c3d7cf13d20320bd9c3d7a348c5b45e1020570de9ee709e6075bb1d8d87f5984"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/rover/system_0002.csv",
+      "bytes": 1559610,
+      "sha256": "e524ebda69ec498f39bf493937cf723e4e068fc7f35b25771c823a54d209833b"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/rover/system_0003.csv",
+      "bytes": 1542499,
+      "sha256": "9794230a57c7af62e9b2ee58fdbe3428a1c6900164edab012a5b4f34bf72e358"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/rover/system_0004.csv",
+      "bytes": 1626141,
+      "sha256": "0ddd13ee0686e31e1995c0edf17cfd6fc481ff9a5e166396ef68a20036183faa"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/rover/system_0005.csv",
+      "bytes": 1601687,
+      "sha256": "d6fd751a9b19b05dee5a38162e7b099091f276519fb1e0d5412ca0da704b98d3"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/rover/system_0006.csv",
+      "bytes": 1529841,
+      "sha256": "fb374ec4deb304a82fe9cd30a8c74a686d9f71209ac5766aefe149b404ed2cf3"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/rover/system_0007.csv",
+      "bytes": 1495730,
+      "sha256": "2b26db572c090f31e11f717fb4491e1998263e5693b25f35fcf0474a8658afd9"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/rover/system_0008.csv",
+      "bytes": 1069015,
+      "sha256": "23a5297c5358cd25e225ddfd647f89b5076a8fa8033bef09243913eb74127651"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/session/metadata.json",
+      "bytes": 520239,
+      "sha256": "d21c22953a94441e8600dc6bc3c3ea6ed7025c1e64cf644036124e57745a0057"
+    },
+    {
+      "path": "logs/antenna_wireless_review_20261023T144538Z/operator_labels.json",
+      "bytes": 1077,
+      "sha256": "1f743cd9e97dcab17de8f96f7a36ea616e64ba88be10181f06a541964ff277db"
+    }
+  ],
+  "first_recorded_host_utc": "2026-10-23T14:27:15.672657+00:00",
+  "last_recorded_host_utc": "2026-10-23T14:45:39.526006+00:00",
+  "host_calendar_valid": true,
+  "first_captured_kst": "2026-10-23T23:27:15.672657+09:00",
+  "last_captured_kst": "2026-10-23T23:45:39.526006+09:00",
+  "first_monotonic_s": 10745.501497408,
+  "last_monotonic_s": 11849.354852096,
+  "first_runtime_t_s": 0.125,
+  "last_runtime_t_s": 1103.983,
+  "rows": 22079,
+  "duration_s": 1103.853354687999,
+  "excluded_rows": [],
+  "missing_plot_columns": [],
+  "pose_path": {
+    "available_points": 21865,
+    "local_frames": [
+      "f45e5d096d0f4d809c62c22454a1f34c"
+    ],
+    "explicit_breaks": 0,
+    "capture_gap_threshold_s": 0.2534902399975181,
+    "rule": "Only pose_estimate_available=True and finite XY with nonempty frame. Break on unavailable pose, frame/loss-count change, or long captured gap. Suppress combined path if multiple frames are present."
+  },
+  "limitations": [
+    "Partial captured session; no closing session summary was captured.",
+    "Original display position accuracy is unverified; it is not a measured route.",
+    "Approximately 15 m is an operator estimate, not an independent distance measurement.",
+    "Host UTC/KST values are recorded clock observations; sensor synchronization is not established.",
+    "Wheel encoder speed is not independent ground-motion truth; RSSI is not packet loss.",
+    "Latest is limited to the available local retained driving evidence."
+  ],
+  "outputs": [
+    {
+      "path": "data/latest_run_delivery_2026-10-24/hallway_7ca72d5e.png",
+      "bytes": 319799,
+      "sha256": "49846188901cfbc07c1513c401fbe8b09caa59cc8efb3a948b0965e0ddeca966"
+    },
+    {
+      "path": "data/latest_run_delivery_2026-10-24/plot_latest_drive.py",
+      "bytes": 12068,
+      "sha256": "0455e939f9d6694c266e803af27670758110e549fcdded7905a93b9e4d20edb9"
+    }
+  ]
+}

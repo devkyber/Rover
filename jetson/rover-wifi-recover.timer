@@ -1,0 +1,13 @@
+[Unit]
+Description=Check Rover field Wi-Fi recovery
+
+[Timer]
+# Render timings from rover/config.py WIFI_RECOVERY during installation.
+# Delay after activation also prevents an overdue boot timer firing at install.
+OnActiveSec=@TIMER_BOOT_S@s
+OnUnitInactiveSec=@TIMER_INTERVAL_S@s
+AccuracySec=1s
+Unit=rover-wifi-recover.service
+
+[Install]
+WantedBy=timers.target

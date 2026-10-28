@@ -1,3 +1,10 @@
+# Preserve recorded bytes and source identities on every host. Shell entrypoints
+# below are the exception: they require LF when checked out on Windows.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Keep third-party driver/SDK bytes intact, including upstream whitespace.
+firmware/scout/v12_4_control_link/esp/components/** -whitespace
+rover/vendor/** -whitespace
+
 # Files that run on the Jetson must keep LF endings even when checked out
 # on Windows (core.autocrlf=true) -- bash fails on a CRLF script with
 # "$'\r': command not found".

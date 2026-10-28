@@ -2,12 +2,15 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
 <title>Rover Station</title>
 <link rel="stylesheet" href="station.css" onerror="setTimeout(() => location.reload(), 1000)">
 </head>
 <body>
+<a class="skip-link" href="#dashboard">Skip to dashboard</a>
 
+<div id="battery-alert" class="battery-alert warn" role="alert" aria-live="assertive" hidden></div>
 <header class="toolbar">
   <h1>postechME Rover Station</h1>
   <span class="spacer"></span>
@@ -16,24 +19,33 @@
   <input id="rover-address" type="text" spellcheck="false" autocomplete="off"
          placeholder="192.168.0.200" aria-label="Rover address">
   <button id="connect" type="button">CONNECT</button>
-  <span id="link-label" class="status-text">DISCONNECTED</span>
+  <span id="link-label" class="status-text" role="status">DISCONNECTED</span>
 
-  <span class="divider"></span>
+  <select id="station-view" aria-label="Station view" hidden>
+    <option value="dashboard">Dashboard + control</option>
+    <option value="monitor">Monitor only</option>
+    <option value="ground">Ground station + hammer</option>
+    <option value="control">Controller only</option>
+  </select>
 
-  <label for="run-tag">RUN</label>
-  <input id="run-tag" type="text" value="drive" spellcheck="false" autocomplete="off"
+  <span class="divider dashboard-tool"></span>
+
+  <label for="run-tag" class="dashboard-tool">RUN</label>
+  <input id="run-tag" class="dashboard-tool" type="text" value="drive" spellcheck="false" autocomplete="off"
          aria-label="Name for the next log">
-  <button id="new-run" type="button"
+  <button id="new-run" class="dashboard-tool" type="button"
           title="Rover closes the current log, starts a new one with this name, and re-aligns. Keep the rover still for 5 s.">NEW RUN</button>
-  <button id="stop-log" type="button" title="Rover closes the current log and keeps running.">STOP LOG</button>
-  <span id="log-label" class="status-text">NOT LOGGING</span>
+  <button id="stop-log" class="dashboard-tool" type="button" title="Rover closes the current log and keeps running.">STOP LOG</button>
+  <span id="log-label" class="status-text dashboard-tool">NOT LOGGING</span>
 
-  <span class="divider"></span>
+  <span class="divider dashboard-tool"></span>
 
-  <button id="reset-view" type="button"
+  <button id="reset-view" class="dashboard-tool" type="button"
           title="Clear the plots, path and statistics on this page. The rover and its log are not touched.">RESET</button>
   <button id="theme" type="button" aria-label="Switch between dark and light">&#9728;</button>
 </header>
+
+<p id="mode-note" class="mode-note" role="status" hidden></p>
 
 <section class="mission" aria-label="Mission status">
   <div id="clock" class="mission-cell">KST --:--:--</div>
@@ -42,135 +54,363 @@
   <div id="tlm-rate" class="mission-cell muted">TLM -- Hz</div>
   <div id="rtt" class="mission-cell muted">LINK -- ms</div>
   <div id="video-rate" class="mission-cell muted">VIDEO -- fps</div>
-  <div id="battery" class="mission-cell muted">BAT -- V</div>
+  <div id="battery" class="mission-cell muted">BAT -- V · -- A</div>
 </section>
 
-<main>
-  <div class="row-top">
-    <section class="panel camera">
-      <div class="panel-head">
+<main id="dashboard" tabindex="-1">
+  <div class="row-top" id="camera-row">
+    <section class="panel camera" id="camera-panel">
+      <div class="panel-head" id="camera-head">
         <h2>CAMERA</h2>
         <span id="video-info" class="head-note"></span>
+        <label class="camera-size">Size<select id="camera-size" aria-label="Camera size" title="Camera size within the dashboard"><option value="50">50%</option><option value="75">75%</option><option value="100" selected>100%</option></select></label>
+        <button id="camera-expand" type="button" class="small" aria-expanded="false">EXPAND</button>
         <button id="fullscreen" type="button" class="small">FULL SCREEN</button>
+        <button id="camera-estop" type="button" class="small" hidden disabled>E-STOP</button>
       </div>
       <div class="video-wrap" id="video-wrap">
         <canvas id="video" width="1920" height="1080"></canvas>
-        <div id="video-banner" class="banner">Not connected to the rover</div>
-        <div class="hud">
+        <div id="video-banner" class="banner"><span id="video-banner-message">Not connected to the rover</span></div>
+        <div id="video-recording" class="video-recording" role="group" aria-label="Video recording">
+          <button type="button" data-video-start disabled>RECORD</button>
+          <button type="button" data-video-stop disabled>STOP &amp; SAVE</button>
+          <span data-video-status role="status" aria-live="polite">VIDEO REC UNAVAILABLE</span>
+          <div id="pan-reference" class="camera-pan" role="group" aria-label="Camera pan controls and manual time reference">
+            <span class="pan-heading">PAN <small data-pan-reference-state>NO 0</small></span>
+            <button type="button" data-pan="-1" aria-label="Pan camera left" title="Hold to pan left; release to stop" disabled>&#9664;</button>
+            <button type="button" data-pan="1" aria-label="Pan camera right" title="Hold to pan right; release to stop" disabled>&#9654;</button>
+            <div class="pan-reference-readout" aria-label="PAN command time since manual zero">
+              <button type="button" data-pan-zero disabled>SET 0</button>
+              <output data-pan-left aria-label="Left command time">L --</output>
+              <output data-pan-right aria-label="Right command time">R --</output>
+            </div>
+          </div>
+        </div>
+        <div class="hud" id="video-hud">
+          <span id="hud-pose-quality" class="pose-warning" hidden>DEGRADED ESTIMATE</span>
           <span><b id="hud-speed">0.00</b> m/s</span>
           <span>yaw <b id="hud-yaw">+0.0</b>&deg;</span>
           <span>roll <b id="hud-roll">+0.0</b>&deg;</span>
           <span>pitch <b id="hud-pitch">+0.0</b>&deg;</span>
           <span>stick <b id="hud-cmd">+0.00 / +0.00</b></span>
         </div>
+        <button id="exit-fullscreen" type="button" class="camera-exit" aria-label="Exit camera fullscreen" hidden>EXIT FULL SCREEN</button>
       </div>
     </section>
 
-    <div class="col-mid">
       <section class="panel attitude">
-        <div class="panel-head"><h2>ATTITUDE</h2><span class="head-note">seen from behind the rover</span></div>
+        <div class="panel-head"><h2>ATTITUDE</h2><span id="attitude-quality" class="head-note">Rear view</span></div>
         <div class="canvas-box"><canvas id="attitude"></canvas></div>
         <div class="readout">
           <span>ROLL <b id="att-roll">+0.0&deg;</b></span>
           <span>PITCH <b id="att-pitch">+0.0&deg;</b></span>
           <span>YAW <b id="att-yaw">+0.0&deg;</b></span>
         </div>
+        <div id="cylinder-view" class="cylinder-view" aria-label="Cylinder position readback">
+          <div class="cylinder-head"><h3>Cylinder</h3><span id="cylinder-status">No readback</span></div>
+          <div class="cylinder-body">
+            <svg class="cylinder-reference" viewBox="0 0 150 74" role="img" aria-labelledby="cylinder-reference-title">
+              <title id="cylinder-reference-title">Upright and down reference silhouettes; current cylinder angle is unknown</title>
+              <g fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 55h53 M88 55h53"/>
+                <rect x="27" y="14" width="17" height="33" rx="2"/>
+                <path d="M35.5 3v11 M35.5 47v8 M25 3h21"/>
+                <rect x="95" y="34" width="33" height="17" rx="2"/>
+                <path d="M128 42.5h11 M88 32v21 M88 42.5h7"/>
+              </g>
+              <g fill="currentColor" font-size="10" text-anchor="middle"><text x="35" y="70">Upright</text><text x="114" y="70">Down</text></g>
+            </svg>
+            <dl class="cylinder-readings">
+              <div><dt>Encoder</dt><dd><b id="cylinder-raw">--</b> <span>raw</span></dd></div>
+              <div><dt>Motor shaft</dt><dd id="cylinder-shaft">--</dd></div>
+              <div><dt>Linkage angle</dt><dd>Uncalibrated</dd></div>
+            </dl>
+          </div>
+          <p id="cylinder-note">Reference positions only. UP / DOWN locked.</p>
+        </div>
       </section>
-      <section class="panel wheels">
-        <div class="panel-head"><h2>WHEELS</h2><span class="head-note">speed and motor current</span></div>
-        <div id="wheels" class="wheel-grid"><p class="empty">Connect to the rover to see its wheels.</p></div>
-      </section>
-    </div>
 
     <section class="panel path">
-      <div class="panel-head"><h2>PATH</h2><span id="path-scale" class="head-note"></span></div>
-      <div class="canvas-box"><canvas id="path"></canvas></div>
-      <div class="readout">
-        <span>X <b id="pos-x">+0.000</b> m</span>
-        <span>Y <b id="pos-y">+0.000</b> m</span>
-        <span>FROM START <b id="pos-r">0.000</b> m</span>
+      <div class="panel-head"><h2>PATH · 2D</h2><span id="path-scale" class="head-note">Waiting for telemetry</span></div>
+      <div class="canvas-box"><canvas id="path" aria-label="Local rover path, start direction X up and Y left, metres"></canvas></div>
+      <div class="readout path-position">
+        <span id="path-position-status" class="path-position-status">LOCAL POSITION · UNAVAILABLE</span>
+        <span>X <b id="pos-x">--</b> m</span>
+        <span>Y <b id="pos-y">--</b> m</span>
+        <span class="path-distance">FROM START <b id="pos-r">--</b> m</span>
       </div>
+      <details id="scout-landings" class="scout-landings">
+        <summary>SCOUT LANDINGS / PLOTS <span id="scout-landings-count"></span></summary>
+        <div class="scout-landings-body">
+        <div class="scout-result-actions">
+          <label class="scout-file">Load landing result<input id="scout-landings-file" type="file" accept=".json,application/json" multiple></label>
+          <button id="scout-landings-clear" type="button">Clear imports</button>
+          <button id="scout-plots-open" type="button">Plot viewer</button>
+        </div>
+        <p id="scout-landings-status" role="status">○ First contact · □ Final rest</p>
+        </div>
+      </details>
+      <details id="mapping-panel" class="mapping">
+        <summary>MISSION MAP <span id="mapping-badge">No map</span></summary>
+        <div class="mapping-body">
+          <p id="mapping-status" role="status">Connect to load a mission map.</p>
+          <p id="mapping-identity" class="mapping-identity">No map selected</p>
+          <div class="mapping-canvas"><canvas id="mapping-canvas" aria-label="Mission map, X right and Y up, metres"></canvas></div>
+          <div class="mapping-legend" aria-label="Map markers"><span>○ First contact</span><span>□ Rest</span><span>◇ Clegg</span><span>+ Landmark</span></div>
+          <p id="mapping-live" class="muted">Rover location unavailable</p>
+          <p class="muted">Circles show supplied uncertainty bounds. Accuracy and live odometry drift remain unverified. Close MISSION MAP to see the local path.</p>
+          <div class="mapping-actions"><button id="mapping-refresh" type="button" disabled>Refresh</button><button id="mapping-export" type="button" disabled>Export JSON</button></div>
+          <details class="mapping-edit"><summary>Create / open map</summary>
+            <form id="mapping-open-form">
+              <label>Saved map<select id="mapping-map-select" aria-label="Saved map"><option value="">No saved maps</option></select></label>
+              <button id="mapping-open" type="submit" disabled>Open map</button>
+            </form>
+            <form id="mapping-create-form">
+              <label>Map name<input id="mapping-name" type="text" maxlength="120" required></label>
+              <label>Coordinate reference<textarea id="mapping-reference" rows="2" maxlength="2000" placeholder="Measured origin, X/Y directions and survey reference" required></textarea></label>
+              <button id="mapping-create" type="submit" disabled>Create map</button>
+            </form>
+          </details>
+          <details class="mapping-edit"><summary>Register local frame</summary>
+            <p class="muted">Use at least two distinct measured point pairs in metres. Registration fits rotation and translation; it does not correct odometry drift.</p>
+            <form id="mapping-register-form">
+              <label>Local frame ID<input id="mapping-frame" type="text" required></label>
+              <button id="mapping-use-frame" type="button" disabled>Use current frame ID</button>
+              <label>Control points (JSON)<textarea id="mapping-points" rows="4" spellcheck="false" placeholder='[{"local_xy":[x,y],"map_xy":[x,y]}, …]' required></textarea></label>
+              <label>Translation bound at control centroid (m, optional)<input id="mapping-reg-bound" type="number" step="any" min="0"></label>
+              <div class="mapping-fields"><label>Heading bound (deg, optional)<input id="mapping-yaw-bound" type="number" step="any" min="0" max="180"></label><label>Max fit residual (m)<input id="mapping-residual" type="number" step="any" min="0" required></label></div>
+              <p class="muted">Without a heading bound, transformed locations have unknown total uncertainty.</p>
+              <label>Survey / transform evidence<textarea id="mapping-reg-evidence" rows="2" maxlength="2000" placeholder="Log or survey record and method" required></textarea></label>
+              <button id="mapping-register" type="submit" disabled>Register frame</button>
+            </form>
+          </details>
+          <details class="mapping-edit"><summary>Add observation / correction</summary>
+            <form id="mapping-observe-form">
+              <label>Event<select id="mapping-kind"><option value="scout_first_contact">Scout first contact</option><option value="scout_rest">Scout final rest</option><option value="clegg_impact">Clegg impact</option><option value="landmark">Landmark</option></select></label>
+              <div class="mapping-fields"><label>Shot ID<input id="mapping-shot" type="text" maxlength="120" required></label><label>Label<input id="mapping-label" type="text" maxlength="120" required></label></div>
+              <fieldset><legend>Event time</legend>
+                <label>Clock reference (optional if unknown)<input id="mapping-clock" type="text" placeholder="unix_s or video filename + seconds"></label>
+                <div class="mapping-fields"><label>Value (s, optional)<input id="mapping-time" type="number" step="any"></label><label>Uncertainty (s, optional)<input id="mapping-time-bound" type="number" step="any" min="0"></label></div>
+                <p class="muted">Leave the value blank when event time is unknown. Saving does not substitute the current time.</p>
+              </fieldset>
+              <label>Observation evidence<textarea id="mapping-evidence" rows="2" maxlength="2000" placeholder="Original recording / measurement reference" required></textarea></label>
+              <label>Location<select id="mapping-location"><option value="unknown">Unknown</option><option value="surveyed">Surveyed map coordinates</option><option value="local">Local frame coordinates</option></select></label>
+              <div id="mapping-unknown-fields"><label>Why unknown<input id="mapping-unknown" type="text" required></label></div>
+              <div id="mapping-coordinate-fields" hidden>
+                <div class="mapping-fields"><label>X (m)<input id="mapping-x" type="number" step="any"></label><label>Y (m)<input id="mapping-y" type="number" step="any"></label></div>
+                <label>Location bound (m, optional)<input id="mapping-location-bound" type="number" step="any" min="0"></label>
+                <label id="mapping-location-frame-label" hidden>Local frame ID<input id="mapping-location-frame" type="text"></label>
+                <label>Location evidence<textarea id="mapping-location-evidence" rows="2" maxlength="2000"></textarea></label>
+              </div>
+              <details><summary>Measured value (optional)</summary>
+                <p class="muted">Record the measured quantity and its calibration. No CIV or soil class is inferred.</p>
+                <label>Quantity<input id="mapping-quantity" type="text" placeholder="e.g. CIV" maxlength="120"></label>
+                <div class="mapping-fields"><label>Value<input id="mapping-value" type="number" step="any"></label><label>Unit<input id="mapping-unit" type="text" maxlength="80"></label></div>
+                <label>Calibration ID<input id="mapping-calibration" type="text" maxlength="120"></label>
+                <label>Measurement evidence<textarea id="mapping-measurement-evidence" rows="2" maxlength="2000"></textarea></label>
+              </details>
+              <details><summary>Correct an earlier event (optional)</summary><label>Supersedes event ID<input id="mapping-supersedes" type="text" maxlength="160"></label><p class="muted">The earlier event stays in the record and is no longer plotted.</p></details>
+              <button id="mapping-observe" type="submit" disabled>Save observation</button>
+            </form>
+          </details>
+          <details><summary>Events <span id="mapping-event-count">0</span></summary><ol id="mapping-events" class="mapping-events"></ol></details>
+          <details><summary>Frame registrations</summary><ul id="mapping-registrations" class="mapping-events"></ul></details>
+        </div>
+      </details>
     </section>
   </div>
 
-  <section class="panel plots">
-    <div class="panel-head">
-      <h2>PLOTS</h2>
-      <div id="plot-toggles" class="toggles"></div>
-      <span class="head-note">last 30 s, up to 4 at once</span>
-    </div>
-    <div id="plot-row" class="plot-row"><p class="empty">Plots start when the rover is connected. Type its address at the top and press CONNECT.</p></div>
-  </section>
-
-  <div class="row-bottom">
-    <section class="panel log">
-      <div class="panel-head"><h2>TELEMETRY / SYSTEM LOG</h2></div>
-      <pre id="log-header" class="log-header"></pre>
-      <div id="log" class="log-body" tabindex="0" aria-label="Telemetry and system log"></div>
-    </section>
-
-    <section class="panel drive">
-      <div class="panel-head"><h2>DRIVE</h2><span id="gamepad-label" class="head-note">keyboard</span></div>
-      <div class="drive-body">
-        <div id="pad" class="pad" aria-label="Drive pad: drag to drive"><div id="pad-dot" class="pad-dot"></div></div>
-        <div class="drive-side">
-          <label for="speed-limit">SPEED LIMIT <b id="speed-limit-value">50%</b></label>
-          <input id="speed-limit" type="range" min="10" max="100" step="5" value="50">
-          <div id="aux" class="aux" aria-label="String lift and camera pan: hold to run">
-            <span>LIFT</span>
-            <button type="button" data-lift="1" aria-label="Lift up" title="Hold to wind the string in. Key R, gamepad D-pad up.">&#9650;</button>
-            <button type="button" data-lift="-1" aria-label="Lift down" title="Hold to let the string out. Key F, gamepad D-pad down.">&#9660;</button>
-            <span>PAN</span>
-            <button type="button" data-pan="-1" aria-label="Pan camera left" title="Hold to turn the camera left. Key Q, gamepad D-pad left.">&#9664;</button>
-            <button type="button" data-pan="1" aria-label="Pan camera right" title="Hold to turn the camera right. Key E, gamepad D-pad right.">&#9654;</button>
+  <div class="workspace-row">
+    <section id="operation-panel" class="panel operation" aria-label="Operation controls">
+      <div class="panel-head operation-title"><h2>OPERATION</h2><span class="head-note">Drive · Clegg · Scout</span></div>
+      <section class="operation-section drive">
+        <div class="panel-head"><h2>DRIVE</h2><span id="gamepad-label" class="head-note">keyboard</span></div>
+        <div class="drive-body">
+          <div id="pad" class="pad" aria-label="Drive pad: drag to drive"><div id="pad-dot" class="pad-dot"></div></div>
+          <div class="drive-side">
+            <label for="speed-limit">SPEED LIMIT <b id="speed-limit-value">50%</b></label>
+            <input id="speed-limit" type="range" min="10" max="100" step="5" value="50" title="Up/Down: change speed limit by 5% per press. W A S D: drive.">
+            <div id="aux" class="aux" aria-label="Camera pan: hold to run">
+              <span>PAN</span>
+              <button type="button" data-pan="-1" aria-label="Pan camera left" title="Hold Left arrow or Q to pan left; release to stop. Gamepad D-pad left.">&#9664;</button>
+              <button type="button" data-pan="1" aria-label="Pan camera right" title="Hold Right arrow or E to pan right; release to stop. Gamepad D-pad right.">&#9654;</button>
+            </div>
+            <button id="estop" type="button" class="estop">E-STOP</button>
+            <p id="drive-hint" class="hint">WASD drive<br>↑↓ speed · ←→ pan<br>Space E-STOP</p>
           </div>
-          <button id="estop" type="button" class="estop">E-STOP</button>
-          <p class="hint">W A S D or arrows drive. R F lift, Q E pan. Space stops.</p>
         </div>
+      </section>
+
+      <section id="hammer-panel" class="operation-section hammer" aria-label="Clegg hammer controls">
+        <div class="panel-head"><h2>CLEGG HAMMER</h2><span id="hammer-state" class="head-note">DISCONNECTED</span>
+        </div>
+        <div class="hammer-actions">
+          <div class="hammer-cylinder" role="group" aria-label="Cylinder ID 5">
+            <span>CYLINDER</span>
+            <button id="hammer-lift" type="button" data-hold="lift" data-lift-direction="up" aria-label="Cylinder up" aria-describedby="hammer-cylinder-status" title="Hold to move up; release to hold position"><b>UP</b></button>
+            <button id="hammer-lower" type="button" data-hold="lift" data-lift-direction="down" aria-label="Cylinder down" aria-describedby="hammer-cylinder-status" title="Hold to move down; release to hold position"><b>DOWN</b></button>
+            <button id="hammer-torque-off" type="button" aria-label="Cylinder torque off" title="End cylinder movement or position hold and turn torque OFF; support the load"><b>TORQUE OFF</b></button>
+          </div>
+          <div class="hammer-strings" role="group" aria-label="String servos">
+            <span>STRING</span>
+            <button id="hammer-wind" type="button" data-hold="wind" aria-describedby="hammer-wind-timer" title="Hold to wind continuously; release to stop. The timer resets on each press." disabled><b>WIND</b></button>
+            <button id="hammer-release" type="button" title="Click once for a timed ARM pulse; E-STOP interrupts" disabled><b>ARM</b></button>
+            <button id="hammer-rearm" type="button" title="Click once for a timed RELEASE pulse; E-STOP interrupts" disabled><b>RELEASE</b></button>
+          </div>
+          <div id="hammer-wind-timer" class="hammer-wind-timer" data-running="false" data-reached="false" title="Time holding WIND on this screen. Resets on the next WIND press; release keeps the result. The reference does not stop WIND or measure string movement.">
+            <span>This hold</span><output id="hammer-wind-time">0.0 / 22.0 s (0%)</output>
+            <progress id="hammer-wind-progress" value="0" max="22" aria-label="WIND hold time toward the reference"></progress>
+          </div>
+          <button id="hammer-estop" type="button">E-STOP</button>
+        </div>
+        <p id="hammer-cylinder-status" class="hint" role="status">Connect to Rover and wait for fresh telemetry.</p>
+        <details class="hammer-details"><summary>STRING SETTINGS</summary>
+          <div class="operation-detail-body">
+            <fieldset id="hammer-string-settings">
+              <legend>STRING output</legend>
+              <label>ARM PWM (µs)<input id="hammer-string-release-pulse_us" type="number" step="1" disabled></label>
+              <label>ARM Duration (s)<input id="hammer-string-release-seconds" type="number" step="0.1" disabled></label>
+              <label>RELEASE PWM (µs)<input id="hammer-string-rearm-pulse_us" type="number" step="1" disabled></label>
+              <label>RELEASE Duration (s)<input id="hammer-string-rearm-seconds" type="number" step="0.1" disabled></label>
+            </fieldset>
+            <p>Changes apply on the next ARM or RELEASE press.</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="jumper-panel" class="operation-section jumper" aria-label="Scout 1 controls">
+        <div class="panel-head">
+          <h2>SCOUT 1</h2>
+          <span id="jumper-state" class="chip idle">OFF</span>
+          <span id="jumper-capture-badge" class="capture-badge" title="Raw capture status; individual sensor health and file finalization are separate">CAPTURE --</span>
+        </div>
+        <p id="jumper-device" class="scout-device">Not configured</p>
+        <div class="jumper-actions" role="group" aria-label="Scout independent commands">
+          <button id="jumper-latch" type="button" title="Move J5 to LOCK; motor output is unchanged" disabled>LOCK</button>
+          <button id="jumper-prepare" type="button" title="Move J5 to PULL; motor output is unchanged" disabled>PULL</button>
+          <button id="jumper-launch" type="button" title="Move J5 to LAUNCH (110°); motor output is unchanged" disabled>LAUNCH</button>
+          <button id="jumper-compress" type="button" title="Start forward rotation; servo output is unchanged" disabled>COMPRESS</button>
+          <button id="jumper-decompress" type="button" title="Start reverse rotation at the same duty; servo output is unchanged" disabled>DECOMPRESS</button>
+          <button id="jumper-stop" type="button" title="Stop either rotation direction; keep the J5 servo output" disabled>STOP ROTATION</button>
+          <button id="jumper-estop" type="button" title="Turn this Scout's motor and servo outputs off" disabled>E-STOP</button>
+        </div>
+        <details class="jumper-details">
+          <summary>Status / setup</summary>
+          <div class="jumper-detail-body operation-detail-body">
+            <p class="jumper-connection"><span id="jumper-address">--</span> · <span id="jumper-owner">No controller</span></p>
+            <p id="jumper-note" class="jumper-note" role="status">Jumper connection is not enabled</p>
+            <dl class="jumper-readings">
+              <div><dt>Battery</dt><dd id="jumper-battery">--</dd></div>
+              <div><dt>Encoder / progress</dt><dd id="jumper-encoder">--</dd></div>
+              <div><dt>Compression result</dt><dd id="jumper-cycle">--</dd></div>
+              <div><dt>API / outputs</dt><dd id="jumper-health">--</dd></div>
+            </dl>
+            <div class="jumper-sensors">
+              <article><h3>ICM-45605</h3><pre id="jumper-icm">No samples</pre></article>
+              <article><h3>ADXL375</h3><pre id="jumper-adxl">No samples</pre></article>
+              <article><h3>MMC5983MA · raw magnetic field</h3><pre id="jumper-mag">No samples</pre></article>
+            </div>
+            <p class="hint">Magnetometer readings are raw counts, not a heading.</p>
+            <p id="jumper-capture" class="jumper-record">Capture: --</p>
+            <pre id="jumper-counters" class="jumper-record">Counts / loss: --</pre>
+            <pre id="jumper-events" class="jumper-record" aria-label="Jumper recent events"></pre>
+            <fieldset id="jumper-settings">
+              <legend>Optional settings</legend>
+              <p class="hint">J5 position servo · LOCK 70° · PULL 170° · LAUNCH 110° (requires the Scout firmware update). Shaft angles are not measured.</p>
+              <div class="jumper-profile-grid">
+                <label>Servo model / source<input id="jumper-servo_model" type="text" size="1" maxlength="80" autocomplete="off"></label>
+                <label>Motor direction<select id="jumper-motor_direction"><option value="">Unset</option><option value="1">+1</option><option value="-1">−1</option></select></label>
+                <label>Encoder sign<select id="jumper-encoder_sign"><option value="">Unset</option><option value="1">+1</option><option value="-1">−1</option></select></label>
+                <label>Motor duty (%)<input id="jumper-motor_duty_pct" type="number" min="1" max="100" step="1"></label>
+              </div>
+              <p class="hint">No count target, timer or stall stop. ACK confirms command handling and output state; it does not measure mechanism movement.</p>
+              <button id="jumper-configure" type="button" disabled>APPLY SETTINGS</button>
+            </fieldset>
+          </div>
+        </details>
+      </section>
+    </section>
+    <div class="telemetry-column">
+      <section class="panel plots">
+        <div class="panel-head">
+          <h2>PLOTS</h2>
+          <div id="plot-toggles" class="toggles"></div>
+          <span id="plots-pose-quality" class="pose-warning" hidden>Pose estimates: motion missing</span>
+          <span class="head-note">last 30 s, up to 4 at once</span>
+        </div>
+        <div id="plot-row" class="plot-row"><p class="empty">Plots start when the rover is connected. Type its address at the top and press CONNECT.</p></div>
+      </section>
+
+      <div class="row-bottom">
+        <section class="panel health">
+          <div class="panel-head"><h2>HEALTH</h2><span id="h-temp" class="head-note"></span></div>
+          <dl class="kv chips">
+            <div><dt>LINK</dt><dd><span id="h-link" class="chip idle">OFF</span></dd></div>
+            <div><dt>CONTROL</dt><dd><span id="h-control" class="chip idle">--</span></dd></div>
+            <div><dt>MOTORS</dt><dd><span id="h-motors" class="chip idle">--</span></dd></div>
+            <div><dt>IMU</dt><dd><span id="h-imu" class="chip idle">--</span></dd></div>
+            <div><dt>CAMERA</dt><dd><span id="h-camera" class="chip idle">--</span></dd></div>
+            <div><dt>LOOP</dt><dd><span id="h-loop" class="chip idle">--</span></dd></div>
+            <div><dt>SERVOS</dt><dd><span id="h-servos" class="chip idle">--</span></dd></div>
+            <div><dt>BATTERY</dt><dd><span id="h-battery" class="chip idle">--</span></dd></div>
+          </dl>
+        </section>
+
+        <section class="panel stats">
+          <div class="panel-head">
+            <h2>DRIVE STATS</h2>
+            <button id="zero-battery" type="button" class="small"
+                    title="Set the rover's count of battery charge used back to zero, e.g. after fitting a fresh battery.">ZERO mAh</button>
+          </div>
+          <dl class="kv">
+            <div class="hero"><dt>DISTANCE</dt><dd id="st-distance">0.00 m</dd></div>
+            <div><dt>MOVING TIME</dt><dd id="st-moving">0.0 s</dd></div>
+            <div><dt>MAX SPEED</dt><dd id="st-speed">0.00 m/s</dd></div>
+            <div><dt>MAX CURRENT</dt><dd id="st-current">0.00 A</dd></div>
+            <div><dt>MAX TILT</dt><dd id="st-tilt">0.0&deg;</dd></div>
+            <div><dt>BATTERY DRAW</dt><dd id="st-battery">--</dd></div>
+            <div><dt>BATTERY USED</dt><dd id="st-mah">--</dd></div>
+          </dl>
+        </section>
+
+        <details class="panel filter diagnostic">
+          <summary class="panel-head"><h2>FILTER CHECK</h2><span class="head-note">NIS, last 3 s</span></summary>
+          <div class="diagnostic-body">
+          <table class="nis">
+            <thead><tr><th>update</th><th>mean</th><th>target</th><th>ratio</th><th></th></tr></thead>
+            <tbody id="nis"><tr><td colspan="5" class="muted">waiting for the rover</td></tr></tbody>
+          </table>
+          <p class="hint">ratio = mean / target. Outside 0.33 to 3, check the model, timing and noise settings. It does not measure accuracy.</p>
+          </div>
+        </details>
+
+        <details class="panel log diagnostic">
+          <summary class="panel-head"><h2>TELEMETRY / SYSTEM LOG</h2></summary>
+          <div class="diagnostic-body">
+          <pre id="log-header" class="log-header"></pre>
+          <div id="log" class="log-body" tabindex="0" aria-label="Telemetry and system log"></div>
+          </div>
+        </details>
       </div>
-    </section>
-
-    <section class="panel stats">
-      <div class="panel-head">
-        <h2>DRIVE STATS</h2>
-        <button id="zero-battery" type="button" class="small"
-                title="Set the rover's count of battery charge used back to zero, e.g. after fitting a fresh battery.">ZERO mAh</button>
-      </div>
-      <dl class="kv">
-        <div class="hero"><dt>DISTANCE</dt><dd id="st-distance">0.00 m</dd></div>
-        <div><dt>MOVING TIME</dt><dd id="st-moving">0.0 s</dd></div>
-        <div><dt>MAX SPEED</dt><dd id="st-speed">0.00 m/s</dd></div>
-        <div><dt>MAX CURRENT</dt><dd id="st-current">0.00 A</dd></div>
-        <div><dt>MAX TILT</dt><dd id="st-tilt">0.0&deg;</dd></div>
-        <div><dt>BATTERY DRAW</dt><dd id="st-battery">--</dd></div>
-        <div><dt>BATTERY USED</dt><dd id="st-mah">--</dd></div>
-      </dl>
-    </section>
-
-    <section class="panel health">
-      <div class="panel-head"><h2>HEALTH</h2><span id="h-temp" class="head-note"></span></div>
-      <dl class="kv chips">
-        <div><dt>LINK</dt><dd><span id="h-link" class="chip idle">OFF</span></dd></div>
-        <div><dt>CONTROL</dt><dd><span id="h-control" class="chip idle">--</span></dd></div>
-        <div><dt>MOTORS</dt><dd><span id="h-motors" class="chip idle">--</span></dd></div>
-        <div><dt>IMU</dt><dd><span id="h-imu" class="chip idle">--</span></dd></div>
-        <div><dt>CAMERA</dt><dd><span id="h-camera" class="chip idle">--</span></dd></div>
-        <div><dt>LOOP</dt><dd><span id="h-loop" class="chip idle">--</span></dd></div>
-        <div><dt>SERVOS</dt><dd><span id="h-servos" class="chip idle">--</span></dd></div>
-        <div><dt>BATTERY</dt><dd><span id="h-battery" class="chip idle">--</span></dd></div>
-      </dl>
-    </section>
-
-    <section class="panel filter">
-      <div class="panel-head"><h2>FILTER CHECK</h2><span class="head-note">NIS, last 3 s</span></div>
-      <table class="nis">
-        <thead><tr><th>update</th><th>mean</th><th>target</th><th>ratio</th><th></th></tr></thead>
-        <tbody id="nis"><tr><td colspan="5" class="muted">waiting for the rover</td></tr></tbody>
-      </table>
-      <p class="hint">ratio = mean / target. Outside 0.33 to 3, check the model, timing and noise settings. It does not measure accuracy.</p>
-    </section>
+    </div>
   </div>
 </main>
+
+<section id="scout-shot-window" class="scout-shot-window" aria-label="Scout offline plot viewer" hidden>
+  <div class="scout-shot-head">
+    <strong>SCOUT PLOT VIEWER</strong>
+    <select id="scout-shot-select" aria-label="Scout plot device"><option value="scout_1">SCOUT 1</option><option value="scout_2">SCOUT 2</option></select>
+    <button id="scout-shot-close" type="button" aria-label="Close shot plots">CLOSE</button>
+  </div>
+  <p id="scout-shot-identity"></p><p id="scout-shot-status" role="status"></p>
+  <p id="scout-shot-metrics"></p>
+  <div class="scout-result-actions">
+    <label class="scout-file">Load plot.json<input id="scout-shot-file" type="file" accept=".json,application/json"></label>
+    <button id="scout-shot-save" type="button" disabled>Save displayed data</button>
+  </div>
+  <p id="scout-shot-note"></p>
+  <div class="scout-shot-grid"><canvas id="scout-shot-a"></canvas><canvas id="scout-shot-b"></canvas><canvas id="scout-shot-c"></canvas><canvas id="scout-shot-d"></canvas></div>
+</section>
 
 <!-- If any script file fails to download, load the page again. It happens:
      the browser cancels downloads -- even from localhost -- when Windows

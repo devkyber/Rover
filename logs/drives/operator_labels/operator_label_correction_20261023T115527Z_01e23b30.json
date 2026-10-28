@@ -1,0 +1,38 @@
+{
+  "schema": "rover_operator_label_v1",
+  "created_notebook_utc": "2026-10-23T11:55:27.488210+00:00",
+  "operator_report_date": "2026-10-23",
+  "timezone": "Asia/Seoul",
+  "record_kind": "immutable correction superseding an agent interpretation error",
+  "supersedes": {
+    "path": "logs/run_analysis_operator_labels_2026-10-23/operator_label_20261023T115428Z_1a56302f.json",
+    "sha256": "8df683e9d9ecb286e715c903ae7713d0084113c57880331157f3a68cdc2b1c77",
+    "reason": "The prior normalized label incorrectly converted3m into180seconds. That duration was the agent interpretation error; the user did not assert180seconds."
+  },
+  "operator_report": {
+    "purpose": "The two actual drives were practice for the2026-10-24contest.",
+    "incident": "The connection suddenly cut, the operator manually rebooted Jetson, then continued running.",
+    "continued_run_exact_quote": "another 3 m of runs",
+    "continued_run_interpretation": "Roughly3m of additional driving is the preferred reading; an approximate operator recollection, not surveyed distance or an asserted180second duration.",
+    "connection_failure_cause": "Unresolved; the reported connection cut alone does not establish the failure cause"
+  },
+  "tentative_associations": [
+    {
+      "run_id": "e2c0c0d377de495d8d423acefa0d2710",
+      "role": "Longer practice-drive candidate",
+      "confidence": "tentative",
+      "limitations": "Exact UTC and ordering relative to reboot remain unresolved"
+    },
+    {
+      "run_id": "218d0d5b716b4e2d9f7350a90107c12b",
+      "role": "Shorter post-reboot continuation candidate",
+      "confidence": "tentative",
+      "limitations": "Its3.36m nominal encoder travel is consistent with roughly3m operator recollection, but neither independent ground distance nor chronological linkage is proven"
+    }
+  ],
+  "protected_interpretations": [
+    "Retain prior label as superseded evidence of the agent interpretation error; do not treat its180second field as a user assertion.",
+    "Original CSV, metadata, native clocks, source identities and previous scalar results remain unchanged.",
+    "Nominal encoder travel is not surveyed ground distance; degraded coordinates remain unvalidated."
+  ]
+}

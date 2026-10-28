@@ -1,0 +1,48 @@
+{
+  "release": "final-vehicle-2026-10-28",
+  "closed_date_kst": "2026-10-28",
+  "operator_guide": "README.md",
+  "source_manifest": "data/final_vehicle_2026-10-28/source_manifest.json",
+  "closure_receipt": "data/final_vehicle_2026-10-28/closure_receipt.json",
+  "installation_identity": "data/final_vehicle_2026-10-28/installation_identity.json",
+  "components": {
+    "jetson": {
+      "entrypoint": "rover/rover_main.py",
+      "configuration": "rover/config.py",
+      "runtime_service": "jetson/rover-field.service",
+      "closure_deployed": false,
+      "fresh_readback": false,
+      "state_basis": "Historical final installation receipts only; Jetson unavailable at closure. User requested inferred identity without logging in."
+    },
+    "station": {
+      "entrypoint": "station/station.py",
+      "dashboard": "station/web/index.html"
+    },
+    "pico": {
+      "source": "firmware/pico/main.py",
+      "board_flash_performed_at_closure": false
+    },
+    "scout": {
+      "firmware": "scout-process-v12.4-control-link-j5",
+      "source": "firmware/scout/v12_4_control_link/esp",
+      "release": "firmware/scout/releases/v12_4_control_link_wifi_20261024",
+      "app_sha256": "293dac4d98e688be1bb56284b71e7195b4cdc073f4c518859e15455426df79d7",
+      "installation_receipts": "data/final_vehicle_2026-10-28/installation_identity.json",
+      "closure_board_flash_performed": false,
+      "installation_record_pointer": "/records/scout_v12_4_boards/record"
+    },
+    "clegg": {
+      "source": "firmware/clegg_wireless_sdk",
+      "last_recorded_source_id": "1787a6485cea4a617bd7d116f405a1edad19667d77ad2944da0507e758b4d2be",
+      "last_recorded_uf2_sha256": "49a3dd044def0855ad8b29c82d2af6075df160bf17dcfc9a1036c82ffb4c09c4",
+      "private_recovery_identity": "data/final_vehicle_2026-10-28/installation_identity.json",
+      "closure_board_flash_performed": false,
+      "private_recovery_record_pointer": "/private_image_identity"
+    }
+  },
+  "movement_recordings": "logs/README.md",
+  "limitations": "docs/05_한계와_로드맵.md",
+  "secrets": "Ignored *.local.md and private/; excluded from Git.",
+  "source_tree_sha256": "8869c2d45e6b6c8dc2736b6a4820ab1060bfc6fbf78e8f3fdb94f1d21e11decf",
+  "cleanup_revision": "core-final-audit-2026-10-28"
+}

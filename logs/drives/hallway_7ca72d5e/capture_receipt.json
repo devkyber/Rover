@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "remote_session": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958",
+  "started_utc": "2026-10-23T14:45:38.423759+00:00",
+  "monotonic_s": 11848.252641344,
+  "boot_id": "3f19ec14-a6b8-4c87-9a5d-73aac75ca01c",
+  "method": "Existing file prefixes at initial per-file size; read-only current-boot journal and radio status. No tests, commands to actuators, settings, restarts, or remote files.",
+  "files": [
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/metadata.json",
+      "name": "session/metadata.json",
+      "bytes": 520239,
+      "initial_size": 520239,
+      "mtime_ns": 1792765635544000000,
+      "sha256": "d21c22953a94441e8600dc6bc3c3ea6ed7025c1e64cf644036124e57745a0057"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/events.jsonl",
+      "name": "session/rover/events.jsonl",
+      "bytes": 38706,
+      "initial_size": 38706,
+      "mtime_ns": 1792766733520000000,
+      "sha256": "065ecf92e29d794f272afffc515f9adc50569bfb073cf72e42c244eb9dbb583c"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/commands.jsonl",
+      "name": "session/rover/commands.jsonl",
+      "bytes": 11095786,
+      "initial_size": 11095786,
+      "mtime_ns": 1792766684400000000,
+      "sha256": "10208eaed62b08fdc6078b3ddfc4e1dfa86e683d4bd42c0465cac2564ef51d54"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/system_0001.csv",
+      "name": "session/rover/system_0001.csv",
+      "bytes": 1594299,
+      "initial_size": 1594299,
+      "mtime_ns": 1792765789428000000,
+      "sha256": "c3d7cf13d20320bd9c3d7a348c5b45e1020570de9ee709e6075bb1d8d87f5984"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/system_0002.csv",
+      "name": "session/rover/system_0002.csv",
+      "bytes": 1559610,
+      "initial_size": 1559610,
+      "mtime_ns": 1792765937576000000,
+      "sha256": "e524ebda69ec498f39bf493937cf723e4e068fc7f35b25771c823a54d209833b"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/system_0003.csv",
+      "name": "session/rover/system_0003.csv",
+      "bytes": 1542499,
+      "initial_size": 1542499,
+      "mtime_ns": 1792766083936000000,
+      "sha256": "9794230a57c7af62e9b2ee58fdbe3428a1c6900164edab012a5b4f34bf72e358"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/system_0004.csv",
+      "name": "session/rover/system_0004.csv",
+      "bytes": 1626141,
+      "initial_size": 1626141,
+      "mtime_ns": 1792766226684000000,
+      "sha256": "0ddd13ee0686e31e1995c0edf17cfd6fc481ff9a5e166396ef68a20036183faa"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/system_0005.csv",
+      "name": "session/rover/system_0005.csv",
+      "bytes": 1601687,
+      "initial_size": 1601687,
+      "mtime_ns": 1792766367024000000,
+      "sha256": "d6fd751a9b19b05dee5a38162e7b099091f276519fb1e0d5412ca0da704b98d3"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/system_0006.csv",
+      "name": "session/rover/system_0006.csv",
+      "bytes": 1529841,
+      "initial_size": 1529841,
+      "mtime_ns": 1792766505628000000,
+      "sha256": "fb374ec4deb304a82fe9cd30a8c74a686d9f71209ac5766aefe149b404ed2cf3"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/system_0007.csv",
+      "name": "session/rover/system_0007.csv",
+      "bytes": 1495730,
+      "initial_size": 1495730,
+      "mtime_ns": 1792766642080000000,
+      "sha256": "2b26db572c090f31e11f717fb4491e1998263e5693b25f35fcf0474a8658afd9"
+    },
+    {
+      "source": "/home/taeholee/Rover/logs/sessions/20261023T142715.535439Z_7ca72d5ef4044b1cadaa_4bfbe958/rover/system_0008.csv",
+      "name": "session/rover/system_0008.csv",
+      "bytes": 1069015,
+      "initial_size": 1069015,
+      "mtime_ns": 1792766739540000000,
+      "sha256": "23a5297c5358cd25e225ddfd647f89b5076a8fa8033bef09243913eb74127651"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "journalctl",
+        "-b",
+        "--no-pager",
+        "-o",
+        "short-monotonic",
+        "-u",
+        "NetworkManager",
+        "-u",
+        "wpa_supplicant",
+        "-u",
+        "rover-wifi-recover.service"
+      ],
+      "name": "network_journal.log",
+      "returncode": 0,
+      "bytes": 298648,
+      "sha256": "ec57d0c8a7f595a560f58cdc76f414e2ec7ce200ca6c7524cb679c9f31992f0d",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "journalctl",
+        "-k",
+        "-b",
+        "--no-pager",
+        "-o",
+        "short-monotonic"
+      ],
+      "name": "kernel_journal.log",
+      "returncode": 0,
+      "bytes": 70528,
+      "sha256": "653216a4cf211e6f01061eca6ed80859ca789a94cd0d24314343e9bd6be175f0",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "iw",
+        "dev",
+        "wlP1p1s0",
+        "link"
+      ],
+      "name": "radio_link.txt",
+      "returncode": 0,
+      "bytes": 382,
+      "sha256": "fa391e46550ac376583a3e736b34b64b83ff8f4c7b9d6131f1aa5c5fd2b366a6",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "iw",
+        "dev",
+        "wlP1p1s0",
+        "station",
+        "dump"
+      ],
+      "name": "radio_station.txt",
+      "returncode": 0,
+      "bytes": 805,
+      "sha256": "770c0ed5df6571283ee657b6517515c0cfa243734dc2bc739127e45451b7cc71",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "iw",
+        "dev",
+        "wlP1p1s0",
+        "info"
+      ],
+      "name": "radio_info.txt",
+      "returncode": 0,
+      "bytes": 287,
+      "sha256": "06d6044d0cbe584e077ec16fe3231bb3091a6b148bf2d27ca257c11e0a210bfd",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "iw",
+        "dev",
+        "wlP1p1s0",
+        "get",
+        "power_save"
+      ],
+      "name": "wifi_power_save.txt",
+      "returncode": 0,
+      "bytes": 16,
+      "sha256": "ba261103b17bb68d60cfd1f819dfd2b8b54e4ac2132b755d4dd4e045990725b7",
+      "stderr": ""
+    }
+  ],
+  "finished_utc": "2026-10-23T14:45:39.880627+00:00"
+}

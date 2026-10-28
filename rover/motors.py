@@ -21,9 +21,22 @@ class Motors:
         import dxl_reader
         self._reader_mod, self._control_mod = dxl_reader, dxl_control
         self.port_h, self.pkt_h = dxl_reader.open_port()
-        self.reader = dxl_reader.create_sync_reader(self.port_h, self.pkt_h)
-        dxl_control.setup_wheels(self.pkt_h, self.port_h)
-        self.writer = dxl_control.create_sync_writer(self.port_h, self.pkt_h)
+        try:
+            self.reader = dxl_reader.create_sync_reader(self.port_h, self.pkt_h)
+            dxl_control.setup_wheels(self.pkt_h, self.port_h)
+            self.writer = dxl_control.create_sync_writer(self.port_h, self.pkt_h)
+        except BaseException:
+            # A constructor failure leaves no Motors instance for main's
+            # cleanup. Torque may already be ON for a subset of the wheels.
+            try:
+                dxl_control.set_torque(self.pkt_h, self.port_h, False)
+            except Exception as error:
+                print(f'Wheel startup torque OFF failed: {error}')
+            try:
+                dxl_reader.close_port(self.port_h)
+            except Exception as error:
+                print(f'Wheel startup port close failed: {error}')
+            raise
 
     def read(self):
         data = self._reader_mod.read_wheels(self.reader)

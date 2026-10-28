@@ -1,0 +1,34 @@
+{
+  "schema": "rover_operator_label_v1",
+  "created_notebook_utc": "2026-10-23T11:54:28.547784+00:00",
+  "operator_report_date": "2026-10-23",
+  "timezone": "Asia/Seoul",
+  "source": "Human user steering relayed by the root analysis agent; normalized paraphrase, not a verbatim quotation",
+  "operator_report": {
+    "purpose": "The two actual drives were practice for the 2026-10-24 contest.",
+    "incident": "The connection suddenly cut, the operator manually rebooted Jetson, then continued driving for approximately three minutes.",
+    "continued_duration_s_approximate": 180,
+    "continued_duration_scope": "Operator recollection; not a measured session or wheel-motion duration",
+    "connection_failure_cause": "Unresolved; a connection cut does not establish a software or RF root cause"
+  },
+  "tentative_associations": [
+    {
+      "run_id": "e2c0c0d377de495d8d423acefa0d2710",
+      "role": "Longer practice-drive candidate",
+      "confidence": "tentative",
+      "limitations": "Exact UTC/boot order unresolved; not proven to precede the manually rebooted continuation"
+    },
+    {
+      "run_id": "218d0d5b716b4e2d9f7350a90107c12b",
+      "role": "Shorter practice/continuation candidate",
+      "confidence": "tentative",
+      "limitations": "Captured interval448.38s and observed wheel motion63.35s do not establish the reported approximately180s continuation or its ordering"
+    }
+  ],
+  "protected_interpretations": [
+    "No original CSV, metadata, native timestamps, source identities or previous analysis results were changed.",
+    "The operator report adds field context; it does not make nominal encoder travel ground truth or validate degraded position estimates.",
+    "The connection cut and manual reboot are operator-reported events. Their exact telemetry/log boundaries and causal linkage remain unresolved."
+  ],
+  "analysis_report_before_append_sha256": "ff98360ead622f2408b2844361c27a8f052f5710fee1460530410420f8448059"
+}

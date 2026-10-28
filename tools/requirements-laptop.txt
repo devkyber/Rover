@@ -1,0 +1,8 @@
+# Final laptop environment: CPython 3.13.14 with Tk support on Windows.
+# Separate from Jetson's numpy<2 constraint.
+numpy==2.4.3
+pyserial==3.5
+matplotlib==3.10.8
+# Clegg firmware builder; hardware toolchains are installed separately.
+cmake==4.4.4
+ninja==1.13.2

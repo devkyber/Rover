@@ -31,13 +31,13 @@ def open_port(port=config.PORT, baudrate=config.BAUDRATE):
         if "access is denied" in text or "permission" in text:
             hint = ("Something else is holding the port."
                     "\n  - Close DYNAMIXEL Wizard 2.0"
-                    "\n  - Stop any rover_main.py / record.py still running")
+                    "\n  - Stop any other Rover process using the U2D2")
         elif "cannot find" in text or "no such" in text:
             hint = (f"{port} does not exist right now."
                     "\n  - Is the U2D2 plugged in?"
-                    "\n  - Find the real port: python dxl_tool.py scan")
+                    "\n  - Check PORT in rover/config.py; see docs/06_하드웨어.md")
         else:
-            hint = "Find the real port: python dxl_tool.py scan"
+            hint = "Check U2D2 and PORT in rover/config.py; see docs/06_하드웨어.md"
         raise RuntimeError(f"Cannot open {port}: {e}\n  {hint}") from e
 
     if not opened:

@@ -21,6 +21,7 @@ The filter works in two steps:
     1. PREDICT: integrate IMU forward (updates nominal), grow uncertainty (updates P)
     2. UPDATE:  use an observation to correct the error state, then inject into nominal
 """
+from contextlib import contextmanager
 import numpy as np
 import config
 
@@ -211,11 +212,70 @@ def finish_trace(state):
     return state.get('_trace')
 
 
+def validate_state(state):
+    """Reject numerical corruption; this is not an accuracy/confidence check."""
+    for key, shape in (('p', (3,)), ('v', (3,)), ('q', (4,)), ('bg', (3,)),
+                       ('ba', (3,)), ('P', (15, 15))):
+        value = np.asarray(state[key])
+        if value.shape != shape or not np.isfinite(value).all():
+            raise ValueError(f'Invalid estimator state: {key}')
+    if np.linalg.norm(state['q']) == 0:
+        raise ValueError('Estimator orientation has zero norm')
+
+
+_INTERVAL_VALIDATION = object()
+
+
+@contextmanager
+def checked_interval(state):
+    """Validate once around Odometry's atomic, rollback-protected interval.
+
+    Standalone stages retain their own checks. Within an interval, the owner
+    restores the entire interval on failure, so copying/checking the same state
+    before and after every FIFO frame repeats work without adding a boundary.
+    The private token is temporary and is never a checkpoint/config option.
+    """
+    validate_state(state)
+    previous = state.get('_interval_validation')
+    state['_interval_validation'] = _INTERVAL_VALIDATION
+    try:
+        yield
+        validate_state(state)
+    finally:
+        if previous is None:
+            state.pop('_interval_validation', None)
+        else:
+            state['_interval_validation'] = previous
+
+
+def _checked_stage(state, operation, *args, **kwargs):
+    """Commit a filter stage only after all its numerical results are valid."""
+    if state.get('_interval_validation') is _INTERVAL_VALIDATION:
+        return operation(state, *args, **kwargs)
+    validate_state(state)
+    candidate = dict(state)
+    if state.get('_trace') is not None:
+        candidate['_trace'] = dict(state['_trace'], stages=list(state['_trace']['stages']))
+    try:
+        with np.errstate(over='raise', invalid='raise', divide='raise'):
+            result = operation(candidate, *args, **kwargs)
+            validate_state(candidate)
+    except (FloatingPointError, np.linalg.LinAlgError, OverflowError) as exc:
+        raise ValueError(f'Estimator numerical failure: {exc}') from exc
+    state.update(candidate)
+    return result
+
+
 # ═══════════════════════════════════════════════════════════════════
 # PREDICT — propagate nominal state with IMU, grow uncertainty
 # ═══════════════════════════════════════════════════════════════════
 
 def predict(state, gyro_raw, accel_raw, dt):
+    """Atomically propagate one IMU interval, rejecting numerical failures."""
+    return _checked_stage(state, _predict, gyro_raw, accel_raw, dt)
+
+
+def _predict(state, gyro_raw, accel_raw, dt):
     """
     IMU strapdown integration.
 
@@ -277,7 +337,8 @@ def predict(state, gyro_raw, accel_raw, dt):
     Q[12:15, 12:15] = np.eye(3) * config.ACCEL_BIAS_RANDOM_WALK**2 * dt
 
     # P = F P Fᵀ + Q
-    state['P'] = F @ state['P'] @ F.T + Q
+    covariance = F @ state['P'] @ F.T + Q
+    state['P'] = (covariance + covariance.T) * 0.5
 
     if state.get('_trace') is not None:
         if trace_level == 'yaw':
@@ -313,6 +374,12 @@ def predict(state, gyro_raw, accel_raw, dt):
 # ═══════════════════════════════════════════════════════════════════
 
 def _ekf_update(state, z, h, H, R, name=None, preserve_yaw=False):
+    """Atomic checked observation update; invalid observations leave state intact."""
+    return _checked_stage(state, _ekf_update_unchecked, z, h, H, R,
+                          name=name, preserve_yaw=preserve_yaw)
+
+
+def _ekf_update_unchecked(state, z, h, H, R, name=None, preserve_yaw=False):
     """
     Standard Kalman filter update step.
 
@@ -328,11 +395,24 @@ def _ekf_update(state, z, h, H, R, name=None, preserve_yaw=False):
     before = (trace_state(state) if trace_level and trace_level != 'yaw' else
               get_euler_deg(state)[2] if trace_level else None)
     P_before = state['P'].copy() if trace_level and trace_level != 'yaw' else None
+    z, h, H, R = (np.asarray(value, dtype=float) for value in (z, h, H, R))
+    if (z.ndim != 1 or not len(z) or h.shape != z.shape or H.shape != (len(z), 15)
+            or R.shape != (len(z), len(z))
+            or not all(np.isfinite(value).all() for value in (z, h, H, R))):
+        raise ValueError('Invalid measurement dimensions or nonfinite values')
     P = state['P']
     y = z - h                                # innovation (measurement - prediction)
     S = H @ P @ H.T + R                      # innovation covariance
-    S_inv = np.linalg.inv(S)
-    K_raw = P @ H.T @ S_inv                  # unconstrained Kalman gain
+    S = (S + S.T) * 0.5
+    # Solve with the positive-definite innovation covariance, never invert it.
+    # Failure is reported; adding arbitrary diagonal noise would hide a broken model.
+    factor = np.linalg.cholesky(S)
+    def solve(rhs):
+        return np.linalg.solve(factor.T, np.linalg.solve(factor, rhs))
+    # Gain and innovation use the same factor. Solve their right-hand sides
+    # together, preserving both equations while avoiding duplicate dispatch.
+    solved = solve(np.column_stack((H @ P, y)))
+    K_raw = solved[:, :-1].T                  # unconstrained Kalman gain
 
     # Wheel speed, NHC, gravity and ZUPT contain no absolute heading
     # reference. Cross-covariance may still put a correction in the
@@ -356,7 +436,8 @@ def _ekf_update(state, z, h, H, R, name=None, preserve_yaw=False):
 
     # Apply correction to error covariance
     I_KH = np.eye(15) - K @ H
-    state['P'] = I_KH @ P @ I_KH.T + K @ R @ K.T   # Joseph form (numerically stable)
+    covariance = I_KH @ P @ I_KH.T + K @ R @ K.T   # Joseph form (numerically stable)
+    state['P'] = (covariance + covariance.T) * 0.5
 
     # Apply correction to nominal state
     _inject(state, dx)
@@ -390,7 +471,9 @@ def _ekf_update(state, z, h, H, R, name=None, preserve_yaw=False):
     #
     # Collected by name in state['nis'] so replay.py can report per
     # observation type -- it is usually one specific update that is lying.
-    nis = float(y @ S_inv @ y)
+    nis = float(y @ solved[:, -1])
+    if not np.isfinite(nis) or nis < 0:
+        raise ValueError('Invalid normalized innovation')
     if state.get('_trace') is not None:
         if trace_level == 'yaw':
             dyaw = float(_angle_delta_deg([0, 0, before], [0, 0, get_euler_deg(state)[2]])[2])

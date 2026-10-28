@@ -1,0 +1,28 @@
+{
+  "original_path": "logs/scout_two_jumps_20261023T174135_527113Z/events_before_suffix.jsonl",
+  "original_bytes": 50023108,
+  "original_sha256": "3bceda9b1c48bc11e01af822daec57cdbce524aa979511bd5a404e0dd5607f13",
+  "operation": "Exact selected original JSONL lines for two PULL request IDs; whole unrelated event stream removed.",
+  "ranges": [
+    {
+      "byte_offset": 41977731,
+      "bytes": 1391,
+      "sha256": "3a218d94db15cf7539eba94f949da0e23e7e6725b86de1dc50d342c6b55862b2"
+    },
+    {
+      "byte_offset": 41979122,
+      "bytes": 1293,
+      "sha256": "1dfec5c27addcd1b89dfa43c2b2b6bc7ca6dc57a86df56967973b3bd1b75556d"
+    },
+    {
+      "byte_offset": 46804560,
+      "bytes": 1392,
+      "sha256": "4a2d7f293744c56e28a16f4696a4bf29cbf8664144cfe136a1e147618567a6fc"
+    },
+    {
+      "byte_offset": 46805952,
+      "bytes": 1296,
+      "sha256": "ae588ea9d5dfa0769f75890cabf89b20a80a4a7b7db7d34531503fca2889dada"
+    }
+  ]
+}

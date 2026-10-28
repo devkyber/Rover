@@ -11,6 +11,7 @@
 // station page is served from the laptop (station.py).
 
 import { hostPort } from './link.js';
+import { STATION_LINK_WATCHDOG } from './link_policy.js';
 
 // If the decoder falls this many frames behind, stop feeding it and jump to
 // the next keyframe (at most 1 s away). Showing every frame late is worse
@@ -40,6 +41,8 @@ export class VideoView {
     this.socket = null;
     this.decoder = null;
     this.needKey = true;
+    this._generation = 0;
+    this._retryTimer = null;
 
     // Refreshed once a second, for the page to show.
     this.fps = 0;
@@ -57,20 +60,27 @@ export class VideoView {
 
   connect(address) {
     this.address = address;
-    if (this.supported) this._open();
+    const generation = ++this._generation;
+    this._clearRetry();
+    this._retireSocket();
+    if (this.supported) this._open(generation);
   }
 
   disconnect() {
     this.address = null;
-    if (this.socket) this.socket.close();
-    this.socket = null;
+    ++this._generation;
+    this._clearRetry();
+    this._retireSocket();
   }
 
   _newDecoder() {
     if (this.decoder && this.decoder.state !== 'closed') this.decoder.close();
     this.needKey = true;
-    this.decoder = new VideoDecoder({
+    const generation = this._generation, socket = this.socket;
+    const current = () => generation === this._generation && socket === this.socket && decoder === this.decoder;
+    const decoder = new VideoDecoder({
       output: picture => {
+        if (!current()) { picture.close(); return; }
         if (this.canvas.width !== picture.displayWidth || this.canvas.height !== picture.displayHeight) {
           this.canvas.width = picture.displayWidth;
           this.canvas.height = picture.displayHeight;
@@ -81,28 +91,58 @@ export class VideoView {
         this.lastFrameAt = performance.now();
       },
       // A damaged frame closes the decoder. Start over at the next keyframe.
-      error: () => this._newDecoder(),
+      error: () => { if (current()) this._newDecoder(); },
     });
+    this.decoder = decoder;
   }
 
-  _open() {
-    if (this.address === null) return;
-    const socket = new WebSocket('ws://' + hostPort(this.address) + '/video');
+  _open(generation) {
+    if (generation !== this._generation || this.address === null || this.socket !== null) return;
+    let socket;
+    try { socket = new WebSocket('ws://' + hostPort(this.address) + '/video'); }
+    catch (error) { this._retry(generation); return; }
     socket.binaryType = 'arraybuffer';
     this.socket = socket;
     this._newDecoder();
 
     socket.onmessage = event => {
+      if (generation !== this._generation || socket !== this.socket) return;
       const message = new Uint8Array(event.data);
       this._bytes += message.length;
       this._decode(message[0] === 1, message.subarray(1));
     };
 
-    socket.onclose = () => {
-      if (socket !== this.socket) return;
-      this.socket = null;
-      if (this.address !== null) setTimeout(() => this._open(), 1000);
-    };
+    socket.onclose = () => this._failed(socket, generation);
+    socket.onerror = () => this._failed(socket, generation);
+  }
+
+  _clearRetry() {
+    clearTimeout(this._retryTimer);
+    this._retryTimer = null;
+  }
+
+  _retireSocket() {
+    const socket = this.socket;
+    this.socket = null;
+    if (socket && socket.readyState !== 3) {
+      try { socket.close(); } catch (error) { /* retry does not depend on the close handshake */ }
+    }
+  }
+
+  _failed(socket, generation) {
+    if (generation !== this._generation || socket !== this.socket) return;
+    this._retireSocket();
+    this._retry(generation);
+  }
+
+  _retry(generation) {
+    if (generation !== this._generation || this.address === null || this._retryTimer !== null) return;
+    const timer = setTimeout(() => {
+      if (generation !== this._generation || this.address === null || this._retryTimer !== timer) return;
+      this._retryTimer = null;
+      this._open(generation);
+    }, STATION_LINK_WATCHDOG.retry_delay_ms);
+    this._retryTimer = timer;
   }
 
   _decode(isKey, frame) {

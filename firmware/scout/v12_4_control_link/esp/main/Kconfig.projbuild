@@ -1,0 +1,13 @@
+menu "Jumping Scout PCB"
+choice SCOUT_LINK
+    prompt "Jetson link"
+    default SCOUT_LINK_WIFI
+    config SCOUT_LINK_USB
+        bool "Native USB Serial/JTAG"
+    config SCOUT_LINK_WIFI
+        bool "Wi-Fi station on Rover LAN, TCP control 9000 / IMU 9001"
+endchoice
+config SCOUT_SHOCK_PROFILE
+    bool "ICM 6400Hz / ADXL 3200Hz instead of 400Hz / 800Hz"
+    default n
+endmenu

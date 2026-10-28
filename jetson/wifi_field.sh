@@ -50,7 +50,11 @@ sudo nmcli "${ACTION[@]}" \
     ipv4.method manual ipv4.addresses "$ADDRESS/24" \
     ipv4.gateway "$GATEWAY" ipv4.dns "$GATEWAY" \
     ipv6.method disabled \
-    connection.autoconnect yes connection.autoconnect-priority 10
+    802-11-wireless-security.proto rsn \
+    802-11-wireless-security.pairwise ccmp \
+    802-11-wireless-security.group ccmp \
+    connection.autoconnect yes connection.autoconnect-priority 100 \
+    connection.autoconnect-retries 0
 
 cat <<EOF
 
