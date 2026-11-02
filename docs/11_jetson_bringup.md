@@ -5,6 +5,69 @@
 여기서는 새 작업 PC를 준비하거나 Jetson 환경·통신·설치를 복구할 때 필요한 경로와 명령을 다룬다.
 기준은 현재 소스와 2026-10-28 설치 기록이며, 과거 설치의 파일 식별은 [인계 기록](../data/final_vehicle_2026-10-28/README.md)에 있다.
 
+<a id="common-commands"></a>
+
+## 자주 쓰는 명령
+
+기본 차량 연결은 **`rover-5G`**다. Jetson의 해당 NetworkManager profile 이름은 `rover-field`다.
+노트북은 같은 공유기의 LAN 또는 Wi-Fi에서 접속한다. 계정·암호는 [로컬 자격 파일](#credentials-and-recovery)에 있다.
+
+### 노트북 PowerShell: 접속과 ping
+
+| 명령 | 용도 |
+|---|---|
+| `ssh rover` | 저장된 Wi-Fi 별칭으로 Jetson 접속 |
+| `ssh rover-usb` | USB 네트워크를 통한 Jetson 접속 |
+| `ssh taeholee@192.168.0.200` | 별칭 없이 현장 LAN 주소로 접속 |
+| `ping 192.168.0.1` | ipTIME 공유기까지 통신 확인 |
+| `ping 192.168.0.200` | Jetson까지 통신 확인 |
+| `ping -t 192.168.0.200` | Windows에서 연속 ping. `Ctrl+C`로 종료 |
+
+`ssh rover`와 `ssh rover-usb`는 노트북 `~/.ssh/config`의 별칭이다.
+현재 저장된 대상은 각각 `taeholee@192.168.0.200`, `taeholee@192.168.55.1`이며
+두 별칭 모두 기존 Jetson SSH key를 지정한다. 별칭·키는 Git clone에 포함되지 않는다.
+USB 명령은 Jetson의 USB 네트워크와 노트북 쪽 경로가 연결된 상태에서 사용한다.
+ping 응답은 IP 통신 상태이며 차량 프로그램 실행 여부는 아래 service 상태로 읽는다.
+
+### Jetson 터미널: service로 실행
+
+기존 직접 실행 프로그램이 없는 상태에서 다음 두 명령을 사용한다.
+
+```bash
+sudo systemctl start rover-field.service
+systemctl status rover-field.service --no-pager
+```
+
+`active (running)`이면 service가 실행 중이다. service 방식은 SSH 창이 닫혀도 계속 실행된다.
+직접 실행 여부는 `pgrep -af '[r]over_main.py'`로 확인한다. 실행 모드의 상세 설명은 [Field service](#field-실행-service)에 있다.
+
+### Jetson 터미널: Python으로 직접 실행
+
+service 방식과 직접 실행 방식은 동시에 사용하지 않는다. service가 켜져 있으면 차량을 정지시키고
+`sudo systemctl stop rover-field.service`로 닫는다. 다른 `rover_main.py`도 없는 상태에서 실행한다.
+
+```bash
+source ~/rover-venv/bin/activate
+cd ~/Rover/rover
+python rover_main.py --tag field
+```
+
+이 방식은 현재 터미널에서 프로그램을 실행한다. 실행 창의 `Ctrl+C`로 종료한다.
+
+### Jetson 터미널: 전원 종료
+
+주행·Scout·임무 출력을 멈추고 기록을 닫은 뒤, service 실행이면 `sudo systemctl stop rover-field.service`,
+직접 실행이면 해당 창의 `Ctrl+C`로 프로그램을 종료한다. 다음 중 하나로 Jetson 전원을 종료한다.
+
+| 명령 | 동작 |
+|---|---|
+| `sudo shutdown -h now` | 즉시 시스템 종료·전원 끄기 |
+| `sudo poweroff` | 전원 끄기. `poweroff`는 한 단어 |
+
+명령 표기는 systemd의 [shutdown](https://www.freedesktop.org/software/systemd/man/latest/shutdown.html)·
+[poweroff](https://www.freedesktop.org/software/systemd/man/latest/poweroff.html) 설명을 따른다.
+영상·세션·Clegg까지 포함한 종료 순서는 [운전 안내](../README.md#단절종료기록)에 있다.
+
 ## 어느 컴퓨터가 무엇을 하는가
 
 ```text
@@ -54,10 +117,11 @@ Station은 화면 파일을 제공하는 작은 Python 서버다. 일반 Rover �
 
 | 자료 | 로컬 위치 | 보관 내용·범위 |
 |---|---|---|
-| Jetson 접속 정보 | `jetson_credentials.local.md` | 주소·계정·비밀번호. 이전 로컬 archive의 같은 파일과 byte 일치 |
-| 현장 Wi-Fi 자격 | `rover_wifi_credentials.local.md` | Rover 무선망 접속 정보와 비밀번호 |
+| Jetson 접속 정보 | `jetson_credentials.local.md` | 주소·계정·비밀번호와 사용자 확인 기록 |
+| 현장 Wi-Fi·공유기 자격 | `rover_wifi_credentials.local.md` | 기존 접속값과 사용자 확인 메모, 두 SSID·ipTIME 관리 계정·기본 5 GHz 연결 기준 |
 | Clegg 핫스팟 자격 | `clegg_wifi.local.md` | 실행기·builder가 읽는 `SSID:`·`Password:` |
 | Jetson SSH key | 노트북 `~/.ssh/id_ed25519_jetson`와 `.pub` | 배포기가 기본으로 사용하는 개인키·공개키 |
+| SSH 접속 별칭 | 노트북 `~/.ssh/config` | `rover`는 Wi-Fi, `rover-usb`는 USB 접속에 사용 |
 | 설치된 Nano 복구 이미지 | `private/clegg_clegg_wireless_sdk.uf2` | 자격이 포함될 수 있는 UF2. 보관된 설치 SHA256과 일치 |
 | 과거 설정 참고 문서 | `private/references_2026-10-08.zip` | 당시 Jetson·통신·전장 설명 등 29개 항목. 현재 설정은 본 핸드북을 따름 |
 | 설치·이미지 식별 | [installation_identity.json](../data/final_vehicle_2026-10-28/installation_identity.json) | 과거 설치 receipt·설정 출처·private 이미지 hash |

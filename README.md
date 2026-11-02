@@ -14,6 +14,7 @@
 Jetson과 Scout는 같은 LAN을 사용한다. 차량 내부 연결에는 인터넷이 필요 없다.
 새 PC·새 Jetson의 패키지 설치는 [설치 안내](docs/11_jetson_bringup.md)를 먼저 따른다.
 저장된 비밀번호·SSH 키·비공개 이미지의 위치는 [자격 정보와 복원 자료](docs/11_jetson_bringup.md#credentials-and-recovery)에 있다.
+`ssh rover`·`ssh rover-usb`·service·직접 실행·ping·종료 명령은 [자주 쓰는 명령](docs/11_jetson_bringup.md#common-commands)에 모았다.
 
 | 어디에 접속하는가 | 주소 | 하는 일 |
 |---|---|---|
@@ -26,8 +27,10 @@ Jetson과 Scout는 같은 LAN을 사용한다. 차량 내부 연결에는 인터
 1. 노트북 PowerShell에서 Jetson에 접속한다.
 
    ```powershell
-   ssh taeholee@192.168.0.200
+   ssh rover
    ```
+
+   이 PC의 `rover`는 현장 Wi-Fi 접속 별칭이다. 별칭이 없는 PC에서는 `ssh taeholee@192.168.0.200`을 사용한다.
 
 2. Jetson에서 기존 프로그램을 확인한다. 출력에 `rover_main.py`가 있으면 중복 시작하지 않는다.
 
