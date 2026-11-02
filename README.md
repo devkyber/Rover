@@ -13,6 +13,7 @@
 필요한 것은 전원이 연결된 차량, 기존 공유기, 노트북이다. 노트북의 USB Ethernet을 공유기 **LAN**에 연결한다.
 Jetson과 Scout는 같은 LAN을 사용한다. 차량 내부 연결에는 인터넷이 필요 없다.
 새 PC·새 Jetson의 패키지 설치는 [설치 안내](docs/11_jetson_bringup.md)를 먼저 따른다.
+저장된 비밀번호·SSH 키·비공개 이미지의 위치는 [자격 정보와 복원 자료](docs/11_jetson_bringup.md#credentials-and-recovery)에 있다.
 
 | 어디에 접속하는가 | 주소 | 하는 일 |
 |---|---|---|

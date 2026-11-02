@@ -18,6 +18,9 @@ Keep factual behavior limits with the relevant explanation; do not turn missing
 capabilities into promises or claim that historical evidence validates current hardware.
 Keep rover/learn_turn_angle.py as the hardware-free production-predictor example.
 The sibling PCB project owns CAD/BOM/pinout; enter through the hardware guide.
+Use verified full GitHub URLs for links into the PCB repository so the handbook
+works on GitHub as well as locally. Keep local CAD paths as code, not cross-repository
+relative hyperlinks; the local docs checker alone does not verify web availability.
 
 Keep only material needed to resume or expand the actual vehicle: current source,
 firmware/build/setup, selected actual-motion originals with labels/metadata and

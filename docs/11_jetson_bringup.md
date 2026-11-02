@@ -45,6 +45,34 @@ Station은 화면 파일을 제공하는 작은 Python 서버다. 일반 Rover �
 위 숫자는 현재 기본값을 읽기 쉽게 표시한 것이다. 변경할 때는 [config.py](../rover/config.py)와 해당 CLI 인수가 원본이다.
 비밀번호는 문서나 명령 예제에 넣지 않고 ignored `*.local.md`·`private/`·credential store로 관리한다.
 
+<a id="credentials-and-recovery"></a>
+
+## 비밀번호·설치 복원 자료의 위치
+
+아래는 **현재 작업 PC에서 2026-11-02 확인한 보관 위치**다. 경로는 별도 표기가 없으면 Rover 저장소 루트 기준이다.
+비밀번호 값은 이 문서에 복제하지 않는다. 로컬 파일 존재 확인과 실제 장치 로그인 성공은 서로 다른 상태다.
+
+| 자료 | 로컬 위치 | 보관 내용·범위 |
+|---|---|---|
+| Jetson 접속 정보 | `jetson_credentials.local.md` | 주소·계정·비밀번호. 이전 로컬 archive의 같은 파일과 byte 일치 |
+| 현장 Wi-Fi 자격 | `rover_wifi_credentials.local.md` | Rover 무선망 접속 정보와 비밀번호 |
+| Clegg 핫스팟 자격 | `clegg_wifi.local.md` | 실행기·builder가 읽는 `SSID:`·`Password:` |
+| Jetson SSH key | 노트북 `~/.ssh/id_ed25519_jetson`와 `.pub` | 배포기가 기본으로 사용하는 개인키·공개키 |
+| 설치된 Nano 복구 이미지 | `private/clegg_clegg_wireless_sdk.uf2` | 자격이 포함될 수 있는 UF2. 보관된 설치 SHA256과 일치 |
+| 과거 설정 참고 문서 | `private/references_2026-10-08.zip` | 당시 Jetson·통신·전장 설명 등 29개 항목. 현재 설정은 본 핸드북을 따름 |
+| 설치·이미지 식별 | [installation_identity.json](../data/final_vehicle_2026-10-28/installation_identity.json) | 과거 설치 receipt·설정 출처·private 이미지 hash |
+
+세 자격 파일은 모두 내용과 비밀번호 필드가 남아 있다. `*.local.md`와 `private/`는 Git에서 제외되므로
+**GitHub에 push하거나 새 PC에서 clone해도 위 비밀 파일·UF2·참고 ZIP은 따라가지 않는다.**
+SSH key도 저장소 밖에 있다. 기존 PC의 이 로컬 자료와 공개 소스·설치 기록을 함께 구분해 보관한다.
+
+Jetson 기본 설치·Wi-Fi 설정을 만드는 스크립트와 service는 공개 저장소의 `jetson/`에 남아 있다.
+다만 현재 Rover 폴더와 `Rover-archive-20261008-111026`의 파일명 조회에서는
+**AX210 `.ko` 파일이나 AX210·커널 복구용으로 식별되는 바이너리 묶음을 찾지 못했다.**
+private 참고 ZIP도 `.ko`나 Jetson 복원 이미지가 아니라 문서 묶음이다.
+AX210의 기존 모듈 설치 경로·Jetson 빌드 작업 경로·커널 식별은 [AX210 복구 조건](#ax210-복구-조건)에 있으며,
+그 원격 파일의 현재 존재 여부는 이번 로컬 문서 확인에서 조회하지 않았다.
+
 ## 기존 Jetson 환경
 
 | 항목 | 기록된 환경 | 의미 |
