@@ -18,6 +18,10 @@ historical Git paths. These paths identify earlier evidence; old Git history is
 not part of the clean upload snapshot. The receipt facts are embedded here.
 Runtime settings remain owned by `rover/config.py`.
 
+The handbook continues to evolve after this handover. Its current text is not a
+byte-for-byte copy of the 2026-10-28 documentation listed in `source_manifest.json`;
+that manifest and the original receipts remain historical records.
+
 The credential-bearing Nano UF2 stays in ignored `private/`; credentials stay in
 ignored `*.local.md`. A clone needs these separately or a rebuild from retained
 firmware source. Recording interpretation is in [the data guide](../../docs/13_scout_integration.md).

@@ -8,5 +8,5 @@ The final per-board installation identities are in [the release record](../../CO
 The current firmware source owns physical output behavior; host settings belong to
 [config.py](../../rover/config.py). Operation is in [README](../../README.md),
 protocol/recording semantics in the [Scout guide](../../docs/13_scout_integration.md),
-and limitations in [JUMPER-01](../../docs/05_한계와_로드맵.md#jumper-01).
+and current interpretation in [the behavior guide](../../docs/05_한계와_로드맵.md#jumper-01).
 Jetson source deployment does not flash a Scout.

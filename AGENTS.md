@@ -1,16 +1,21 @@
 # Working on Rover
 
-Read README.md for operation, docs/README.md for the compact vehicle handbook,
-and docs/05_한계와_로드맵.md for frozen limits. Inspect the working tree before
+Read README.md for operation, docs/README.md for the continuing-project handbook,
+and docs/05_한계와_로드맵.md for current behavior and interpretation. Inspect the working tree before
 editing and preserve unrelated changes. Keep Korean operator instructions short,
 use English UI labels, and keep the existing driving dashboard.
 
 One owner per fact: runtime constants in rover/config.py; equations/update order
-in rover/eskf.py and rover/odometry.py; task IDs/status in the roadmap; navigation
+in rover/eskf.py and rover/odometry.py; current behavior scope in docs/05; navigation
 in docs/README.md. Keep installation/network recovery in docs/11_jetson_bringup.md,
 hardware/wiring in docs/06_하드웨어.md, data/mission contracts in
 docs/13_scout_integration.md, and useful derivations/worked examples in docs/01.
 Do not recreate separate generic Python lessons or duplicate subject guides.
+Explain the current architecture, component choices, interfaces and worked examples
+well enough for a new teammate to continue development. Do not reduce the handbook
+to a closure archive or add improvement backlogs/validation task lists unless asked.
+Keep factual behavior limits with the relevant explanation; do not turn missing
+capabilities into promises or claim that historical evidence validates current hardware.
 Keep rover/learn_turn_angle.py as the hardware-free production-predictor example.
 The sibling PCB project owns CAD/BOM/pinout; enter through the hardware guide.
 
